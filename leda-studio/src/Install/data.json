@@ -1,0 +1,740 @@
+{
+  "appUuid": "SYSTEM",
+  "content": {
+    "packages": [
+      {
+        "appUuid": "SYSTEM",
+        "name": "System",
+        "sharable": true,
+        "system": true,
+        "uuid": "PACKAGE_SYSTEM_UUID"
+      },
+      {
+        "appUuid": "SYSTEM",
+        "name": "Appx",
+        "sharable": false,
+        "system": true,
+        "uuid": "PACKAGE_APPX_UUID"
+      }
+    ],
+    "classes": [
+      {
+        "System": true,
+        "attributes": [
+          {
+            "System": true,
+            "name": "id",
+            "primary": true,
+            "type": "ID",
+            "typeLabel": "ID",
+            "uuid": "RX_USER_ID_UUID"
+          },
+          {
+            "System": true,
+            "name": "name",
+            "nullable": true,
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "RX_USER_NAME_UUID"
+          },
+          {
+            "System": true,
+            "length": 128,
+            "name": "loginName",
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "RX_USER_LOGINNAME_UUID"
+          },
+          {
+            "System": true,
+            "length": 256,
+            "name": "password",
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "RX_USER_PASSWORD_UUID"
+          },
+          {
+            "System": true,
+            "name": "isSupper",
+            "nullable": true,
+            "type": "Boolean",
+            "typeLabel": "Boolean",
+            "uuid": "RX_USER_ISSUPPER_UUID"
+          },
+          {
+            "System": true,
+            "name": "isDemo",
+            "nullable": true,
+            "type": "Boolean",
+            "typeLabel": "Boolean",
+            "uuid": "RX_USER_ISDEMO_UUID"
+          },
+          {
+            "System": true,
+            "createDate": true,
+            "name": "createdAt",
+            "type": "Date",
+            "typeLabel": "Date",
+            "uuid": "RX_USER_CREATEDAT_UUID"
+          },
+          {
+            "System": true,
+            "name": "updatedAt",
+            "type": "Date",
+            "typeLabel": "Date",
+            "updateDate": true,
+            "uuid": "RX_USER_UPDATEDAT_UUID"
+          }
+        ],
+        "innerId": 4,
+        "name": "User",
+        "packageUuid": "PACKAGE_SYSTEM_UUID",
+        "root": true,
+        "stereoType": "Entity",
+        "uuid": "META_USER_UUID"
+      },
+      {
+        "System": true,
+        "attributes": [
+          {
+            "System": true,
+            "name": "id",
+            "primary": true,
+            "type": "ID",
+            "typeLabel": "ID",
+            "uuid": "RX_ROLE_ID_UUID"
+          },
+          {
+            "System": true,
+            "name": "name",
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "RX_ROLE_NAME_UUID"
+          },
+          {
+            "System": true,
+            "name": "description",
+            "nullable": true,
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "RX_ROLE_DESCRIPTION_UUID"
+          },
+          {
+            "System": true,
+            "createDate": true,
+            "name": "createdAt",
+            "type": "Date",
+            "typeLabel": "Date",
+            "uuid": "RX_ROLE_CREATEDAT_UUID"
+          },
+          {
+            "System": true,
+            "name": "updatedAt",
+            "type": "Date",
+            "typeLabel": "Date",
+            "updateDate": true,
+            "uuid": "RX_ROLE_META_UPDATEDAT_UUID"
+          }
+        ],
+        "innerId": 5,
+        "name": "Role",
+        "packageUuid": "PACKAGE_SYSTEM_UUID",
+        "root": true,
+        "stereoType": "Entity",
+        "uuid": "META_ROLE_UUID"
+      },
+      {
+        "attributes": [
+          {
+            "name": "id",
+            "primary": true,
+            "type": "ID",
+            "typeLabel": "ID",
+            "uuid": "c0702129-6e3a-4549-bd7b-c87f2129db3a"
+          },
+          {
+            "name": "uuid",
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "83b44412-a76d-4c9d-baeb-84d4c1c62665"
+          }
+        ],
+        "idNoShift": true,
+        "innerId": 1001,
+        "methods": [],
+        "name": "App",
+        "packageUuid": "PACKAGE_APPX_UUID",
+        "root": true,
+        "stereoType": "Entity",
+        "uuid": "2082d665-e503-402a-a089-678115c5ed3e"
+      },
+      {
+        "attributes": [
+          {
+            "name": "id",
+            "primary": true,
+            "type": "ID",
+            "typeLabel": "ID",
+            "uuid": "6970a84b-a192-4431-9bd0-2e14e6b7e5f0"
+          }
+        ],
+        "innerId": 1002,
+        "methods": [],
+        "name": "Page",
+        "packageUuid": "PACKAGE_APPX_UUID",
+        "root": true,
+        "stereoType": "Entity",
+        "uuid": "f9288fd0-2747-4fa0-8b3d-4c8bdaeb5dd8"
+      },
+      {
+        "attributes": [
+          {
+            "name": "PC",
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "8d37eb83-0421-4b61-9609-7b24a28bcd89"
+          },
+          {
+            "name": "H5",
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "06964564-b1f6-46fa-bc50-0056bf0223cc"
+          },
+          {
+            "name": "Admin",
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "b1f389ea-a0a4-4a29-9fd2-111d25c2ecfb"
+          }
+        ],
+        "innerId": 1003,
+        "methods": [],
+        "name": "Device",
+        "packageUuid": "PACKAGE_APPX_UUID",
+        "root": false,
+        "stereoType": "Enum",
+        "uuid": "096f252a-5e35-4e49-8dce-297b2f16374f"
+      },
+      {
+        "attributes": [
+          {
+            "name": "id",
+            "primary": true,
+            "type": "ID",
+            "typeLabel": "ID",
+            "uuid": "d41a058a-cef4-4444-bbb2-67d03bddf680"
+          }
+        ],
+        "innerId": 1004,
+        "methods": [],
+        "name": "PageCategory",
+        "packageUuid": "PACKAGE_APPX_UUID",
+        "root": true,
+        "stereoType": "Entity",
+        "uuid": "e90f69e9-1be0-45e2-95a6-269da4d2fada"
+      },
+      {
+        "attributes": [
+          {
+            "name": "id",
+            "primary": true,
+            "type": "ID",
+            "typeLabel": "ID",
+            "uuid": "fd9383b4-b31a-4ae6-93b4-bf1dc0cd0c28"
+          }
+        ],
+        "innerId": 1005,
+        "methods": [],
+        "name": "Menu",
+        "packageUuid": "PACKAGE_APPX_UUID",
+        "root": true,
+        "stereoType": "Entity",
+        "uuid": "660a55fe-c2f1-4b17-921e-38aa14737a1c"
+      },
+      {
+        "attributes": [
+          {
+            "name": "id",
+            "primary": true,
+            "type": "ID",
+            "typeLabel": "ID",
+            "uuid": "ef57e146-3faf-4ffc-ade7-4344d2c717ae"
+          },
+          {
+            "name": "title",
+            "type": "String",
+            "typeLabel": "String",
+            "uuid": "296d7cc8-16a0-49b9-a407-ee17cb04850c"
+          }
+        ],
+        "innerId": 1006,
+        "methods": [],
+        "name": "TitleAble",
+        "packageUuid": "PACKAGE_APPX_UUID",
+        "root": false,
+        "stereoType": "Abstract",
+        "uuid": "6be09899-afed-4115-b214-4511adc0e813"
+      },
+      {
+        "attributes": [
+          {
+            "name": "id",
+            "primary": true,
+            "type": "ID",
+            "typeLabel": "ID",
+            "uuid": "9416ad58-4c54-4c81-8839-2fd9b9eabd20"
+          },
+          {
+            "name": "schema",
+            "type": "JSON",
+            "typeLabel": "JSON",
+            "uuid": "94f1a640-4279-409e-b1aa-340093028ea0"
+          },
+          {
+            "name": "device",
+            "type": "Enum",
+            "typeLabel": "Device",
+            "typeUuid": "096f252a-5e35-4e49-8dce-297b2f16374f",
+            "uuid": "95009bc6-dfa7-4e3a-9037-192c5aa83725"
+          }
+        ],
+        "innerId": 1007,
+        "methods": [],
+        "name": "SchemaAble",
+        "packageUuid": "PACKAGE_APPX_UUID",
+        "root": false,
+        "stereoType": "Abstract",
+        "uuid": "087b2915-5582-496d-bafb-ae2f5623a70d"
+      }
+    ],
+    "relations": [
+      {
+        "innerId": 101,
+        "relationType": "twoWayAssociation",
+        "roleOfSource": "roles",
+        "roleOfTarget": "users",
+        "sourceId": "META_ROLE_UUID",
+        "sourceMutiplicity": "0..*",
+        "targetId": "META_USER_UUID",
+        "targetMultiplicity": "0..*",
+        "uuid": "META_RELATION_USER_ROLE_UUID"
+      },
+      {
+        "innerId": 0,
+        "relationType": "inherit",
+        "sourceId": "e90f69e9-1be0-45e2-95a6-269da4d2fada",
+        "sourceMutiplicity": "0..1",
+        "targetId": "6be09899-afed-4115-b214-4511adc0e813",
+        "targetMultiplicity": "0..1",
+        "uuid": "88369e47-ace7-4486-9f76-de36f2810447"
+      },
+      {
+        "innerId": 0,
+        "relationType": "inherit",
+        "sourceId": "2082d665-e503-402a-a089-678115c5ed3e",
+        "sourceMutiplicity": "0..1",
+        "targetId": "6be09899-afed-4115-b214-4511adc0e813",
+        "targetMultiplicity": "0..1",
+        "uuid": "77e5f307-a1c1-4022-a1bf-9f6004889e8a"
+      },
+      {
+        "innerId": 0,
+        "relationType": "inherit",
+        "sourceId": "f9288fd0-2747-4fa0-8b3d-4c8bdaeb5dd8",
+        "sourceMutiplicity": "0..1",
+        "targetId": "6be09899-afed-4115-b214-4511adc0e813",
+        "targetMultiplicity": "0..1",
+        "uuid": "ae68f127-5d2d-41a3-a905-bc5279ea0520"
+      },
+      {
+        "innerId": 0,
+        "relationType": "inherit",
+        "sourceId": "f9288fd0-2747-4fa0-8b3d-4c8bdaeb5dd8",
+        "sourceMutiplicity": "0..1",
+        "targetId": "087b2915-5582-496d-bafb-ae2f5623a70d",
+        "targetMultiplicity": "0..1",
+        "uuid": "c921aa03-3be8-4650-91ad-e7f8cb552b8b"
+      },
+      {
+        "innerId": 0,
+        "relationType": "inherit",
+        "sourceId": "660a55fe-c2f1-4b17-921e-38aa14737a1c",
+        "sourceMutiplicity": "0..1",
+        "targetId": "087b2915-5582-496d-bafb-ae2f5623a70d",
+        "targetMultiplicity": "0..1",
+        "uuid": "0b456cb0-ffcf-4bb6-a0c9-84524bbdc7b3"
+      },
+      {
+        "innerId": 1001,
+        "relationType": "twoWayCombination",
+        "roleOfSource": "app",
+        "roleOfTarget": "pages",
+        "sourceId": "2082d665-e503-402a-a089-678115c5ed3e",
+        "sourceMutiplicity": "0..1",
+        "targetId": "f9288fd0-2747-4fa0-8b3d-4c8bdaeb5dd8",
+        "targetMultiplicity": "0..*",
+        "uuid": "5563d5ee-2846-4360-8f39-cfa18864ac2e"
+      },
+      {
+        "innerId": 1002,
+        "relationType": "twoWayCombination",
+        "roleOfSource": "app",
+        "roleOfTarget": "menus",
+        "sourceId": "2082d665-e503-402a-a089-678115c5ed3e",
+        "sourceMutiplicity": "0..1",
+        "targetId": "660a55fe-c2f1-4b17-921e-38aa14737a1c",
+        "targetMultiplicity": "0..*",
+        "uuid": "963e03f6-c6c8-4e91-8912-4f64697a9b1f"
+      },
+      {
+        "innerId": 1003,
+        "relationType": "twoWayCombination",
+        "roleOfSource": "app",
+        "roleOfTarget": "pageCategory",
+        "sourceId": "2082d665-e503-402a-a089-678115c5ed3e",
+        "sourceMutiplicity": "0..1",
+        "targetId": "e90f69e9-1be0-45e2-95a6-269da4d2fada",
+        "targetMultiplicity": "0..*",
+        "uuid": "3ad27c5f-73b1-4064-8f39-86381e35457a"
+      },
+      {
+        "uuid": "2b499cf1-f6b5-4ea6-bebf-e50ce165cb03",
+        "innerId": 1005,
+        "relationType": "oneWayAssociation",
+        "sourceId": "2082d665-e503-402a-a089-678115c5ed3e",
+        "targetId": "META_USER_UUID",
+        "roleOfTarget": "owner",
+        "sourceMutiplicity": "0..*",
+        "targetMultiplicity": "0..1"
+      },
+      {
+        "uuid": "dab87ed4-a67c-44c9-aa94-876393eb4ca6",
+        "innerId": 0,
+        "relationType": "inherit",
+        "sourceId": "e90f69e9-1be0-45e2-95a6-269da4d2fada",
+        "targetId": "087b2915-5582-496d-bafb-ae2f5623a70d",
+        "sourceMutiplicity": "0..1",
+        "targetMultiplicity": "0..1"
+      }
+    ],
+    "diagrams": [
+      {
+        "edges": [],
+        "name": "Appx diagram",
+        "nodes": [],
+        "packageUuid": "PACKAGE_APPX_UUID",
+        "uuid": "8518245f-af73-43b5-a17f-468eefce5acc"
+      }
+    ],
+    "x6Nodes": [
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "height": 120,
+        "id": "2082d665-e503-402a-a089-678115c5ed3e",
+        "width": 180,
+        "x": -480,
+        "y": -10
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "height": 120,
+        "id": "f9288fd0-2747-4fa0-8b3d-4c8bdaeb5dd8",
+        "width": 180,
+        "x": 140,
+        "y": 0
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "height": 140,
+        "id": "096f252a-5e35-4e49-8dce-297b2f16374f",
+        "width": 180,
+        "x": -500,
+        "y": -300
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "height": 120,
+        "id": "e90f69e9-1be0-45e2-95a6-269da4d2fada",
+        "width": 180,
+        "x": -210,
+        "y": 0
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "height": 120,
+        "id": "660a55fe-c2f1-4b17-921e-38aa14737a1c",
+        "width": 180,
+        "x": 400,
+        "y": 30
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "height": 120,
+        "id": "6be09899-afed-4115-b214-4511adc0e813",
+        "width": 180,
+        "x": -220,
+        "y": -210
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "height": 120,
+        "id": "087b2915-5582-496d-bafb-ae2f5623a70d",
+        "width": 180,
+        "x": 140,
+        "y": -210
+      },
+      {
+        "id": "META_USER_UUID",
+        "x": -800.0000000000002,
+        "y": 10,
+        "width": 160,
+        "height": 80,
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc"
+      }
+    ],
+    "x6Edges": [
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "id": "88369e47-ace7-4486-9f76-de36f2810447",
+        "sourceAnchor": {
+          "args": {
+            "dx": "44%",
+            "dy": "50%",
+            "rotate": true
+          },
+          "name": "topLeft"
+        },
+        "vertices": [
+          {
+            "x": -130.8,
+            "y": -50
+          }
+        ]
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "id": "77e5f307-a1c1-4022-a1bf-9f6004889e8a",
+        "vertices": [
+          {
+            "x": -390,
+            "y": -150
+          }
+        ]
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "id": "ae68f127-5d2d-41a3-a905-bc5279ea0520",
+        "sourceAnchor": {
+          "args": {
+            "dx": "17%",
+            "dy": "50%",
+            "rotate": true
+          },
+          "name": "topLeft"
+        },
+        "vertices": [
+          {
+            "x": 170,
+            "y": -70
+          },
+          {
+            "x": 50,
+            "y": -70
+          },
+          {
+            "x": 50,
+            "y": -150
+          }
+        ]
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "id": "c921aa03-3be8-4650-91ad-e7f8cb552b8b",
+        "vertices": []
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "id": "0b456cb0-ffcf-4bb6-a0c9-84524bbdc7b3",
+        "vertices": [
+          {
+            "x": 490,
+            "y": -150
+          }
+        ]
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "id": "5563d5ee-2846-4360-8f39-cfa18864ac2e",
+        "roleOnSourcePosition": {
+          "angle": 0,
+          "distance": 0.048681541582150094,
+          "offset": 19.999999999999943
+        },
+        "roleOnTargetPosition": {
+          "distance": -40,
+          "offset": 20
+        },
+        "sourceAnchor": {
+          "args": {
+            "dx": "50%",
+            "dy": "50%",
+            "rotate": true
+          },
+          "name": "topLeft"
+        },
+        "sourceMultiplicityPosition": {
+          "angle": 0,
+          "distance": 0.048681541582150094,
+          "offset": -20.000000000000057
+        },
+        "targetAnchor": {
+          "args": {
+            "dx": "78%",
+            "dy": "50%",
+            "rotate": true
+          },
+          "name": "topLeft"
+        },
+        "targetMultiplicityPosition": {
+          "distance": -40,
+          "offset": -20
+        },
+        "vertices": [
+          {
+            "x": -390,
+            "y": 300
+          },
+          {
+            "x": 280,
+            "y": 300
+          }
+        ]
+      },
+      {
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "id": "963e03f6-c6c8-4e91-8912-4f64697a9b1f",
+        "roleOnSourcePosition": {
+          "angle": 0,
+          "distance": 0.01990554277953037,
+          "offset": 19.85806038333852
+        },
+        "roleOnTargetPosition": {
+          "distance": -40,
+          "offset": 20
+        },
+        "sourceAnchor": {
+          "args": {
+            "dx": "11%",
+            "dy": "50%",
+            "rotate": true
+          },
+          "name": "topLeft"
+        },
+        "sourceMultiplicityPosition": {
+          "angle": 0,
+          "distance": 0.019923897292542337,
+          "offset": -20.14193129200226
+        },
+        "targetMultiplicityPosition": {
+          "distance": -40,
+          "offset": -20
+        },
+        "vertices": [
+          {
+            "x": -460,
+            "y": 360
+          },
+          {
+            "x": 490,
+            "y": 360
+          }
+        ]
+      },
+      {
+        "id": "3ad27c5f-73b1-4064-8f39-86381e35457a",
+        "vertices": [
+          {
+            "x": -320,
+            "y": 240
+          },
+          {
+            "x": -120,
+            "y": 240
+          }
+        ],
+        "roleOnSourcePosition": {
+          "angle": 0,
+          "distance": 0.14898755516065196,
+          "offset": 19.812403259985917
+        },
+        "sourceMultiplicityPosition": {
+          "angle": 0,
+          "distance": 0.14926167625347575,
+          "offset": -20.187401428944604
+        },
+        "roleOnTargetPosition": {
+          "angle": 0,
+          "distance": 0.9596412625335536,
+          "offset": 80
+        },
+        "targetMultiplicityPosition": {
+          "distance": -40,
+          "offset": -20
+        },
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc",
+        "sourceAnchor": {
+          "args": {
+            "dx": "89%",
+            "dy": "50%",
+            "rotate": true
+          },
+          "name": "topLeft"
+        },
+        "targetAnchor": {
+          "args": {
+            "dx": "50%",
+            "dy": "50%",
+            "rotate": true
+          },
+          "name": "topLeft"
+        }
+      },
+      {
+        "id": "2b499cf1-f6b5-4ea6-bebf-e50ce165cb03",
+        "vertices": [],
+        "roleOnSourcePosition": {
+          "distance": 40,
+          "offset": 20
+        },
+        "sourceMultiplicityPosition": {
+          "distance": 40,
+          "offset": -20
+        },
+        "roleOnTargetPosition": {
+          "distance": -40,
+          "offset": 20
+        },
+        "targetMultiplicityPosition": {
+          "distance": -40,
+          "offset": -20
+        },
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc"
+      },
+      {
+        "id": "dab87ed4-a67c-44c9-aa94-876393eb4ca6",
+        "vertices": [
+          {
+            "x": 80,
+            "y": 60
+          },
+          {
+            "x": 80,
+            "y": -150
+          }
+        ],
+        "diagramUuid": "8518245f-af73-43b5-a17f-468eefce5acc"
+      }
+    ]
+  },
+  "id": "1507236403010867254"
+}

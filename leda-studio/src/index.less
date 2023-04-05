@@ -1,0 +1,186 @@
+@import "./variables.less";
+.rx-studio{
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  .header{
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    border-bottom: 1px solid @borderColor;
+    //box-shadow: -8px 8px 14px 0 rgb(25 42 70 / 11%);
+    .logo{
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      svg{
+        margin-right: 16px;
+      }
+    }
+
+    .logo-divider{
+      height: 24px;
+      margin-left: 32px;
+      margin-right: 32px;
+    }
+
+    .nav-area{
+      flex:1;
+      .nav-button{
+        border: 0;
+        .nav-icon{
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    .min-button{
+      border: 0;
+    }
+    .avatar{
+      border: 1px solid @borderColor;
+      cursor: pointer;
+    }
+    .app-title{
+      font-weight: bold;
+    }
+  }
+  .float{
+    box-shadow: @floatBoxShadow;
+    transition: all 0.3s;
+  }
+
+  .hover-float:hover{
+    box-shadow: @floatBoxShadow;
+    transition: all 0.3s;
+  }
+
+  .content{
+    height: 0;
+    //display: flex;
+    flex-flow: column;
+    flex: 1;
+    margin-top: @toolbarHeight;
+    .app-manage-bar{
+      //position: fixed;
+      height: 64px;
+      width: 100vw;
+      z-index: 1;
+      padding: @contentPadding;
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .search{
+        width: 240px;
+        border-radius: 16px;
+        .search-icon{
+          color: rgba(0,0,0,.45);
+        }
+      }
+
+      .actions{
+        margin-right: 6px;
+      }
+    }
+    .content-inner{
+      padding: @contentPadding;
+      flex:1;
+      display: flex;
+      flex-flow: column;
+      .content-show-block{
+        flex: 1;
+        display: flex;
+        min-height: calc(100vh - 240px);
+        flex-flow: column;
+        .config-content{
+          padding: 16px 100px 16px 100px;
+        }
+        .ui-list-content{
+          padding: 16px 60px 16px 60px;
+        }
+      }
+    }
+  }
+}
+
+//暂时解决一个很奇怪的问题
+.ant-tabs-content{
+ .ant-tabs-tabpane-hidden{
+    display: none;
+  } 
+}
+
+
+
+.full-width{
+  width: 100%;
+}
+.no-border{
+  border:0;
+}
+
+.border{
+  border: 1px solid @borderColor;
+}
+
+.bottom-border{
+  border-bottom: 1px solid @borderColor;
+}
+
+.left-border{
+  border-left: 1px solid @borderColor;
+}
+
+.right-border{
+  border-right: 1px solid @borderColor;
+}
+
+.top-border{
+  border-top: 1px solid @borderColor;
+}
+
+.transparent{
+  background: transparent;
+}
+
+::-webkit-scrollbar {
+  display: block;
+  width: 0.3rem;
+  height: 0.3rem;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0.2rem;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all .2s;
+}
+
+.draggable-label{
+  display: flex;
+  padding: 8px 4px;
+  padding-left: 16px;
+  cursor: move;
+  background-color: @backgrounColor;
+  border:  solid 1px @backgrounColor;
+}
+.draggable-label:hover{
+  transform: translate3d(0, 0, 0);
+}
+
+.draggable-icon{
+  opacity: 0.4;
+  margin-right: 8px;
+}

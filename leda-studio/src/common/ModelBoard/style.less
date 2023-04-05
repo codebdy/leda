@@ -1,0 +1,38 @@
+@import "../../variables.less";
+
+.appx-model-board{
+  flex: 1;
+  display: flex;
+  flex-flow: row;
+  height: calc(100vh - @toolbarHeight);
+  background-color: @canvasBackgroundColor;
+  .model-tree-shell{
+    display: flex;
+    flex-flow: column;
+    background-color: @backgrounColor;
+    border-right: solid 1px @borderColor;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+  .property-box-area{
+    display: flex;
+    height: 100%;
+    flex-flow: column;
+    width: 260px;
+    background-color: @backgrounColor;
+    .property-box{
+      flex:1;
+      display: flex;
+      flex-flow: column;
+      height: 0;
+      overflow: auto;
+      width: 100%;
+      .property-pannel{
+        padding: 8px 16px;
+      }
+    }
+  }
+
+  
+}

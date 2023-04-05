@@ -1,0 +1,13 @@
+database: database_name
+driver: mysql
+host: localhost_name
+service_id: 1
+password: your password
+port: "3306"
+user: root
+auth_url: ""
+#storage: "local"
+zeebe_address: "[Zeebe API]"
+zeebe_client_id: "[Client ID]"
+zeebe_client_secret: "[Client Secret]"
+zeebe_authorization_server_url: "[OAuth API]"
