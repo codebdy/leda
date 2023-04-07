@@ -2,5 +2,9 @@
 
 接口定义
 
+struct{
+  
+}
+
 start()
 end()
