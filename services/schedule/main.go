@@ -1,43 +1,28 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
+	"codebdy.com/leda/services/schedule/resolver"
+	"codebdy.com/leda/services/schedule/schema"
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
-	"codebdy.com/leda/services/schedule/resolver"
 )
 
-var schema *graphql.Schema
-
-func init() {
-	s := `
-	schema {
-		query: Query
-		mutation: Mutation
-	}
-	
-	type Query {
-		hello: String!
-	}
-	
-	type Mutation {
-		hello: String!
-	}
-	`
-	schema = graphql.MustParseSchema(s, &resolver.Resolver{})
-}
+const port = ":8080"
 
 func main() {
-
+	schema := graphql.MustParseSchema(schema.SDL, &resolver.Resolver{})
 	http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write(page)
 	}))
 
 	http.Handle("/graphql", &relay.Handler{Schema: schema})
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	fmt.Println(fmt.Sprintf("🚀 Graphql server ready at http://localhost%s/graphql", port))
+	log.Fatal(http.ListenAndServe(port, nil))
 }
 
 var page = []byte(`
