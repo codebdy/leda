@@ -1,11 +1,10 @@
-package main
+package schedule
 
 import (
 	"log"
 	"net/http"
 
 	"codebdy.com/leda/services/schedule/resolvers"
-	"codebdy.com/leda/services/schedule/schema"
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
 )
@@ -14,7 +13,7 @@ const PORT = "8080"
 
 func main() {
 
-	schema := graphql.MustParseSchema(schema.Sdl, &resolvers.RootResolver{}, nil)
+	schema := graphql.MustParseSchema(SDL, &resolvers.RootResolver{}, nil)
 
 	http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write(page)

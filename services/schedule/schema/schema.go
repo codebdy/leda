@@ -1,2 +1,0 @@
-package schema
-const Sdl = ``

@@ -1,4 +1,0 @@
-package schema
-
-const mustaionSDL = `
-`
