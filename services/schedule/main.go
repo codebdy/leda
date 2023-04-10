@@ -1,4 +1,4 @@
-package schedule
+package main
 
 import (
 	"log"

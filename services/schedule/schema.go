@@ -1,6 +1,6 @@
-package schedule
+package main
 
-const SDL = `
+var SDL = `
 	schema {
 		query: Query
 	}
