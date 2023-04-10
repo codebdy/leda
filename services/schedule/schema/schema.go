@@ -11,6 +11,9 @@ var SDL = `
 	}
 
 	type Mutation {
-		hello2: String!
+		#返回 status
+		startOneShotTask(id:ID!): String!
+		#返回 status
+		startPeriodicTask(id:ID!): String!
 	}
 `
