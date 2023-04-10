@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"codebdy.com/leda/services/schedule/middleware"
 	"codebdy.com/leda/services/schedule/resolver"
 	"codebdy.com/leda/services/schedule/schema"
 	"github.com/graph-gophers/graphql-go"
@@ -19,7 +20,12 @@ func main() {
 		w.Write(page)
 	}))
 
-	http.Handle("/graphql", &relay.Handler{Schema: schema})
+	h := &relay.Handler{Schema: schema}
+	http.Handle("/graphql",
+		middleware.CorsMiddleware(
+			middleware.AuthMiddleware(h),
+		),
+	)
 
 	fmt.Println(fmt.Sprintf("🚀 Graphql server ready at http://localhost%s/graphql", port))
 	log.Fatal(http.ListenAndServe(port, nil))
