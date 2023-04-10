@@ -4,22 +4,38 @@ import (
 	"log"
 	"net/http"
 
-	"codebdy.com/leda/services/schedule/resolvers"
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
+	"codebdy.com/leda/services/schedule/resolver"
 )
 
-const PORT = "8080"
+var schema *graphql.Schema
+
+func init() {
+	s := `
+	schema {
+		query: Query
+		mutation: Mutation
+	}
+	
+	type Query {
+		hello: String!
+	}
+	
+	type Mutation {
+		hello: String!
+	}
+	`
+	schema = graphql.MustParseSchema(s, &resolver.Resolver{})
+}
 
 func main() {
-
-	schema := graphql.MustParseSchema(SDL, &resolvers.RootResolver{}, nil)
 
 	http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write(page)
 	}))
 
-	http.Handle("/query", &relay.Handler{Schema: schema})
+	http.Handle("/graphql", &relay.Handler{Schema: schema})
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
@@ -50,7 +66,7 @@ var page = []byte(`
     <script>
       ReactDOM.render(
         React.createElement(GraphiQL, {
-          fetcher: GraphiQL.createFetcher({url: '/query'}),
+          fetcher: GraphiQL.createFetcher({url: '/graphql'}),
           defaultEditorToolsVisibility: true,
         }),
         document.getElementById('graphiql'),
