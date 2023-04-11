@@ -2,7 +2,7 @@ package entities
 
 import "time"
 
-type PeriodicTask struct {
+type Task struct {
 	//任务类型，客户端自己用于区分各种任务
 	Type           string     `json:"type"`
 	Id             int64      `json:"id"`

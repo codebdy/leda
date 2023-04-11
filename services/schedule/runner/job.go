@@ -6,10 +6,10 @@ import (
 	"codebdy.com/leda/services/schedule/entities"
 )
 
-type OneShotJob struct {
-	task *entities.OneShotTask
+type Job struct {
+	task *entities.Task
 }
 
-func (OneShotJob) Run() {
-	fmt.Println("每5秒执行一次")
+func (Job) Run() {
+	fmt.Println("执行任务")
 }

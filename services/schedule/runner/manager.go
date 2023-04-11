@@ -1,37 +1,48 @@
 package runner
 
 import (
-	"fmt"
 	"sync"
 
 	"codebdy.com/leda/services/schedule/entities"
 	"github.com/robfig/cron"
 )
 
-func init() {
-	c := cron.New()
-	c.AddFunc("*/5 * * * * *", func() {
-		fmt.Println("每5秒执行一次")
-	})
-	c.Start()
-}
+// func init() {
+// 	c := cron.New()
+// 	c.AddFunc("*/5 * * * * *", func() {
+// 		fmt.Println("只执行一次")
+// 		fmt.Printf("2 c.Entries(): %v\n", c.Entries())
+// 	})
+// 	fmt.Printf("1 c.Entries(): %v\n", c.Entries())
+// 	c.Start()
+// }
+var TaskRunner *TaskManager = &TaskManager{}
 
 type TaskManager struct {
-	oneShotTasks  sync.Map
-	periodicTasks sync.Map
+	crons sync.Map
 }
 
-func (t *TaskManager) StartOneShotTask(task *entities.OneShotTask) {
+func (t *TaskManager) StartTask(task *entities.Task) {
 	c := cron.New()
-	c.AddJob(task.CronExpression, OneShotJob{task: task})
-	t.oneShotTasks.Store(task.Id, c)
+	c.AddJob(task.CronExpression, Job{task: task})
+	t.crons.Store(task.Id, c)
 	c.Start()
 }
 
-func (t *TaskManager) CancelOneShotTask(taskId int64) {
-	c, ok := t.oneShotTasks.Load(taskId)
+func (t *TaskManager) StopTask(taskId int64) {
+	c, ok := t.crons.Load(taskId)
 	if ok {
 		(c.(*cron.Cron)).Stop()
-		t.oneShotTasks.Delete(taskId)
+		t.crons.Delete(taskId)
 	}
+}
+
+func (t *TaskManager) Destory() {
+	t.crons.Range(func(key interface{}, value interface{}) bool {
+		c, ok := t.crons.LoadAndDelete(key)
+		if ok {
+			(c.(*cron.Cron)).Stop()
+		}
+		return true
+	})
 }
