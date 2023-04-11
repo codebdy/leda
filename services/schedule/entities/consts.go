@@ -9,8 +9,7 @@ const (
 	PERIODIC_TASK_TYPE_PAUSED    string = "Paused"
 	PERIODIC_TASK_TYPE_ERROR     string = "Error"
 
-	REQUEST_TYPE_HTTP_GET         string = "HttpGet"
-	REQUEST_TYPE_HTTP_POST        string = "HttpPOST"
-	REQUEST_TYPE_GRAPHQL_QUERY    string = "GraphqlQuery"
-	REQUEST_TYPE_GRAPHQL_MUTATION string = "GraphqlMutation"
+	REQUEST_TYPE_HTTP_GET  string = "HttpGet"
+	REQUEST_TYPE_HTTP_POST string = "HttpPOST"
+	REQUEST_TYPE_GRAPHQL   string = "Graphql"
 )
