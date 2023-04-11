@@ -1,10 +1,15 @@
 package runner
 
-import "fmt"
+import (
+	"fmt"
 
-type TestJob struct {
+	"codebdy.com/leda/services/schedule/entities"
+)
+
+type OneShotJob struct {
+	Task *entities.OneShotTask
 }
 
-func (TestJob) Run() {
+func (OneShotJob) Run() {
 	fmt.Println("每5秒执行一次")
 }
