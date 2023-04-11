@@ -7,6 +7,7 @@ import (
 
 	"codebdy.com/leda/services/schedule/middleware"
 	"codebdy.com/leda/services/schedule/resolver"
+	_ "codebdy.com/leda/services/schedule/runner"
 	"codebdy.com/leda/services/schedule/schema"
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
