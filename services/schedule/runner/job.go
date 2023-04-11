@@ -7,7 +7,7 @@ import (
 )
 
 type OneShotJob struct {
-	Task *entities.OneShotTask
+	task *entities.OneShotTask
 }
 
 func (OneShotJob) Run() {

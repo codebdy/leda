@@ -23,7 +23,7 @@ type TaskManager struct {
 
 func (t *TaskManager) StartOneShotTask(task *entities.OneShotTask) {
 	c := cron.New()
-	c.AddJob(task.CronExpression, OneShotJob{Task: task})
+	c.AddJob(task.CronExpression, OneShotJob{task: task})
 	t.oneShotTasks.Store(task.Id, c)
 	c.Start()
 }
