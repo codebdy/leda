@@ -4,8 +4,9 @@ import (
 	"fmt"
 
 	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"codebdy.com/leda/services/entify/model/domain"
-	"codebdy.com/leda/services/entify/utils"
+
 	"github.com/gertd/go-pluralize"
 )
 

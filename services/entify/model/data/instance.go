@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
 	"codebdy.com/leda/services/entify/model/table"
-	"codebdy.com/leda/services/entify/utils"
 	"github.com/google/uuid"
 )
 
