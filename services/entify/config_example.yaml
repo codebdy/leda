@@ -1,0 +1,7 @@
+database: your database
+driver: mysql
+host: localhost
+service_id: 1
+password: your password
+port: "3306"
+user: root
