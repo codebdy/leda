@@ -153,5 +153,29 @@
         }
       ]
     }
+  ],
+  "relations":[
+    {
+      "innerId": 100,
+      "relationType": "oneWayCombination",
+      "roleOfSource": "belongsToApp",
+      "roleOfTarget": "meta",
+      "sourceId": "APP_ENTITY_UUID",
+      "targetId": "META_ENTITY_UUID",
+      "sourceMutiplicity": "0..*",
+      "targetMultiplicity": "0..1",
+      "uuid": "APP_META_RELATION_UUID"
+    },
+    {
+      "innerId": 101,
+      "relationType": "oneWayCombination",
+      "roleOfSource": "belongsToService",
+      "roleOfTarget": "meta",
+      "sourceId": "SERVICE_ENTITY_UUID",
+      "targetId": "META_ENTITY_UUID",
+      "sourceMutiplicity": "0..*",
+      "targetMultiplicity": "0..1",
+      "uuid": "SERVICE_META_RELATION_UUID"
+    }
   ]
 }
