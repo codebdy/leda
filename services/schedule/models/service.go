@@ -1,6 +1,10 @@
 package models
 
-import "codebdy.com/leda/services/schedule/consts"
+import (
+	"context"
+
+	"codebdy.com/leda/services/schedule/consts"
+)
 
 type ModelsService struct {
 	host string
@@ -12,6 +16,6 @@ func New() ModelsService {
 	}
 }
 
-func (m ModelsService) Execute(gql string, params map[string]interface{}) interface{} {
+func (m ModelsService) Execute(ctx context.Context, gql string, params map[string]interface{}) interface{} {
 	return nil
 }
