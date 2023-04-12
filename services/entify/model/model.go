@@ -1,9 +1,9 @@
 package model
 
 import (
-	"rxdrag.com/entify/model/domain"
-	"rxdrag.com/entify/model/graph"
-	"rxdrag.com/entify/model/meta"
+	"codebdy.com/leda/services/entify/model/domain"
+	"codebdy.com/leda/services/entify/model/graph"
+	"codebdy.com/leda/services/entify/model/meta"
 )
 
 type Model struct {

@@ -1,7 +1,7 @@
 package graph
 
 import (
-	"rxdrag.com/entify/model/domain"
+	"codebdy.com/leda/services/entify/model/domain"
 )
 
 type ThirdParty struct {

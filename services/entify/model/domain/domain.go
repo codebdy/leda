@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"rxdrag.com/entify/model/meta"
+	"codebdy.com/leda/services/entify/model/meta"
 )
 
 type Model struct {

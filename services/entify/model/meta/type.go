@@ -1,6 +1,6 @@
 package meta
 
-import "rxdrag.com/entify/consts"
+import "codebdy.com/leda/services/entify/consts"
 
 const (
 	ID                 string = "ID"

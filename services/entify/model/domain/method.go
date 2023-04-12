@@ -1,6 +1,6 @@
 package domain
 
-import "rxdrag.com/entify/model/meta"
+import "codebdy.com/leda/services/entify/model/meta"
 
 type Method struct {
 	meta.MethodMeta

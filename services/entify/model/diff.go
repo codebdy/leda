@@ -1,6 +1,6 @@
 package model
 
-import "rxdrag.com/entify/model/table"
+import "codebdy.com/leda/services/entify/model/table"
 
 type ModifyAtom struct {
 	ExcuteSQL string

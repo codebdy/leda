@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"rxdrag.com/entify/consts"
+	"codebdy.com/leda/services/entify/consts"
 )
 
 func readContentFromJson() MetaContent {

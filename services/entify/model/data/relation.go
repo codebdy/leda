@@ -1,9 +1,9 @@
 package data
 
 import (
-	"rxdrag.com/entify/consts"
-	"rxdrag.com/entify/model/graph"
-	"rxdrag.com/entify/model/table"
+	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/model/graph"
+	"codebdy.com/leda/services/entify/model/table"
 )
 
 type AssociationRef struct {

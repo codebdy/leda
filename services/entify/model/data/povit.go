@@ -1,7 +1,7 @@
 package data
 
 import (
-	"rxdrag.com/entify/model/table"
+	"codebdy.com/leda/services/entify/model/table"
 )
 
 type AssociationPovit struct {

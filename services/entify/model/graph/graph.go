@@ -3,9 +3,9 @@ package graph
 import (
 	"fmt"
 
-	"rxdrag.com/entify/model/domain"
-	"rxdrag.com/entify/model/meta"
-	"rxdrag.com/entify/model/table"
+	"codebdy.com/leda/services/entify/model/domain"
+	"codebdy.com/leda/services/entify/model/meta"
+	"codebdy.com/leda/services/entify/model/table"
 )
 
 type Model struct {

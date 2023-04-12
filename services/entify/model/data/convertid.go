@@ -3,7 +3,7 @@ package data
 import (
 	"strconv"
 
-	"rxdrag.com/entify/consts"
+	"codebdy.com/leda/services/entify/consts"
 )
 
 func ConvertId(id interface{}) uint64 {

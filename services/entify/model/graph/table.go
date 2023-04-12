@@ -3,9 +3,9 @@ package graph
 import (
 	"fmt"
 
-	"rxdrag.com/entify/consts"
-	"rxdrag.com/entify/model/meta"
-	"rxdrag.com/entify/model/table"
+	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/model/meta"
+	"codebdy.com/leda/services/entify/model/table"
 )
 
 func NewEntityTable(entity *Entity) *table.Table {

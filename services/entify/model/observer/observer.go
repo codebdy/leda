@@ -5,6 +5,7 @@ import (
 	"sync"
 
 	"codebdy.com/leda/services/entify/model/graph"
+	"codebdy.com/leda/services/entify/model/observer/consts"
 )
 
 type ModelObserver interface {

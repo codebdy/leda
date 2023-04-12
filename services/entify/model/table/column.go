@@ -1,6 +1,6 @@
 package table
 
-import "rxdrag.com/entify/model/meta"
+import "codebdy.com/leda/services/entify/model/meta"
 
 type Column struct {
 	meta.AttributeMeta

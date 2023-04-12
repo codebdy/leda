@@ -1,6 +1,6 @@
 package graph
 
-import "rxdrag.com/entify/model/domain"
+import "codebdy.com/leda/services/entify/model/domain"
 
 type Interface struct {
 	Class

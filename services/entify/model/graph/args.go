@@ -3,7 +3,7 @@ package graph
 import (
 	"fmt"
 
-	"rxdrag.com/entify/consts"
+	"codebdy.com/leda/services/entify/consts"
 )
 
 const PREFIX_T string = "t"

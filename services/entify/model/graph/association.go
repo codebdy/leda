@@ -1,6 +1,6 @@
 package graph
 
-import "rxdrag.com/entify/model/meta"
+import "codebdy.com/leda/services/entify/model/meta"
 
 type Association struct {
 	Relation       *Relation
