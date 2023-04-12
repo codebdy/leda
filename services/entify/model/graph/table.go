@@ -13,7 +13,6 @@ func NewEntityTable(entity *Entity) *table.Table {
 		Uuid:          entity.Uuid(),
 		Name:          entity.TableName(),
 		EntityInnerId: entity.Domain.InnerId,
-		IdNoShift:     entity.Domain.IdNoShift,
 	}
 
 	allAttrs := entity.AllAttributes()

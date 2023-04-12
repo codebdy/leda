@@ -6,5 +6,4 @@ type Table struct {
 	EntityInnerId uint64
 	Columns       []*Column
 	PKString      string
-	IdNoShift     bool
 }

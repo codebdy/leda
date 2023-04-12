@@ -52,7 +52,7 @@ func (m *Model) GetClassByUuid(uuid string) *ClassMeta {
 	return nil
 }
 
-func (m *Model) GetExtractClassByUuid(uuid string) *ClassMeta {
+func (m *Model) GetAbstractClassByUuid(uuid string) *ClassMeta {
 	for i := range m.Classes {
 		if m.Classes[i].Uuid == uuid && m.Classes[i].StereoType == CLASSS_ABSTRACT {
 			return m.Classes[i]

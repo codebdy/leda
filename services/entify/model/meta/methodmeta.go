@@ -1,10 +1,6 @@
 package meta
 
 const (
-	SCRIPT         string = "script"
-	CLOUD_FUNCTION string = "cloudFunction"
-	MICRO_SERVICE  string = "microService"
-
 	QUERY    string = "query"
 	MUTATION string = "mutation"
 )
@@ -26,7 +22,5 @@ type MethodMeta struct {
 	TypeLabel   string    `json:"typeLabel"`
 	Args        []ArgMeta `json:"args"`
 	OperateType string    `json:"operateType"` //Mutation or Query
-	Script      string    `json:"script"`
 	Description string    `json:"description"`
-	System      bool      `json:"system"`
 }

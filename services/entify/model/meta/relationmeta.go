@@ -39,7 +39,7 @@ type RelationMeta struct {
 }
 
 func (r *RelationMeta) IsAbsract(m *Model) bool {
-	if m.GetExtractClassByUuid(r.SourceId) != nil || m.GetExtractClassByUuid(r.TargetId) != nil {
+	if m.GetAbstractClassByUuid(r.SourceId) != nil || m.GetAbstractClassByUuid(r.TargetId) != nil {
 		return true
 	}
 	return false

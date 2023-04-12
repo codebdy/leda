@@ -5,8 +5,6 @@ const (
 	CLASSS_ENUM        string = "Enum"
 	CLASSS_ABSTRACT    string = "Abstract"
 	CLASS_VALUE_OBJECT string = "ValueObject"
-	CLASS_SERVICE      string = "Service"
-	CLASS_THIRDPARTY   string = "ThirdParty"
 )
 
 type ClassMeta struct {
@@ -20,12 +18,10 @@ type ClassMeta struct {
 	Root        bool            `json:"root"`
 	Description string          `json:"description"`
 	SoftDelete  bool            `json:"softDelete"`
-	System      bool            `json:"system"`
-	IdNoShift   bool            `json:"idNoShift"`
 	PackageUuid string          `json:"packageUuid"`
 	OnCreated   string          `json:"onCreated"`
 	OnUpdated   string          `json:"onUpdated"`
 	OnDeleted   string          `json:"onDeleted"`
-	//生成表名时使用
+	//生成表名时使用,运行时动态注入，不持久化
 	AppId uint64
 }

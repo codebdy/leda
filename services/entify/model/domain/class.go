@@ -15,7 +15,6 @@ type Class struct {
 	Parents       []*Class
 	Children      []*Class
 	AppId         uint64
-	IdNoShift     bool
 	OnCreated     string
 	OnUpdated     string
 	OnDeleted     string
@@ -41,7 +40,6 @@ func NewClass(c *meta.ClassMeta) *Class {
 		OnDeleted:   c.OnDeleted,
 		AppId:       c.AppId,
 		PackageUuid: c.PackageUuid,
-		IdNoShift:   c.IdNoShift,
 	}
 
 	for i := range c.Attributes {
