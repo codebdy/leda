@@ -10,8 +10,8 @@ import (
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
 	"codebdy.com/leda/services/entify/model/table"
+	"codebdy.com/leda/services/entify/utils"
 	"github.com/google/uuid"
-	"rxdrag.com/entify/utils"
 )
 
 type Field struct {

@@ -4,6 +4,7 @@ import (
 	"context"
 	"sync"
 
+	"codebdy.com/leda/services/entify/consts/contexts"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/observer/consts"
 )
