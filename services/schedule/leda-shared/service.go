@@ -1,18 +1,19 @@
-package models
+package leda
 
 import (
 	"context"
-
-	"codebdy.com/leda/services/schedule/consts"
 )
 
 type ModelsService struct {
 	host string
 }
 
-func New() ModelsService {
+func New(host string) ModelsService {
+	if host == "" {
+		host = "models"
+	}
 	return ModelsService{
-		host: consts.MODEL_HOST_NAME,
+		host: host,
 	}
 }
 
