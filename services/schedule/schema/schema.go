@@ -11,15 +11,22 @@ var SDL = `
 	}
 
 	type Mutation {
-		creatTask(config:TaskConfigInput!, start:bool):TaskConfig
+		creatTask(config:TaskInput!):Task
 		#返回 status
 		startTask(id:ID!): String!
 		#返回 status
 		stopTask(id:ID!): String!
 	}
 
+	type Task{
+
+	}
+
+	type TaskInput{
+
+	}
+
 	type TaskConfig{
-		entityId:ID
 		requestType: String!
 		url: String
 		gql: String
@@ -27,7 +34,6 @@ var SDL = `
 	}
 
 	type TaskConfigInput{
-		entityId:ID
 		requestType: String!
 		url: String
 		gql: String

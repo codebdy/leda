@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"codebdy.com/leda/services/schedule/consts"
+	"codebdy.com/leda/services/schedule/leda-shared"
 )
 
 // ContextValue is a context key
@@ -23,7 +23,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		if len(splitToken) == 2 {
 			reqToken = splitToken[1]
 			// 附加token
-			ctx := context.WithValue(r.Context(), consts.TOKEN, reqToken)
+			ctx := context.WithValue(r.Context(), leda.TOKEN, reqToken)
 			next.ServeHTTP(w, r.WithContext(ctx))
 		} else {
 			next.ServeHTTP(w, r)
