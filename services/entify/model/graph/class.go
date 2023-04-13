@@ -57,7 +57,7 @@ func (c *Class) AddAssociation(a *Association) {
 
 func (c *Class) TableName() string {
 	name := utils.SnakeString(c.Domain.Name)
-	if c.Domain.AppId == 1 {
+	if c.Domain.AppId == 0 {
 		return name
 	}
 	return fmt.Sprintf("%s%d_%s", consts.TABLE_PREFIX, c.Domain.AppId, name)
