@@ -3,7 +3,7 @@ package parser
 import (
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
-	"codebdy.com/leda/services/entify/scalars"
+	"codebdy.com/leda/services/entify/leda-shared/scalars"
 	"github.com/graphql-go/graphql"
 )
 

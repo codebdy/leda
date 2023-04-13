@@ -4,7 +4,7 @@ import (
 	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
-	"codebdy.com/leda/services/entify/modules/app/resolve"
+	"codebdy.com/leda/services/entify/app/resolve"
 	"github.com/graphql-go/graphql"
 )
 

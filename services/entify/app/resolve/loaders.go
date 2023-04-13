@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"codebdy.com/leda/services/entify/common/contexts"
 	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/contexts"
+	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"codebdy.com/leda/services/entify/model"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/service"
-	"codebdy.com/leda/services/entify/utils"
 	"github.com/graph-gophers/dataloader"
 	"github.com/graphql-go/graphql"
 )
@@ -44,7 +44,7 @@ func CreateDataLoaders() *Loaders {
 
 func (l *Loaders) GetLoader(p graphql.ResolveParams, association *graph.Association, args graph.QueryArg, model *model.Model) *dataloader.Loader {
 	contextValues := contexts.Values(p.Context)
-	loaderId := fmt.Sprintf("%s%d", association.Path(), contextValues.AppId)
+	loaderId := fmt.Sprintf("%s@%s", association.Path(), contextValues.AppName)
 	if l.loaders[loaderId] == nil {
 		l.loaders[loaderId] = dataloader.NewBatchedLoader(QueryBatchFn(p, association, args, model))
 	}

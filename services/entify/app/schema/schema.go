@@ -1,18 +1,17 @@
 package schema
 
 import (
+	"codebdy.com/leda/services/entify/app/schema/parser"
 	"codebdy.com/leda/services/entify/model"
-	"codebdy.com/leda/services/entify/modules/app/schema/parser"
 	"github.com/graphql-go/graphql"
 )
 
 type AppGraphqlSchema struct {
-	QueryFields        []*graphql.Field
-	MutationFields     []*graphql.Field
-	SubscriptionFields []*graphql.Field
-	Directives         []*graphql.Directive
-	Types              []graphql.Type
-	proccessor         *AppProcessor
+	QueryFields    []*graphql.Field
+	MutationFields []*graphql.Field
+	Directives     []*graphql.Directive
+	Types          []graphql.Type
+	proccessor     *AppProcessor
 }
 
 type AppProcessor struct {

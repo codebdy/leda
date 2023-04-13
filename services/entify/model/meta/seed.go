@@ -18,11 +18,11 @@ func readContentFromJson() MetaContent {
 	return content
 }
 
-var SystemAppData map[string]interface{}
+var SystemMeta map[string]interface{}
 
 func init() {
 	content := readContentFromJson()
-	SystemAppData = map[string]interface{}{
+	SystemMeta = map[string]interface{}{
 		"id":            SYSTEM_APP_ID,
 		"uuid":          "SYSTEM-APP-UUID",
 		"title":         "Appx",

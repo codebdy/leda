@@ -5,7 +5,7 @@ import (
 
 	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/storage"
-	"codebdy.com/leda/services/entify/utils"
+	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"github.com/graphql-go/graphql"
 )
 

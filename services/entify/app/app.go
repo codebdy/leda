@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"sync"
 
+	"codebdy.com/leda/services/entify/app/schema"
+	"codebdy.com/leda/services/entify/app/schema/parser"
 	"codebdy.com/leda/services/entify/model"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
-	"codebdy.com/leda/services/entify/modules/app/schema"
-	"codebdy.com/leda/services/entify/modules/app/schema/parser"
 	"codebdy.com/leda/services/entify/orm"
 	"codebdy.com/leda/services/entify/service"
 	"github.com/mitchellh/mapstructure"
@@ -108,9 +108,9 @@ func GetSystemApp() *App {
 
 func GetPredefinedSystemApp() *App {
 
-	metaConent := meta.SystemAppData["meta"].(meta.MetaContent)
+	metaConent := meta.SystemMeta["meta"].(meta.MetaContent)
 	return &App{
-		AppId: meta.SystemAppData["id"].(uint64),
+		AppId: meta.SystemMeta["id"].(uint64),
 		Model: model.New(&metaConent, meta.SYSTEM_APP_ID),
 	}
 }

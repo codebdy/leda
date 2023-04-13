@@ -1,11 +1,10 @@
 package schema
 
 import (
+	"codebdy.com/leda/services/entify/app/resolve"
 	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/leda-shared/scalars"
 	"codebdy.com/leda/services/entify/model/graph"
-	"codebdy.com/leda/services/entify/model/meta"
-	"codebdy.com/leda/services/entify/modules/app/resolve"
-	"codebdy.com/leda/services/entify/scalars"
 	"github.com/graphql-go/graphql"
 )
 
@@ -44,12 +43,6 @@ func (a *AppProcessor) mutationFields() []*graphql.Field {
 	for _, entity := range a.Model.Graph.RootEnities() {
 		if entity.Domain.Root {
 			a.appendEntityMutationToFields(entity, mutationFields)
-		}
-	}
-
-	for _, orchestration := range a.Model.Meta.Orchestrations {
-		if orchestration.OperateType == consts.MUTATION {
-			a.appendOrchestrationToMutationFields(orchestration, mutationFields)
 		}
 	}
 
@@ -139,14 +132,5 @@ func (a *AppProcessor) appendEntityMutationToFields(entity *graph.Entity, feilds
 			Args:    a.setArgs(entity),
 			Resolve: resolve.SetResolveFn(entity, a.Model),
 		}
-	}
-}
-
-func (a *AppProcessor) appendOrchestrationToMutationFields(orchestration *meta.OrchestrationMeta, fields graphql.Fields) {
-	fields[orchestration.Name] = &graphql.Field{
-		Type:        a.modelParser.OrchestrationType(orchestration),
-		Args:        a.modelParser.MethodArgs(orchestration.Args),
-		Description: orchestration.Description,
-		Resolve:     resolve.MethodResolveFn(orchestration.Script, orchestration.Args, a.Model),
 	}
 }
