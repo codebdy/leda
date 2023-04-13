@@ -91,6 +91,12 @@
           "uuid": "APP_COLUMN_IMAGE_URL_UUID"
         },
         {
+          "name": "metaId",
+          "type": "ID",
+          "typeLabel": "ID",
+          "uuid": "APP_COLUMN_META_ID_UUID"
+        },
+        {
           "name": "createdAt",
           "createDate": true,
           "type": "Date",
@@ -141,6 +147,12 @@
           "uuid": "SERVICE_COLUMN_IMAGE_URL_UUID"
         },
         {
+          "name": "metaId",
+          "type": "ID",
+          "typeLabel": "ID",
+          "uuid": "SERVICE_COLUMN_META_ID_UUID"
+        },
+        {
           "name": "createdAt",
           "createDate": true,
           "type": "Date",
@@ -156,29 +168,6 @@
         }
       ]
     }
-  ],
-  "relations":[
-    {
-      "innerId": 100,
-      "relationType": "oneWayCombination",
-      "roleOfSource": "belongsToApp",
-      "roleOfTarget": "meta",
-      "sourceId": "APP_ENTITY_UUID",
-      "targetId": "META_ENTITY_UUID",
-      "sourceMutiplicity": "0..*",
-      "targetMultiplicity": "0..1",
-      "uuid": "APP_META_RELATION_UUID"
-    },
-    {
-      "innerId": 101,
-      "relationType": "oneWayCombination",
-      "roleOfSource": "belongsToService",
-      "roleOfTarget": "meta",
-      "sourceId": "SERVICE_ENTITY_UUID",
-      "targetId": "META_ENTITY_UUID",
-      "sourceMutiplicity": "0..*",
-      "targetMultiplicity": "0..1",
-      "uuid": "SERVICE_META_RELATION_UUID"
-    }
   ]
+
 }
