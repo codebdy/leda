@@ -7,7 +7,7 @@ import (
 )
 
 func readContentFromJson() MetaContent {
-	data, err := ioutil.ReadFile("./seeds/meta.json")
+	data, err := ioutil.ReadFile("./seeds/system-meta.json")
 	content := MetaContent{}
 	if nil != err {
 		log.Panic(err.Error())

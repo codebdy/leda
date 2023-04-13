@@ -1,18 +1,15 @@
 package install
 
 import (
-	"log"
 	"time"
 
 	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/leda-shared/scalars"
+	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"codebdy.com/leda/services/entify/logs"
-	"codebdy.com/leda/services/entify/model/data"
 	"codebdy.com/leda/services/entify/model/meta"
 	"codebdy.com/leda/services/entify/modules/app"
 	"codebdy.com/leda/services/entify/orm"
-	"codebdy.com/leda/services/entify/scalars"
-	"codebdy.com/leda/services/entify/service"
-	"codebdy.com/leda/services/entify/utils"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
 )
@@ -89,62 +86,62 @@ func installMutationFields() []*graphql.Field {
 func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	defer utils.PrintErrorStack()
 
-	systemAppData := meta.SystemAppData
+	systemData := meta.SystemMeta
 	input := InstallArg{}
 	mapstructure.Decode(p.Args[INPUT], &input)
 
 	if input.Meta != nil {
-		systemAppData = input.Meta
+		systemData = input.Meta
 	}
 
-	nextMeta := systemAppData["meta"].(meta.MetaContent)
-	app.PublishMeta(&meta.MetaContent{}, &nextMeta, meta.SYSTEM_APP_ID)
+	nextMeta := systemData["meta"].(meta.MetaContent)
+	app.PublishMeta(&meta.MetaContent{}, &nextMeta, 0)
 
-	systemApp := app.GetSystemApp()
+	//systemApp := app.GetSystemApp()
 
-	now := time.Now()
-	systemAppData["saveMetaAt"] = now
-	systemAppData["publishMetaAt"] = now
-	instance := data.NewInstance(
-		systemAppData,
-		systemApp.GetEntityByName(meta.APP_ENTITY_NAME),
-	)
-	s := service.NewSystem()
-	_, err := s.InsertOne(instance)
+	// now := time.Now()
+	// systemData["saveMetaAt"] = now
+	// systemData["publishMetaAt"] = now
+	// instance := data.NewInstance(
+	// 	systemData,
+	// 	systemApp.GetEntityByName(meta.APP_ENTITY_NAME),
+	// )
+	// s := service.NewSystem()
+	// _, err := s.InsertOne(instance)
 
-	if err != nil {
-		log.Panic(err.Error())
-	}
+	// if err != nil {
+	// 	log.Panic(err.Error())
+	// }
 
-	systemApp, err = app.Get(meta.SYSTEM_APP_ID)
+	// systemApp, err = app.Get(meta.SYSTEM_APP_ID)
 
-	if err != nil {
-		log.Panic(err.Error())
-	}
+	// if err != nil {
+	// 	log.Panic(err.Error())
+	// }
 
-	if input.Admin != "" {
-		instance = data.NewInstance(
-			adminInstance(input.Admin, input.Password),
-			systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
-		)
-		_, err = s.SaveOne(instance)
-		if err != nil {
-			logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
-			return nil, err
-		}
-		if input.WithDemo {
-			instance = data.NewInstance(
-				demoInstance(),
-				systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
-			)
-			_, err = s.SaveOne(instance)
-			if err != nil {
-				logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
-				return nil, err
-			}
-		}
-	}
-	isExist := orm.IsEntityExists(meta.APP_ENTITY_NAME)
+	// if input.Admin != "" {
+	// 	instance = data.NewInstance(
+	// 		adminInstance(input.Admin, input.Password),
+	// 		systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
+	// 	)
+	// 	_, err = s.SaveOne(instance)
+	// 	if err != nil {
+	// 		logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
+	// 		return nil, err
+	// 	}
+	// 	if input.WithDemo {
+	// 		instance = data.NewInstance(
+	// 			demoInstance(),
+	// 			systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
+	// 		)
+	// 		_, err = s.SaveOne(instance)
+	// 		if err != nil {
+	// 			logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
+	// 			return nil, err
+	// 		}
+	// 	}
+	// }
+	isExist := orm.IsEntityExists(meta.META_ENTITY_NAME)
 	logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.SUCCESS, "")
 	app.Installed = true
 	return isExist, nil

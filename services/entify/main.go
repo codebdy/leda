@@ -6,12 +6,12 @@ import (
 	"net/http"
 	"os"
 
-	"codebdy.com/leda/services/entify/common/errorx"
-	"codebdy.com/leda/services/entify/common/middlewares"
 	"codebdy.com/leda/services/entify/config"
 	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/db"
 	"codebdy.com/leda/services/entify/handler"
+	"codebdy.com/leda/services/entify/leda-shared/errorx"
+	"codebdy.com/leda/services/entify/leda-shared/middlewares"
 	"codebdy.com/leda/services/entify/model/meta"
 	"codebdy.com/leda/services/entify/modules/app"
 	"codebdy.com/leda/services/entify/modules/register"
@@ -19,10 +19,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 
 	_ "codebdy.com/leda/services/entify/modules/app"
-	_ "codebdy.com/leda/services/entify/modules/authentication"
-	_ "codebdy.com/leda/services/entify/modules/imexport"
 	_ "codebdy.com/leda/services/entify/modules/install"
-	_ "codebdy.com/leda/services/entify/modules/notification"
 	_ "codebdy.com/leda/services/entify/modules/publish"
 	_ "codebdy.com/leda/services/entify/modules/snapshot"
 )
@@ -51,7 +48,7 @@ func checkParams() {
 }
 
 func checkMetaInstall() {
-	if !orm.IsEntityExists(meta.APP_ENTITY_NAME) {
+	if !orm.IsEntityExists(meta.META_ENTITY_NAME) {
 		app.Installed = false
 	} else {
 		app.Installed = true
@@ -78,15 +75,6 @@ func main() {
 		),
 	)
 	fmt.Println(fmt.Sprintf("🚀 Graphql server ready at http://localhost:%d/graphql", PORT))
-
-	http.Handle("/subscriptions",
-		middlewares.CorsMiddleware(
-			middlewares.ContextMiddleware(
-				register.AppendMiddlewares(handler.NewSubscription()),
-			),
-		),
-	)
-	fmt.Println(fmt.Sprintf("🎉 Subscriptions endpoint is ws://localhost:%d/subscriptions", PORT))
 
 	if config.Storage() == consts.LOCAL {
 		prefix := "/" + consts.STATIC_PATH + "/"

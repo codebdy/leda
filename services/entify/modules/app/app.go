@@ -188,6 +188,17 @@ func MergeSystemModel(content *meta.MetaContent) *meta.MetaContent {
 	return content
 }
 
+func GetSystemApp() *App {
+	if result, ok := appLoaderCache.Load(0); ok {
+		loader := result.(*AppLoader)
+		if !loader.loaded {
+			loader.load(false)
+		}
+		return loader.app
+	}
+
+	return GetPredefinedSystemApp()
+}
 func GetPredefinedSystemApp() *App {
 
 	metaConent := meta.SystemMeta["meta"].(meta.MetaContent)
