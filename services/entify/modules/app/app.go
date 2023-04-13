@@ -123,33 +123,43 @@ func NewApp(appId uint64) *App {
 	}
 
 	s := service.NewSystem()
-	appMeta := s.QueryById(
-		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
+	appData := s.QueryById(
+		systemApp.GetEntityByName(meta.APP_ENTITY_NAME),
 		appId,
 	)
 
-	if appMeta != nil {
-		publishedMeta := appMeta.(map[string]interface{})["publishedContent"]
-		var content *meta.MetaContent
-		if publishedMeta != nil {
-			content = DecodeContent(publishedMeta)
-		}
-		// if appId != meta.SYSTEM_APP_ID {
-		// 	content = MergeSystemModel(content)
-		// }
+	if appData == nil {
+		return nil
+	}
+	appMeta := s.QueryById(
+		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
+		appData.(map[string]interface{})["metaId"].(uint64),
+	)
 
-		model := model.New(content, appId)
-		schema := schema.New(model)
-
-		return &App{
-			AppId:  appId,
-			Model:  model,
-			Schema: schema,
-			Parser: schema.Parser(),
-		}
+	if appMeta == nil {
+		return nil
 	}
 
-	return nil
+	publishedMeta := appMeta.(map[string]interface{})["publishedContent"]
+	var content *meta.MetaContent
+	if publishedMeta != nil {
+		content = DecodeContent(publishedMeta)
+	}
+
+	//合并服务
+	// if appId != meta.SYSTEM_APP_ID {
+	// 	content = MergeSystemModel(content)
+	// }
+
+	model := model.New(content, appId)
+	schema := schema.New(model)
+
+	return &App{
+		AppId:  appId,
+		Model:  model,
+		Schema: schema,
+		Parser: schema.Parser(),
+	}
 }
 
 func DecodeContent(obj interface{}) *meta.MetaContent {
