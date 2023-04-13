@@ -8,21 +8,6 @@ import (
 	"codebdy.com/leda/services/entify/orm"
 )
 
-// func QueryInterface(intf *graph.Interface, args graph.QueryArg) orm.QueryResponse {
-// 	session, err := orm.Open()
-// 	if err != nil {
-// 		panic(err.Error())
-// 	}
-// 	return session.QueryInterface(intf, args)
-// }
-
-// func QueryOneInterface(intf *graph.Interface, args graph.QueryArg) interface{} {
-// 	session, err := orm.Open()
-// 	if err != nil {
-// 		panic(err.Error())
-// 	}
-// 	return session.QueryOneInterface(intf, args)
-// }
 func mergeWhereArgs(whereArgs, authArgs graph.QueryArg) graph.QueryArg {
 	if len(whereArgs) == 0 {
 		return authArgs
