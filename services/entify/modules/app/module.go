@@ -15,10 +15,6 @@ type AppModule struct {
 }
 
 func (m *AppModule) Init(ctx context.Context) {
-	if contexts.Values(ctx).AppId == 0 {
-		return
-	}
-
 	//没有安装
 	if !Installed {
 		return

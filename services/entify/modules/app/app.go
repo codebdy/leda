@@ -118,6 +118,10 @@ func (a *App) ReLoad() {
 
 func NewApp(appId uint64) *App {
 	systemApp := GetPredefinedSystemApp()
+	if appId == 0 {
+		return systemApp
+	}
+
 	s := service.NewSystem()
 	appMeta := s.QueryById(
 		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
@@ -187,10 +191,12 @@ func GetSystemApp() *App {
 	return GetPredefinedSystemApp()
 }
 func GetPredefinedSystemApp() *App {
-
 	metaConent := meta.SystemMeta["content"].(meta.MetaContent)
+	model := model.New(&metaConent, 0)
+	schema := schema.New(model)
 	return &App{
-		AppId: meta.SystemMeta["id"].(uint64),
-		Model: model.New(&metaConent, 0),
+		AppId:  0,
+		Schema: schema,
+		Parser: schema.Parser(),
 	}
 }
