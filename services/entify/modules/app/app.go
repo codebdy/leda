@@ -48,16 +48,6 @@ func (l *AppLoader) load(force bool) {
 
 var appLoaderCache sync.Map
 
-// func init() {
-// 	//先加载系统APP
-// 	if orm.IsEntityExists(meta.META_ENTITY_NAME) {
-// 		// _, err := Get(meta.SYSTEM_APP_ID)
-// 		// if err != nil {
-// 		// 	log.Panic(err.Error())
-// 		// }
-// 	}
-// }
-
 func GetAppByIdArg(idArg interface{}) (*App, error) {
 	if idArg == nil {
 		err := errors.New("Nil app id")

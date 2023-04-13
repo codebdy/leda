@@ -3,6 +3,7 @@
     {
       "name": "Meta",
       "uuid": "META_ENTITY_UUID",
+      "stereoType": "Entity",
       "root": true,
       "attributes": [
         {
@@ -58,6 +59,7 @@
     {
       "name": "App",
       "uuid": "APP_ENTITY_UUID",
+      "stereoType": "Entity",
       "root": true,
       "attributes": [
         {
@@ -107,6 +109,7 @@
     {
       "name": "Service",
       "uuid": "SERVICE_ENTITY_UUID",
+      "stereoType": "Entity",
       "root": true,
       "attributes": [
         {
