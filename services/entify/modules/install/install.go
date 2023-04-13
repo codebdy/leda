@@ -4,17 +4,17 @@ import (
 	"log"
 	"time"
 
+	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/logs"
+	"codebdy.com/leda/services/entify/model/data"
+	"codebdy.com/leda/services/entify/model/meta"
+	"codebdy.com/leda/services/entify/modules/app"
+	"codebdy.com/leda/services/entify/orm"
+	"codebdy.com/leda/services/entify/scalars"
+	"codebdy.com/leda/services/entify/service"
+	"codebdy.com/leda/services/entify/utils"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
-	"rxdrag.com/entify/consts"
-	"rxdrag.com/entify/logs"
-	"rxdrag.com/entify/model/data"
-	"rxdrag.com/entify/model/meta"
-	"rxdrag.com/entify/modules/app"
-	"rxdrag.com/entify/orm"
-	"rxdrag.com/entify/scalars"
-	"rxdrag.com/entify/service"
-	"rxdrag.com/entify/utils"
 )
 
 type InstallArg struct {

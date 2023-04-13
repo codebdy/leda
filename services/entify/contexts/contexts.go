@@ -7,10 +7,10 @@ import (
 )
 
 type ContextValues struct {
-	Token   string
-	AppName string
-	Host    string
-	IP      string
+	Token string
+	AppId uint64
+	Host  string
+	IP    string
 }
 
 func Values(ctx context.Context) ContextValues {

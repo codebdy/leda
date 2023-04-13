@@ -5,11 +5,11 @@ import (
 	"log"
 	"net/http"
 
+	"codebdy.com/leda/services/entify/common/contexts"
+	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/modules/app"
+	"codebdy.com/leda/services/entify/modules/register"
 	"github.com/graphql-go/graphql"
-	"rxdrag.com/entify/common/contexts"
-	"rxdrag.com/entify/consts"
-	"rxdrag.com/entify/modules/app"
-	"rxdrag.com/entify/modules/register"
 )
 
 type PublishModule struct {

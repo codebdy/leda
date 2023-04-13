@@ -7,13 +7,13 @@ import (
 	"strings"
 	"time"
 
+	"codebdy.com/leda/services/entify/model/data"
+	"codebdy.com/leda/services/entify/model/graph"
+	"codebdy.com/leda/services/entify/modules/app"
+	"codebdy.com/leda/services/entify/modules/register"
+	"codebdy.com/leda/services/entify/service"
+	"codebdy.com/leda/services/entify/utils"
 	"github.com/graphql-go/graphql"
-	"rxdrag.com/entify/model/data"
-	"rxdrag.com/entify/model/graph"
-	"rxdrag.com/entify/modules/app"
-	"rxdrag.com/entify/modules/register"
-	"rxdrag.com/entify/service"
-	"rxdrag.com/entify/utils"
 )
 
 const (

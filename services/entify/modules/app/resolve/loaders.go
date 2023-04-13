@@ -44,7 +44,7 @@ func CreateDataLoaders() *Loaders {
 
 func (l *Loaders) GetLoader(p graphql.ResolveParams, association *graph.Association, args graph.QueryArg, model *model.Model) *dataloader.Loader {
 	contextValues := contexts.Values(p.Context)
-	loaderId := fmt.Sprintf("%s@%s", association.Path(), contextValues.AppName)
+	loaderId := fmt.Sprintf("%s@%s", association.Path(), contextValues.AppId)
 	if l.loaders[loaderId] == nil {
 		l.loaders[loaderId] = dataloader.NewBatchedLoader(QueryBatchFn(p, association, args, model))
 	}

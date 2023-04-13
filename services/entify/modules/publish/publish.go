@@ -3,10 +3,10 @@ package publish
 import (
 	"context"
 
+	"codebdy.com/leda/services/entify/logs"
+	"codebdy.com/leda/services/entify/modules/app"
+	"codebdy.com/leda/services/entify/utils"
 	"github.com/graphql-go/graphql"
-	"rxdrag.com/entify/logs"
-	"rxdrag.com/entify/modules/app"
-	"rxdrag.com/entify/utils"
 )
 
 func PublishMetaResolveFn(app *app.App) graphql.FieldResolveFn {

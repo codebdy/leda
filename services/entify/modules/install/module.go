@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
+	"codebdy.com/leda/services/entify/modules/app"
+	"codebdy.com/leda/services/entify/modules/register"
 	"github.com/graphql-go/graphql"
-	"rxdrag.com/entify/modules/app"
-	"rxdrag.com/entify/modules/register"
 )
 
 type InstallModule struct {
