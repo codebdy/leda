@@ -32,20 +32,20 @@ func (a *App) Publish(ctx context.Context) {
 	appMap := appData.(map[string]interface{})
 
 	nextMeta := meta.MetaContent{}
-	err := mapstructure.Decode(appMap["meta"], &nextMeta)
+	err := mapstructure.Decode(appMap["content"], &nextMeta)
 	if err != nil {
 		log.Println(err.Error())
 	}
 	oldMeta := meta.MetaContent{}
-	err = mapstructure.Decode(appMap["publishedMeta"], &oldMeta)
+	err = mapstructure.Decode(appMap["publishedContent"], &oldMeta)
 	if err != nil {
 		log.Println(err.Error())
 	}
 
 	PublishMeta(a.MergeModel(&oldMeta), a.MergeModel(&nextMeta), a.AppId)
 
-	appMap["publishedMeta"] = appMap["meta"]
-	appMap["publishMetaAt"] = time.Now()
+	appMap["publishedContent"] = appMap["content"]
+	appMap["publishedAt"] = time.Now()
 	instance := data.NewInstance(
 		appMap,
 		entity,

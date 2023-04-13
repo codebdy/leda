@@ -2,9 +2,7 @@ package app
 
 import (
 	"errors"
-	"fmt"
 	"log"
-	"strconv"
 	"sync"
 
 	"codebdy.com/leda/services/entify/model"
@@ -48,20 +46,20 @@ func (l *AppLoader) load(force bool) {
 
 var appLoaderCache sync.Map
 
-func GetAppByIdArg(idArg interface{}) (*App, error) {
-	if idArg == nil {
-		err := errors.New("Nil app id")
-		log.Panic(err.Error())
-	}
-	appIdStr := idArg.(string)
-	appId, err := strconv.ParseUint(appIdStr, 10, 64)
+// func GetAppByIdArg(idArg interface{}) (*App, error) {
+// 	if idArg == nil {
+// 		err := errors.New("Nil app id")
+// 		log.Panic(err.Error())
+// 	}
+// 	appIdStr := idArg.(string)
+// 	appId, err := strconv.ParseUint(appIdStr, 10, 64)
 
-	if err != nil {
-		err := errors.New(fmt.Sprintf("App id error:%s", appIdStr))
-		log.Panic(err.Error())
-	}
-	return Get(appId)
-}
+// 	if err != nil {
+// 		err := errors.New(fmt.Sprintf("App id error:%s", appIdStr))
+// 		log.Panic(err.Error())
+// 	}
+// 	return Get(appId)
+// }
 
 func Get(appId uint64) (*App, error) {
 	if result, ok := appLoaderCache.Load(appId); ok {
@@ -127,7 +125,7 @@ func NewApp(appId uint64) *App {
 	)
 
 	if appMeta != nil {
-		publishedMeta := appMeta.(map[string]interface{})["publishedMeta"]
+		publishedMeta := appMeta.(map[string]interface{})["publishedContent"]
 		var content *meta.MetaContent
 		if publishedMeta != nil {
 			content = DecodeContent(publishedMeta)
@@ -190,7 +188,7 @@ func GetSystemApp() *App {
 }
 func GetPredefinedSystemApp() *App {
 
-	metaConent := meta.SystemMeta["meta"].(meta.MetaContent)
+	metaConent := meta.SystemMeta["content"].(meta.MetaContent)
 	return &App{
 		AppId: meta.SystemMeta["id"].(uint64),
 		Model: model.New(&metaConent, 0),

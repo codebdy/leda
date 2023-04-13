@@ -23,8 +23,8 @@ var SystemMeta map[string]interface{}
 func init() {
 	content := readContentFromJson()
 	SystemMeta = map[string]interface{}{
-		"id":            0,
-		"meta":          content,
-		"publishedMeta": content,
+		"id":               0,
+		"content":          content,
+		"publishedContent": content,
 	}
 }
