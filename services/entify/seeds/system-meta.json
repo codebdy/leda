@@ -10,13 +10,11 @@
           "name": "id",
           "primary": true,
           "type": "ID",
-          "typeLabel": "ID",
           "uuid": "META_COLUMN_ID_UUID"
         },
         {
           "name": "name",
           "type": "String",
-          "typeLabel": "String",
           "unique": true,
           "uuid": "META_COLUMN_NAME_UUID"
         },
@@ -24,33 +22,28 @@
           "name": "content",
           "nullable": true,
           "type": "JSON",
-          "typeLabel": "JSON",
           "uuid": "META_COLUMN_CONTENT_UUID"
         },
         {
           "name": "publishedContent",
           "nullable": true,
           "type": "JSON",
-          "typeLabel": "JSON",
           "uuid": "META_COLUMN_PUBLISHED_CONTENT_UUID"
         },
         {
           "name": "publishedAt",
           "type": "Date",
-          "typeLabel": "Date",
           "uuid": "META_COLUMN_PUBLISHED_AT_UUID"
         },
         {
           "name": "createdAt",
           "createDate": true,
           "type": "Date",
-          "typeLabel": "Date",
           "uuid": "META_COLUMN_CREATED_AT_UUID"
         },
         {
           "name": "updatedAt",
           "type": "Date",
-          "typeLabel": "Date",
           "updateDate": true,
           "uuid": "META_COLUMN_UPDATED_AT_UUID"
         }
@@ -66,13 +59,11 @@
           "name": "id",
           "primary": true,
           "type": "ID",
-          "typeLabel": "ID",
           "uuid": "APP_COLUMN_ID_UUID"
         },
         {
           "name": "name",
           "type": "String",
-          "typeLabel": "String",
           "unique": true,
           "uuid": "APP_COLUMN_NAME_UUID"
         },
@@ -80,33 +71,29 @@
           "name": "title",
           "nullable": true,
           "type": "String",
-          "typeLabel": "String",
           "uuid": "APP_COLUMN_TITLE_UUID"
         },
         {
           "name": "imageUrl",
           "nullable": true,
           "type": "String",
-          "typeLabel": "String",
           "uuid": "APP_COLUMN_IMAGE_URL_UUID"
         },
         {
           "name": "metaId",
+          "nullable": true,
           "type": "ID",
-          "typeLabel": "ID",
           "uuid": "APP_COLUMN_META_ID_UUID"
         },
         {
           "name": "createdAt",
           "createDate": true,
           "type": "Date",
-          "typeLabel": "Date",
           "uuid": "APP_COLUMN_CREATED_AT_UUID"
         },
         {
           "name": "updatedAt",
           "type": "Date",
-          "typeLabel": "Date",
           "updateDate": true,
           "uuid": "APP_COLUMN_UPDATED_AT_UUID"
         }
@@ -122,13 +109,11 @@
           "name": "id",
           "primary": true,
           "type": "ID",
-          "typeLabel": "ID",
           "uuid": "SERVICE_COLUMN_ID_UUID"
         },
         {
           "name": "name",
           "type": "String",
-          "typeLabel": "String",
           "unique": true,
           "uuid": "SERVICE_COLUMN_NAME_UUID"
         },
@@ -136,33 +121,34 @@
           "name": "title",
           "nullable": true,
           "type": "String",
-          "typeLabel": "String",
           "uuid": "SERVICE_COLUMN_TITLE_UUID"
         },
         {
           "name": "imageUrl",
           "nullable": true,
           "type": "String",
-          "typeLabel": "String",
           "uuid": "SERVICE_COLUMN_IMAGE_URL_UUID"
         },
         {
           "name": "metaId",
+          "nullable": true,
           "type": "ID",
-          "typeLabel": "ID",
           "uuid": "SERVICE_COLUMN_META_ID_UUID"
+        },
+        {
+          "name": "system",
+          "type": "Boolean",
+          "uuid": "SERVICE_COLUMN_SYSTEM_UUID"
         },
         {
           "name": "createdAt",
           "createDate": true,
           "type": "Date",
-          "typeLabel": "Date",
           "uuid": "SERVICE_COLUMN_CREATED_AT_UUID"
         },
         {
           "name": "updatedAt",
           "type": "Date",
-          "typeLabel": "Date",
           "updateDate": true,
           "uuid": "SERVICE_COLUMN_UPDATED_AT_UUID"
         }
