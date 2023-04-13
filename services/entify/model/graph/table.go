@@ -54,7 +54,7 @@ func NewAttributeColumn(attr *Attribute) *table.Column {
 
 func NewRelationTable(relation *Relation) *table.Table {
 	prefix := consts.PIVOT
-	if relation.AppId != 1 {
+	if relation.AppId != 0 {
 		prefix = fmt.Sprintf("%s%d%s", consts.TABLE_PREFIX, relation.AppId, consts.PIVOT)
 	}
 	name := fmt.Sprintf(

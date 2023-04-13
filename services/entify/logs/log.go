@@ -3,11 +3,7 @@ package logs
 import (
 	"context"
 
-	"codebdy.com/leda/services/entify/contexts"
-	"codebdy.com/leda/services/entify/model"
-	"codebdy.com/leda/services/entify/model/data"
 	"codebdy.com/leda/services/entify/model/graph"
-	"codebdy.com/leda/services/entify/service"
 )
 
 func WriteModelLog(
@@ -17,16 +13,16 @@ func WriteModelLog(
 	result string,
 	gql interface{},
 ) {
-	model := model.SystemModel.Graph
-	contextsValues := contexts.Values(ctx)
-	logObject := map[string]interface{}{
-		"ip":          contextsValues.IP,
-		"operateType": operate,
-		"classUuid":   cls.Uuid(),
-		"className":   cls.Name(),
-		"gql":         gql,
-		"result":      result,
-	}
+	// model := model.SystemModel.Graph
+	// contextsValues := contexts.Values(ctx)
+	// logObject := map[string]interface{}{
+	// 	"ip":          contextsValues.IP,
+	// 	"operateType": operate,
+	// 	"classUuid":   cls.Uuid(),
+	// 	"className":   cls.Name(),
+	// 	"gql":         gql,
+	// 	"result":      result,
+	// }
 	// if contextsValues.Me != nil {
 	// 	logObject["user"] = map[string]interface{}{
 	// 		"add": map[string]interface{}{
@@ -35,17 +31,17 @@ func WriteModelLog(
 	// 	}
 	// }
 
-	if contextsValues.AppId != 0 {
-		logObject["app"] = map[string]interface{}{
-			"add": map[string]interface{}{
-				"id": contextsValues.AppId,
-			},
-		}
-	}
+	// if contextsValues.AppId != 0 {
+	// 	logObject["app"] = map[string]interface{}{
+	// 		"add": map[string]interface{}{
+	// 			"id": contextsValues.AppId,
+	// 		},
+	// 	}
+	// }
 
-	instance := data.NewInstance(logObject, model.GetEntityByName("ModelLog"))
-	s := service.NewSystem()
-	s.SaveOne(instance)
+	// instance := data.NewInstance(logObject, model.GetEntityByName("ModelLog"))
+	// s := service.NewSystem()
+	// s.SaveOne(instance)
 }
 
 func WriteBusinessLog(
@@ -56,12 +52,12 @@ func WriteBusinessLog(
 ) {
 	//contextsValues := contexts.Values(ctx)
 
-	useId := ""
+	//useId := ""
 	// if contextsValues.Me != nil {
 	// 	useId = contextsValues.Me.Id
 	// }
 
-	WriteUserBusinessLog(useId, ctx, operate, result, message)
+	//WriteUserBusinessLog(useId, ctx, operate, result, message)
 }
 
 func WriteUserBusinessLog(
@@ -71,33 +67,33 @@ func WriteUserBusinessLog(
 	result string,
 	message string,
 ) {
-	model := model.SystemModel.Graph
-	contextsValues := contexts.Values(ctx)
+	// model := model.SystemModel.Graph
+	// contextsValues := contexts.Values(ctx)
 
-	logObject := map[string]interface{}{
-		"ip":          contextsValues.IP,
-		"appUuid":     contextsValues.AppId,
-		"operateType": operate,
-		"result":      result,
-		"message":     message,
-	}
-	if useId != "" {
-		logObject["user"] = map[string]interface{}{
-			"add": map[string]interface{}{
-				"id": useId,
-			},
-		}
-	}
+	// logObject := map[string]interface{}{
+	// 	"ip":          contextsValues.IP,
+	// 	"appUuid":     contextsValues.AppId,
+	// 	"operateType": operate,
+	// 	"result":      result,
+	// 	"message":     message,
+	// }
+	// if useId != "" {
+	// 	logObject["user"] = map[string]interface{}{
+	// 		"add": map[string]interface{}{
+	// 			"id": useId,
+	// 		},
+	// 	}
+	// }
 
-	if contextsValues.AppId != 0 {
-		logObject["app"] = map[string]interface{}{
-			"add": map[string]interface{}{
-				"id": contextsValues.AppId,
-			},
-		}
-	}
+	// if contextsValues.AppId != 0 {
+	// 	logObject["app"] = map[string]interface{}{
+	// 		"add": map[string]interface{}{
+	// 			"id": contextsValues.AppId,
+	// 		},
+	// 	}
+	// }
 
-	instance := data.NewInstance(logObject, model.GetEntityByName("BusinessLog"))
-	s := service.NewSystem()
-	s.SaveOne(instance)
+	// instance := data.NewInstance(logObject, model.GetEntityByName("BusinessLog"))
+	// s := service.NewSystem()
+	// s.SaveOne(instance)
 }
