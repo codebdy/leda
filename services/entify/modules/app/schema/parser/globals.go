@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"codebdy.com/leda/services/entify/app/resolve"
 	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/modules/app/resolve"
 	"github.com/graphql-go/graphql"
 )
 
