@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"codebdy.com/leda/services/entify/common/contexts"
+	"codebdy.com/leda/services/entify/contexts"
 	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/modules/app"
 	"codebdy.com/leda/services/entify/modules/register"

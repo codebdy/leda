@@ -12,7 +12,7 @@ import (
 	"codebdy.com/leda/services/entify/modules/app"
 	"codebdy.com/leda/services/entify/modules/register"
 	"codebdy.com/leda/services/entify/service"
-	"codebdy.com/leda/services/entify/utils"
+	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"github.com/graphql-go/graphql"
 )
 

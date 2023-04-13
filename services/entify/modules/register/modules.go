@@ -48,11 +48,6 @@ func GetSchema(ctx context.Context) graphql.Schema {
 			rootMutationFields[field.Name] = field
 		}
 
-		subscriptionFields := module.SubscriptionFields()
-		for i := range subscriptionFields {
-			field := subscriptionFields[i]
-			rootSubscriptionFields[field.Name] = field
-		}
 		directives = append(directives, module.Directives()...)
 		types = append(types, module.Types()...)
 	}
