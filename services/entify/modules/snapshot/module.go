@@ -35,9 +35,6 @@ func (m *SnapshotModule) QueryFields() []*graphql.Field {
 	return []*graphql.Field{}
 }
 
-func (m *SnapshotModule) SubscriptionFields() []*graphql.Field {
-	return []*graphql.Field{}
-}
 func (m *SnapshotModule) Directives() []*graphql.Directive {
 	return []*graphql.Directive{}
 }

@@ -7,7 +7,6 @@ import (
 	"os"
 
 	"codebdy.com/leda/services/entify/config"
-	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/db"
 	"codebdy.com/leda/services/entify/handler"
 	"codebdy.com/leda/services/entify/leda-shared/errorx"
@@ -76,15 +75,6 @@ func main() {
 	)
 	fmt.Println(fmt.Sprintf("🚀 Graphql server ready at http://localhost:%d/graphql", PORT))
 
-	if config.Storage() == consts.LOCAL {
-		prefix := "/" + consts.STATIC_PATH + "/"
-		fmt.Println(fmt.Sprintf("📄 Running a file server at http://localhost:%d/static/", PORT))
-		http.Handle(prefix,
-			http.StripPrefix(
-				prefix,
-				middlewares.CorsMiddleware(http.FileServer(http.Dir("./"+consts.STATIC_PATH)))),
-		)
-	}
 	err := http.ListenAndServe(fmt.Sprintf(":%d", PORT), nil)
 	if err != nil {
 		fmt.Printf("启动失败:%s", err)

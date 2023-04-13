@@ -31,7 +31,6 @@ func RegisterModule(module Moduler) {
 func GetSchema(ctx context.Context) graphql.Schema {
 	rootQueryFields := graphql.Fields{}
 	rootMutationFields := graphql.Fields{}
-	rootSubscriptionFields := graphql.Fields{}
 	directives := []*graphql.Directive{}
 	types := []graphql.Type{}
 
@@ -66,21 +65,11 @@ func GetSchema(ctx context.Context) graphql.Schema {
 		rootMutation = nil
 	}
 
-	rootSubscription := graphql.NewObject(graphql.ObjectConfig{
-		Name:   ROOT_SUBSCRIPTION_NAME,
-		Fields: rootSubscriptionFields,
-	})
-
-	if len(rootSubscriptionFields) == 0 {
-		rootSubscription = nil
-	}
-
 	schemaConfig := graphql.SchemaConfig{
-		Query:        rootQuery,
-		Mutation:     rootMutation,
-		Subscription: rootSubscription,
-		Directives:   directives,
-		Types:        types,
+		Query:      rootQuery,
+		Mutation:   rootMutation,
+		Directives: directives,
+		Types:      types,
 	}
 
 	schema, err := graphql.NewSchema(schemaConfig)
