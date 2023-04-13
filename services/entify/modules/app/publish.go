@@ -21,10 +21,11 @@ func PublishMeta(published, next *meta.MetaContent, appId uint64) {
 }
 
 func (a *App) Publish(ctx context.Context) {
-	entity := a.GetEntityByName(meta.APP_ENTITY_NAME)
+	entity := a.GetEntityByName(meta.META_ENTITY_NAME)
 	s := service.New(ctx, a.Model.Graph)
 	appData := s.QueryById(
 		entity,
+		//化成metaId
 		a.AppId,
 	)
 
@@ -60,10 +61,11 @@ func (a *App) Publish(ctx context.Context) {
 }
 
 func (a *App) MergeModel(content *meta.MetaContent) *meta.MetaContent {
+	//后面改成合并Service
 	//合并系统Schema
-	if a.AppId != meta.SYSTEM_APP_ID {
-		return MergeSystemModel(content)
-	}
+	// if a.AppId != meta.SYSTEM_APP_ID {
+	// 	return MergeSystemModel(content)
+	// }
 
 	return content
 }

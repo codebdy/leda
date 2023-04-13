@@ -23,9 +23,7 @@ var SystemMeta map[string]interface{}
 func init() {
 	content := readContentFromJson()
 	SystemMeta = map[string]interface{}{
-		"id":            SYSTEM_APP_ID,
-		"uuid":          "SYSTEM-APP-UUID",
-		"title":         "Appx",
+		"id":            0,
 		"meta":          content,
 		"publishedMeta": content,
 	}

@@ -87,7 +87,7 @@ func Get(appId uint64) (*App, error) {
 		}
 		appLoaderCache.Store(appId, appLoader)
 		appLoader.load(false)
-		if appId == meta.SYSTEM_APP_ID {
+		if appId == 0 {
 			model.SystemModel = appLoader.app.Model
 		}
 		return appLoader.app, nil
@@ -133,7 +133,7 @@ func NewApp(appId uint64) *App {
 	systemApp := GetPredefinedSystemApp()
 	s := service.NewSystem()
 	appMeta := s.QueryById(
-		systemApp.GetEntityByName(meta.APP_ENTITY_NAME),
+		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
 		appId,
 	)
 
@@ -186,4 +186,13 @@ func MergeSystemModel(content *meta.MetaContent) *meta.MetaContent {
 	// 	content.Relations = append(content.Relations, *systemModel.Meta.Relations[i])
 	// }
 	return content
+}
+
+func GetPredefinedSystemApp() *App {
+
+	metaConent := meta.SystemMeta["meta"].(meta.MetaContent)
+	return &App{
+		AppId: meta.SystemMeta["id"].(uint64),
+		Model: model.New(&metaConent, 0),
+	}
 }
