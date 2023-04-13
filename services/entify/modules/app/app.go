@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"sync"
 
-	"codebdy.com/leda/services/entify/app/schema"
-	"codebdy.com/leda/services/entify/app/schema/parser"
 	"codebdy.com/leda/services/entify/model"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
+	"codebdy.com/leda/services/entify/modules/app/schema"
+	"codebdy.com/leda/services/entify/modules/app/schema/parser"
 	"codebdy.com/leda/services/entify/orm"
 	"codebdy.com/leda/services/entify/service"
 	"github.com/mitchellh/mapstructure"

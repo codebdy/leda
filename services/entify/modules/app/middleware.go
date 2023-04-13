@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"codebdy.com/leda/services/entify/app/resolve"
+	"codebdy.com/leda/services/entify/modules/app/resolve"
 	"codebdy.com/leda/services/entify/consts"
 )
 

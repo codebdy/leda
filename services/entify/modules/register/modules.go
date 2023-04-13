@@ -20,7 +20,6 @@ type Moduler interface {
 	Init(ctx context.Context)
 	QueryFields() []*graphql.Field
 	MutationFields() []*graphql.Field
-	SubscriptionFields() []*graphql.Field
 	Directives() []*graphql.Directive
 	Types() []graphql.Type
 	Middlewares() []func(next http.Handler) http.Handler
