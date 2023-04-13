@@ -51,11 +51,11 @@ var appLoaderCache sync.Map
 
 func init() {
 	//先加载系统APP
-	if orm.IsEntityExists(meta.APP_ENTITY_NAME) {
-		_, err := Get(meta.SYSTEM_APP_ID)
-		if err != nil {
-			log.Panic(err.Error())
-		}
+	if orm.IsEntityExists(meta.META_ENTITY_NAME) {
+		// _, err := Get(meta.SYSTEM_APP_ID)
+		// if err != nil {
+		// 	log.Panic(err.Error())
+		// }
 	}
 }
 
@@ -94,26 +94,26 @@ func Get(appId uint64) (*App, error) {
 	}
 }
 
-func GetSystemApp() *App {
-	if result, ok := appLoaderCache.Load(meta.SYSTEM_APP_ID); ok {
-		loader := result.(*AppLoader)
-		if !loader.loaded {
-			loader.load(false)
-		}
-		return loader.app
-	}
+// func GetSystemApp() *App {
+// 	if result, ok := appLoaderCache.Load(meta.SYSTEM_APP_ID); ok {
+// 		loader := result.(*AppLoader)
+// 		if !loader.loaded {
+// 			loader.load(false)
+// 		}
+// 		return loader.app
+// 	}
 
-	return GetPredefinedSystemApp()
-}
+// 	return GetPredefinedSystemApp()
+// }
 
-func GetPredefinedSystemApp() *App {
+// func GetPredefinedSystemApp() *App {
 
-	metaConent := meta.SystemMeta["meta"].(meta.MetaContent)
-	return &App{
-		AppId: meta.SystemMeta["id"].(uint64),
-		Model: model.New(&metaConent, meta.SYSTEM_APP_ID),
-	}
-}
+// 	metaConent := meta.SystemMeta["meta"].(meta.MetaContent)
+// 	return &App{
+// 		AppId: meta.SystemMeta["id"].(uint64),
+// 		Model: model.New(&metaConent, meta.SYSTEM_APP_ID),
+// 	}
+// }
 
 func (a *App) GetEntityByName(name string) *graph.Entity {
 	return a.Model.Graph.GetEntityByName(name)
@@ -143,9 +143,9 @@ func NewApp(appId uint64) *App {
 		if publishedMeta != nil {
 			content = DecodeContent(publishedMeta)
 		}
-		if appId != meta.SYSTEM_APP_ID {
-			content = MergeSystemModel(content)
-		}
+		// if appId != meta.SYSTEM_APP_ID {
+		// 	content = MergeSystemModel(content)
+		// }
 
 		model := model.New(content, appId)
 		schema := schema.New(model)
@@ -177,13 +177,13 @@ func MergeSystemModel(content *meta.MetaContent) *meta.MetaContent {
 		content = &meta.MetaContent{}
 	}
 	//合并系统Schema
-	systemModel := GetSystemApp().Model
-	for i := range systemModel.Meta.Classes {
-		content.Classes = append(content.Classes, *systemModel.Meta.Classes[i])
-	}
+	// systemModel := GetSystemApp().Model
+	// for i := range systemModel.Meta.Classes {
+	// 	content.Classes = append(content.Classes, *systemModel.Meta.Classes[i])
+	// }
 
-	for i := range systemModel.Meta.Relations {
-		content.Relations = append(content.Relations, *systemModel.Meta.Relations[i])
-	}
+	// for i := range systemModel.Meta.Relations {
+	// 	content.Relations = append(content.Relations, *systemModel.Meta.Relations[i])
+	// }
 	return content
 }
