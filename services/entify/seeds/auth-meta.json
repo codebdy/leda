@@ -128,5 +128,19 @@
         }
       ]
     }
+  ],
+  "relations": [
+    {
+      "innerId": 101,
+      "relationType": "twoWayAssociation",
+      "roleOfSource": "roles",
+      "roleOfTarget": "users",
+      "sourceId": "META_ROLE_UUID",
+      "sourceMutiplicity": "0..*",
+      "system": false,
+      "targetId": "META_USER_UUID",
+      "targetMultiplicity": "0..*",
+      "uuid": "META_RELATION_USER_ROLE_UUID"
+    }
   ]
 }
