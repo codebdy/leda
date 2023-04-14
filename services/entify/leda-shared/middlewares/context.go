@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"codebdy.com/leda/services/entify/contexts"
 	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/contexts"
 	"github.com/thinkeridea/go-extend/exnet"
 )
 
@@ -39,11 +39,14 @@ func TransContext(w http.ResponseWriter, r *http.Request) context.Context {
 			// v.Me = me
 		}
 	}
-	appId := r.Header.Get(consts.HEADER_APPX_APPID)
+	appId := r.Header.Get(consts.HEADER_LEDA_APPID)
 	if appId != "" {
 		intAppId, _ := strconv.ParseUint(appId, 10, 64)
 		v.AppId = intAppId
 	}
+
+	appName := r.Header.Get(consts.HEADER_LEDA_APPNAME)
+	v.AppName = appName
 
 	v.Host = r.Host
 	ip := exnet.ClientPublicIP(r)

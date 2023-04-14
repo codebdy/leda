@@ -1,7 +1,8 @@
 package consts
 
 const LOADERS = "loaders"
-const HEADER_APPX_APPID = "Appx-appid"
+const HEADER_LEDA_APPID = "leda-appid"
+const HEADER_LEDA_APPNAME = "leda-appname"
 const APPID = "appId"
 const TABLE_PREFIX = "a"
 
@@ -194,4 +195,3 @@ const (
 	FILE_WIDTH     = "width"
 	FILE_HEIGHT    = "height"
 )
-
