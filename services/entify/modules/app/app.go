@@ -199,6 +199,13 @@ func GetSystemApp() *App {
 		return loader.app
 	}
 
+	//第一次获取时，创建加载器
+	appLoader := &AppLoader{
+		appId:  0,
+		loaded: true,
+	}
+	appLoaderCache.Store(0, appLoader)
+
 	return getPredefinedSystemApp()
 }
 
