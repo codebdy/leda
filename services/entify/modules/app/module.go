@@ -4,11 +4,18 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"sync"
 
+	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/contexts"
+	"codebdy.com/leda/services/entify/model/graph"
+	"codebdy.com/leda/services/entify/model/meta"
 	"codebdy.com/leda/services/entify/modules/register"
+	"codebdy.com/leda/services/entify/service"
 	"github.com/graphql-go/graphql"
 )
+
+var AppNames sync.Map
 
 type AppModule struct {
 	app *App
@@ -20,7 +27,33 @@ func (m *AppModule) Init(ctx context.Context) {
 		return
 	}
 
-	app, err := Get(contexts.Values(ctx).AppId)
+	contextValues := contexts.Values(ctx)
+
+	appId := contextValues.AppId
+	appName := contextValues.AppName
+	if appId == 0 && contextValues.AppName != "" {
+		if id, ok := AppNames.Load(contextValues.AppName); ok {
+			appId = id.(uint64)
+		} else {
+			systemApp := GetPredefinedSystemApp()
+			s := service.NewSystem()
+			app := s.QueryOneEntity(systemApp.GetEntityByName(meta.APP_ENTITY_NAME), graph.QueryArg{
+				consts.ARG_WHERE: graph.QueryArg{
+					"name": graph.QueryArg{
+						consts.ARG_EQ: appName,
+					},
+				},
+			})
+
+			if app != nil {
+				appId = app.(map[string]interface{})["id"].(uint64)
+				AppNames.Store(appName, appId)
+			} else {
+				log.Panic("Can not find app")
+			}
+		}
+	}
+	app, err := Get(appId)
 	if err != nil {
 		log.Panic(err.Error())
 	}
