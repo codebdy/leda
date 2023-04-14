@@ -108,7 +108,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 		authMetaMp,
 		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
 	)
-
+	//插入 Meta
 	authMeta, err := s.InsertOne(instance)
 
 	if err != nil || authMeta == nil {
@@ -120,6 +120,8 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 		authServiceMap(authMetaId),
 		systemApp.GetEntityByName(meta.SERVICE_ENTITY_NAME),
 	)
+	// 插入 Service
+	s.InsertOne(instance)
 	nextMeta = authMetaMp[consts.META_PUBLISHED_CONTENT].(meta.MetaContent)
 	app.PublishMeta(&meta.MetaContent{}, &nextMeta, 0)
 	app.LoadServiceMetas()
@@ -170,6 +172,7 @@ func authServiceMap(metaId uint64) map[string]interface{} {
 	return map[string]interface{}{
 		consts.NAME:           "authService",
 		"metaId":              metaId,
+		"isSystem":            true,
 		consts.META_CREATEDAT: time.Now(),
 		consts.META_UPDATEDAT: time.Now(),
 	}

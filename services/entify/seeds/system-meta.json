@@ -136,8 +136,9 @@
           "uuid": "SERVICE_COLUMN_META_ID_UUID"
         },
         {
-          "name": "system",
+          "name": "isSystem",
           "type": "Boolean",
+          "nullable": true,
           "uuid": "SERVICE_COLUMN_SYSTEM_UUID"
         },
         {

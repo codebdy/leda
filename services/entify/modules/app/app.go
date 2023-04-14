@@ -201,6 +201,7 @@ func GetSystemApp() *App {
 
 	return getPredefinedSystemApp()
 }
+
 func getPredefinedSystemApp() *App {
 	metaConent := meta.SystemMeta[consts.META_CONTENT].(meta.MetaContent)
 	meragedMetaConent := MergeServiceModels(&metaConent)
