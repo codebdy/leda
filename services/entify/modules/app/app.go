@@ -207,5 +207,6 @@ func getPredefinedSystemApp() *App {
 		AppId:  0,
 		Schema: schema,
 		Parser: schema.Parser(),
+		Model:  model,
 	}
 }
