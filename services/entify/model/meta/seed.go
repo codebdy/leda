@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
-
-	"codebdy.com/leda/services/entify/consts"
 )
 
 func ReadContentFromJson(fileName string) MetaContent {
@@ -20,13 +18,13 @@ func ReadContentFromJson(fileName string) MetaContent {
 	return content
 }
 
-var SystemMeta map[string]interface{}
+var SystemMeta *MetaContent
+var DefualtAuthServiceMeta *MetaContent
 
 func init() {
 	content := ReadContentFromJson("./seeds/system-meta.json")
-	SystemMeta = map[string]interface{}{
-		"id":                          0,
-		consts.META_CONTENT:           content,
-		consts.META_PUBLISHED_CONTENT: content,
-	}
+	SystemMeta = &content
+
+	content = ReadContentFromJson("./seeds/auth-meta.json")
+	DefualtAuthServiceMeta = &content
 }

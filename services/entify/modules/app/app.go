@@ -174,8 +174,8 @@ func MergeServiceModels(content *meta.MetaContent) *meta.MetaContent {
 	if content == nil {
 		content = &meta.MetaContent{}
 	}
-	serviceMetas.Range(func(key interface{}, value interface{}) bool {
-		if metaData, ok := serviceMetas.Load(key); ok {
+	ServiceMetas.Range(func(key interface{}, value interface{}) bool {
+		if metaData, ok := ServiceMetas.Load(key); ok {
 			serviceMeta := metaData.(*meta.MetaContent)
 			for i := range serviceMeta.Classes {
 				content.Classes = append(content.Classes, serviceMeta.Classes[i])
@@ -210,8 +210,8 @@ func GetSystemApp() *App {
 }
 
 func getPredefinedSystemApp() *App {
-	metaConent := meta.SystemMeta[consts.META_CONTENT].(meta.MetaContent)
-	meragedMetaConent := MergeServiceModels(&metaConent)
+	metaConent := meta.SystemMeta
+	meragedMetaConent := MergeServiceModels(metaConent)
 	model := model.New(meragedMetaConent, 0)
 	schema := schema.New(model)
 	return &App{

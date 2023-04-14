@@ -21,7 +21,6 @@ type InstallArg struct {
 	Admin    string     `json:"admin"`
 	Password string     `json:"password"`
 	WithDemo bool       `json:"withDemo"`
-	Meta     utils.JSON `json:"meta"`
 }
 
 const INPUT = "input"
@@ -89,16 +88,11 @@ func installMutationFields() []*graphql.Field {
 func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	defer utils.PrintErrorStack()
 
-	systemData := meta.SystemMeta
 	input := InstallArg{}
 	mapstructure.Decode(p.Args[INPUT], &input)
 
-	if input.Meta != nil {
-		systemData = input.Meta
-	}
-
-	nextMeta := systemData[consts.META_CONTENT].(meta.MetaContent)
-	app.PublishMeta(&meta.MetaContent{}, &nextMeta, 0)
+	nextMeta := meta.SystemMeta
+	app.PublishMeta(&meta.MetaContent{}, nextMeta, 0)
 
 	systemApp := app.GetSystemApp()
 
@@ -121,9 +115,16 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 		systemApp.GetEntityByName(meta.SERVICE_ENTITY_NAME),
 	)
 	// 插入 Service
-	s.InsertOne(instance)
-	nextMeta = authMetaMp[consts.META_PUBLISHED_CONTENT].(meta.MetaContent)
-	app.PublishMeta(&meta.MetaContent{}, &nextMeta, 0)
+	authService, err := s.InsertOne(instance)
+	if err != nil || authService == nil {
+		log.Panic(err.Error())
+	}
+	authServiceId := authMeta.(map[string]interface{})["id"].(uint64)
+	//把Service数据放入缓存
+	app.ServiceMetas.Store(authServiceId, meta.DefualtAuthServiceMeta)
+
+	nextMeta = meta.DefualtAuthServiceMeta
+	app.PublishMeta(&meta.MetaContent{}, nextMeta, 0)
 	app.LoadServiceMetas()
 	systemApp.ReLoad()
 	if input.Admin != "" {
@@ -155,12 +156,11 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 }
 
 func authMetaMap() map[string]interface{} {
-	content := meta.ReadContentFromJson("./seeds/auth-meta.json")
 
 	return map[string]interface{}{
 		consts.NAME:                   "authMeta",
-		consts.META_CONTENT:           content,
-		consts.META_PUBLISHED_CONTENT: content,
+		consts.META_CONTENT:           meta.DefualtAuthServiceMeta,
+		consts.META_PUBLISHED_CONTENT: meta.DefualtAuthServiceMeta,
 		consts.META_PUBLISHEDAT:       time.Now(),
 		consts.META_CREATEDAT:         time.Now(),
 		consts.META_UPDATEDAT:         time.Now(),

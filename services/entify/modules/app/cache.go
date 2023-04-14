@@ -11,7 +11,7 @@ import (
 
 var appLoaderCache sync.Map
 
-var serviceMetas sync.Map
+var ServiceMetas sync.Map
 
 //加载微内核
 func LoadServiceMetas() {
@@ -33,7 +33,7 @@ func LoadServiceMetas() {
 					if publishedMeta != nil {
 						content = DecodeContent(publishedMeta)
 					}
-					serviceMetas.Store(metaMap["id"], content)
+					ServiceMetas.Store(metaMap["id"], content)
 				}
 			}
 		}
@@ -41,8 +41,8 @@ func LoadServiceMetas() {
 }
 
 func clearServiceMetas() {
-	serviceMetas.Range(func(key interface{}, value interface{}) bool {
-		serviceMetas.Delete(key)
+	ServiceMetas.Range(func(key interface{}, value interface{}) bool {
+		ServiceMetas.Delete(key)
 		return true
 	})
 }
