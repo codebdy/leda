@@ -27,7 +27,7 @@ func (m *AppModule) Init(ctx context.Context) {
 		return
 	}
 
-	loadServiceMetas()
+	LoadServiceMetas()
 
 	contextValues := contexts.Values(ctx)
 

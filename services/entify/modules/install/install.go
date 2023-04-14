@@ -122,49 +122,30 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	)
 	nextMeta = authMetaMp[consts.META_PUBLISHED_CONTENT].(meta.MetaContent)
 	app.PublishMeta(&meta.MetaContent{}, &nextMeta, 0)
-
-	// now := time.Now()
-	// systemData["saveMetaAt"] = now
-	// systemData["publishMetaAt"] = now
-	// instance := data.NewInstance(
-	// 	systemData,
-	// 	systemApp.GetEntityByName(meta.APP_ENTITY_NAME),
-	// )
-	// s := service.NewSystem()
-	// _, err := s.InsertOne(instance)
-
-	// if err != nil {
-	// 	log.Panic(err.Error())
-	// }
-
-	// systemApp, err = app.Get(meta.SYSTEM_APP_ID)
-
-	// if err != nil {
-	// 	log.Panic(err.Error())
-	// }
-
-	// if input.Admin != "" {
-	// 	instance = data.NewInstance(
-	// 		adminInstance(input.Admin, input.Password),
-	// 		systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
-	// 	)
-	// 	_, err = s.SaveOne(instance)
-	// 	if err != nil {
-	// 		logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
-	// 		return nil, err
-	// 	}
-	// 	if input.WithDemo {
-	// 		instance = data.NewInstance(
-	// 			demoInstance(),
-	// 			systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
-	// 		)
-	// 		_, err = s.SaveOne(instance)
-	// 		if err != nil {
-	// 			logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
-	// 			return nil, err
-	// 		}
-	// 	}
-	// }
+	app.LoadServiceMetas()
+	systemApp.ReLoad()
+	if input.Admin != "" {
+		instance = data.NewInstance(
+			adminInstance(input.Admin, input.Password),
+			systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
+		)
+		_, err = s.SaveOne(instance)
+		if err != nil {
+			logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
+			return nil, err
+		}
+		if input.WithDemo {
+			instance = data.NewInstance(
+				demoInstance(),
+				systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
+			)
+			_, err = s.SaveOne(instance)
+			if err != nil {
+				logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
+				return nil, err
+			}
+		}
+	}
 	isExist := orm.IsEntityExists(meta.META_ENTITY_NAME)
 	logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.SUCCESS, "")
 	app.Installed = true

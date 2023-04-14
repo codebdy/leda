@@ -14,7 +14,7 @@ var appLoaderCache sync.Map
 var serviceMetas sync.Map
 
 //加载微内核
-func loadServiceMetas() {
+func LoadServiceMetas() {
 	clearServiceMetas()
 	systemApp := GetSystemApp()
 	s := service.NewSystem()

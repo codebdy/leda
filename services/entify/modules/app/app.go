@@ -145,10 +145,7 @@ func NewApp(appId uint64) *App {
 		content = DecodeContent(publishedMeta)
 	}
 
-	//合并服务
-	// if appId != meta.SYSTEM_APP_ID {
-	// 	content = MergeSystemModel(content)
-	// }
+	content = MergeServiceModels(content)
 
 	model := model.New(content, appId)
 	schema := schema.New(model)
@@ -172,19 +169,24 @@ func DecodeContent(obj interface{}) *meta.MetaContent {
 	return &content
 }
 
-func MergeSystemModel(content *meta.MetaContent) *meta.MetaContent {
+//合并微服务模型
+func MergeServiceModels(content *meta.MetaContent) *meta.MetaContent {
 	if content == nil {
 		content = &meta.MetaContent{}
 	}
-	//合并系统Schema
-	// systemModel := GetSystemApp().Model
-	// for i := range systemModel.Meta.Classes {
-	// 	content.Classes = append(content.Classes, *systemModel.Meta.Classes[i])
-	// }
+	serviceMetas.Range(func(key interface{}, value interface{}) bool {
+		if metaData, ok := serviceMetas.Load(key); ok {
+			serviceMeta := metaData.(*meta.MetaContent)
+			for i := range serviceMeta.Classes {
+				content.Classes = append(content.Classes, serviceMeta.Classes[i])
+			}
 
-	// for i := range systemModel.Meta.Relations {
-	// 	content.Relations = append(content.Relations, *systemModel.Meta.Relations[i])
-	// }
+			for i := range serviceMeta.Relations {
+				content.Relations = append(content.Relations, serviceMeta.Relations[i])
+			}
+		}
+		return true
+	})
 	return content
 }
 
@@ -201,7 +203,8 @@ func GetSystemApp() *App {
 }
 func getPredefinedSystemApp() *App {
 	metaConent := meta.SystemMeta[consts.META_CONTENT].(meta.MetaContent)
-	model := model.New(&metaConent, 0)
+	meragedMetaConent := MergeServiceModels(&metaConent)
+	model := model.New(meragedMetaConent, 0)
 	schema := schema.New(model)
 	return &App{
 		AppId:  0,
