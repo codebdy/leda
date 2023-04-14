@@ -44,8 +44,6 @@ func (l *AppLoader) load(force bool) {
 	}
 }
 
-var appLoaderCache sync.Map
-
 // func GetAppByIdArg(idArg interface{}) (*App, error) {
 // 	if idArg == nil {
 // 		err := errors.New("Nil app id")
@@ -117,7 +115,7 @@ func (a *App) ReLoad() {
 }
 
 func NewApp(appId uint64) *App {
-	systemApp := GetPredefinedSystemApp()
+	systemApp := getPredefinedSystemApp()
 	if appId == 0 {
 		return systemApp
 	}
@@ -198,9 +196,9 @@ func GetSystemApp() *App {
 		return loader.app
 	}
 
-	return GetPredefinedSystemApp()
+	return getPredefinedSystemApp()
 }
-func GetPredefinedSystemApp() *App {
+func getPredefinedSystemApp() *App {
 	metaConent := meta.SystemMeta["content"].(meta.MetaContent)
 	model := model.New(&metaConent, 0)
 	schema := schema.New(model)
