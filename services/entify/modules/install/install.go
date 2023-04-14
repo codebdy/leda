@@ -1,15 +1,18 @@
 package install
 
 import (
+	"log"
 	"time"
 
 	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/leda-shared/scalars"
 	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"codebdy.com/leda/services/entify/logs"
+	"codebdy.com/leda/services/entify/model/data"
 	"codebdy.com/leda/services/entify/model/meta"
 	"codebdy.com/leda/services/entify/modules/app"
 	"codebdy.com/leda/services/entify/orm"
+	"codebdy.com/leda/services/entify/service"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
 )
@@ -97,7 +100,28 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	nextMeta := systemData[consts.META_CONTENT].(meta.MetaContent)
 	app.PublishMeta(&meta.MetaContent{}, &nextMeta, 0)
 
-	//systemApp := app.GetSystemApp()
+	systemApp := app.GetSystemApp()
+
+	s := service.NewSystem()
+	authMetaMp := authMetaMap()
+	instance := data.NewInstance(
+		authMetaMp,
+		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
+	)
+
+	authMeta, err := s.InsertOne(instance)
+
+	if err != nil || authMeta == nil {
+		log.Panic(err.Error())
+	}
+
+	authMetaId := authMeta.(map[string]interface{})["id"].(uint64)
+	instance = data.NewInstance(
+		authServiceMap(authMetaId),
+		systemApp.GetEntityByName(meta.SERVICE_ENTITY_NAME),
+	)
+	nextMeta = authMetaMp[consts.META_PUBLISHED_CONTENT].(meta.MetaContent)
+	app.PublishMeta(&meta.MetaContent{}, &nextMeta, 0)
 
 	// now := time.Now()
 	// systemData["saveMetaAt"] = now
@@ -147,9 +171,24 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	return isExist, nil
 }
 
-func authServiceInstace() map[string]interface{} {
+func authMetaMap() map[string]interface{} {
+	content := meta.ReadContentFromJson("./seeds/auth-meta.json")
+
 	return map[string]interface{}{
-		consts.NAME:           "auth",
+		consts.NAME:                   "authMeta",
+		consts.META_CONTENT:           content,
+		consts.META_PUBLISHED_CONTENT: content,
+		consts.META_PUBLISHEDAT:       time.Now(),
+		consts.META_CREATEDAT:         time.Now(),
+		consts.META_UPDATEDAT:         time.Now(),
+	}
+}
+
+func authServiceMap(metaId uint64) map[string]interface{} {
+
+	return map[string]interface{}{
+		consts.NAME:           "authService",
+		"metaId":              metaId,
 		consts.META_CREATEDAT: time.Now(),
 		consts.META_UPDATEDAT: time.Now(),
 	}

@@ -8,8 +8,8 @@ import (
 	"codebdy.com/leda/services/entify/consts"
 )
 
-func readContentFromJson() MetaContent {
-	data, err := ioutil.ReadFile("./seeds/system-meta.json")
+func ReadContentFromJson(fileName string) MetaContent {
+	data, err := ioutil.ReadFile(fileName)
 	content := MetaContent{}
 	if nil != err {
 		log.Panic(err.Error())
@@ -23,7 +23,7 @@ func readContentFromJson() MetaContent {
 var SystemMeta map[string]interface{}
 
 func init() {
-	content := readContentFromJson()
+	content := ReadContentFromJson("./seeds/system-meta.json")
 	SystemMeta = map[string]interface{}{
 		"id":                          0,
 		consts.META_CONTENT:           content,
