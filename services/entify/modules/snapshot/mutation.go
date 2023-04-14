@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"codebdy.com/leda/services/entify/model/data"
 	"codebdy.com/leda/services/entify/model/graph"
@@ -118,11 +119,11 @@ func (m *SnapshotModule) makeVersion(p graphql.ResolveParams) (interface{}, erro
 						"id": appId,
 					},
 				},
-				"instanceId":  instanceId,
-				"content":     result.Data.(map[string]interface{})[operateName],
-				"version":     p.Args["version"],
-				"description": p.Args["description"],
-				"createdAt":   time.Now(),
+				"instanceId":        instanceId,
+				consts.META_CONTENT: result.Data.(map[string]interface{})[operateName],
+				"version":           p.Args["version"],
+				"description":       p.Args["description"],
+				"createdAt":         time.Now(),
 			},
 			m.app.GetEntityByName("Snapshot"),
 		)

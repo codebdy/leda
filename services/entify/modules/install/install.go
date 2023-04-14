@@ -94,7 +94,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 		systemData = input.Meta
 	}
 
-	nextMeta := systemData["content"].(meta.MetaContent)
+	nextMeta := systemData[consts.META_CONTENT].(meta.MetaContent)
 	app.PublishMeta(&meta.MetaContent{}, &nextMeta, 0)
 
 	//systemApp := app.GetSystemApp()
@@ -145,6 +145,14 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.SUCCESS, "")
 	app.Installed = true
 	return isExist, nil
+}
+
+func authServiceInstace() map[string]interface{} {
+	return map[string]interface{}{
+		consts.NAME:           "auth",
+		consts.META_CREATEDAT: time.Now(),
+		consts.META_UPDATEDAT: time.Now(),
+	}
 }
 
 func adminInstance(name string, password string) map[string]interface{} {

@@ -115,13 +115,14 @@ const (
 * Meta实体用到的常量
 **/
 const (
-	META_ID          string = "id"
-	META_APP_UUID    string = "appUuid"
-	META_STATUS      string = "status"
-	META_CONTENT     string = "content"
-	META_PUBLISHEDAT string = "publishedAt"
-	META_CREATEDAT   string = "createdAt"
-	META_UPDATEDAT   string = "updatedAt"
+	META_ID                string = "id"
+	META_APP_UUID          string = "appUuid"
+	META_STATUS            string = "status"
+	META_CONTENT           string = "content"
+	META_PUBLISHED_CONTENT        = "publishedContent"
+	META_PUBLISHEDAT       string = "publishedAt"
+	META_CREATEDAT         string = "createdAt"
+	META_UPDATEDAT         string = "updatedAt"
 
 	META_CLASSES   string = "classes"
 	META_RELATIONS string = "relations"

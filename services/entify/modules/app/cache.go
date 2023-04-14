@@ -3,6 +3,7 @@ package app
 import (
 	"sync"
 
+	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
 	"codebdy.com/leda/services/entify/service"
@@ -26,7 +27,7 @@ func loadServiceMetas() {
 			metaData := s.QueryById(systemApp.GetEntityByName(meta.META_ENTITY_NAME), metaIdData.(uint64))
 			if metaData != nil {
 				metaMap := metaData.(map[string]interface{})
-				publishedMeta := metaMap["publishedContent"]
+				publishedMeta := metaMap[consts.META_PUBLISHED_CONTENT]
 				if publishedMeta != nil && publishedMeta != "" {
 					var content *meta.MetaContent
 					if publishedMeta != nil {

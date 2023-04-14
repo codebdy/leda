@@ -5,6 +5,7 @@ import (
 	"log"
 	"sync"
 
+	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/model"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
@@ -138,7 +139,7 @@ func NewApp(appId uint64) *App {
 		return nil
 	}
 
-	publishedMeta := appMeta.(map[string]interface{})["publishedContent"]
+	publishedMeta := appMeta.(map[string]interface{})[consts.META_PUBLISHED_CONTENT]
 	var content *meta.MetaContent
 	if publishedMeta != nil {
 		content = DecodeContent(publishedMeta)
@@ -199,7 +200,7 @@ func GetSystemApp() *App {
 	return getPredefinedSystemApp()
 }
 func getPredefinedSystemApp() *App {
-	metaConent := meta.SystemMeta["content"].(meta.MetaContent)
+	metaConent := meta.SystemMeta[consts.META_CONTENT].(meta.MetaContent)
 	model := model.New(&metaConent, 0)
 	schema := schema.New(model)
 	return &App{

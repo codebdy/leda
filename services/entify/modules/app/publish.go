@@ -5,6 +5,7 @@ import (
 	"log"
 	"time"
 
+	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/model"
 	"codebdy.com/leda/services/entify/model/data"
 	"codebdy.com/leda/services/entify/model/meta"
@@ -32,19 +33,19 @@ func (a *App) Publish(ctx context.Context) {
 	appMap := appData.(map[string]interface{})
 
 	nextMeta := meta.MetaContent{}
-	err := mapstructure.Decode(appMap["content"], &nextMeta)
+	err := mapstructure.Decode(appMap[consts.META_CONTENT], &nextMeta)
 	if err != nil {
 		log.Println(err.Error())
 	}
 	oldMeta := meta.MetaContent{}
-	err = mapstructure.Decode(appMap["publishedContent"], &oldMeta)
+	err = mapstructure.Decode(appMap[consts.META_PUBLISHED_CONTENT], &oldMeta)
 	if err != nil {
 		log.Println(err.Error())
 	}
 
 	PublishMeta(a.MergeModel(&oldMeta), a.MergeModel(&nextMeta), a.AppId)
 
-	appMap["publishedContent"] = appMap["content"]
+	appMap[consts.META_PUBLISHED_CONTENT] = appMap[consts.META_CONTENT]
 	appMap["publishedAt"] = time.Now()
 	instance := data.NewInstance(
 		appMap,
