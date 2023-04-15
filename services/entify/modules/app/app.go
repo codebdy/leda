@@ -12,7 +12,6 @@ import (
 	"codebdy.com/leda/services/entify/modules/app/schema"
 	"codebdy.com/leda/services/entify/modules/app/schema/parser"
 	"codebdy.com/leda/services/entify/service"
-	"github.com/mitchellh/mapstructure"
 )
 
 //节省开支，运行时使用，初始化时请使用orm.IsEntityExists
@@ -45,22 +44,11 @@ func (l *AppLoader) load(force bool) {
 	}
 }
 
-// func GetAppByIdArg(idArg interface{}) (*App, error) {
-// 	if idArg == nil {
-// 		err := errors.New("Nil app id")
-// 		log.Panic(err.Error())
-// 	}
-// 	appIdStr := idArg.(string)
-// 	appId, err := strconv.ParseUint(appIdStr, 10, 64)
-
-// 	if err != nil {
-// 		err := errors.New(fmt.Sprintf("App id error:%s", appIdStr))
-// 		log.Panic(err.Error())
-// 	}
-// 	return Get(appId)
-// }
-
 func Get(appId uint64) (*App, error) {
+	if appId == 0 {
+		return GetSystemApp(), nil
+	}
+
 	if result, ok := appLoaderCache.Load(appId); ok {
 		if !result.(*AppLoader).loaded {
 			result.(*AppLoader).load(false)
@@ -80,27 +68,6 @@ func Get(appId uint64) (*App, error) {
 	}
 }
 
-// func GetSystemApp() *App {
-// 	if result, ok := appLoaderCache.Load(meta.SYSTEM_APP_ID); ok {
-// 		loader := result.(*AppLoader)
-// 		if !loader.loaded {
-// 			loader.load(false)
-// 		}
-// 		return loader.app
-// 	}
-
-// 	return GetPredefinedSystemApp()
-// }
-
-// func GetPredefinedSystemApp() *App {
-
-// 	metaConent := meta.SystemMeta["meta"].(meta.MetaContent)
-// 	return &App{
-// 		AppId: meta.SystemMeta["id"].(uint64),
-// 		Model: model.New(&metaConent, meta.SYSTEM_APP_ID),
-// 	}
-// }
-
 func (a *App) GetEntityByName(name string) *graph.Entity {
 	return a.Model.Graph.GetEntityByName(name)
 }
@@ -109,14 +76,8 @@ func (a *App) GetEntityByInnerId(innerId uint64) *graph.Entity {
 	return a.Model.Graph.GetEntityByInnerId(innerId)
 }
 
-func (a *App) ReLoad() {
-	if result, ok := appLoaderCache.Load(a.AppId); ok {
-		result.(*AppLoader).load(true)
-	}
-}
-
 func NewApp(appId uint64) *App {
-	systemApp := getPredefinedSystemApp()
+	systemApp := GetSystemApp()
 	if appId == 0 {
 		return systemApp
 	}
@@ -155,69 +116,5 @@ func NewApp(appId uint64) *App {
 		Model:  model,
 		Schema: schema,
 		Parser: schema.Parser(),
-	}
-}
-
-func DecodeContent(obj interface{}) *meta.MetaContent {
-	content := meta.MetaContent{}
-	if obj != nil {
-		err := mapstructure.Decode(obj, &content)
-		if err != nil {
-			panic("Decode content failure:" + err.Error())
-		}
-	}
-	return &content
-}
-
-//合并微服务模型
-func MergeServiceModels(content *meta.MetaContent) *meta.MetaContent {
-	if content == nil {
-		content = &meta.MetaContent{}
-	}
-	ServiceMetas.Range(func(key interface{}, value interface{}) bool {
-		if metaData, ok := ServiceMetas.Load(key); ok {
-			serviceMeta := metaData.(*meta.MetaContent)
-			for i := range serviceMeta.Classes {
-				content.Classes = append(content.Classes, serviceMeta.Classes[i])
-			}
-
-			for i := range serviceMeta.Relations {
-				content.Relations = append(content.Relations, serviceMeta.Relations[i])
-			}
-		}
-		return true
-	})
-	return content
-}
-
-func GetSystemApp() *App {
-	if result, ok := appLoaderCache.Load(0); ok {
-		loader := result.(*AppLoader)
-		if !loader.loaded {
-			loader.load(false)
-		}
-		return loader.app
-	}
-
-	//第一次获取时，创建加载器
-	appLoader := &AppLoader{
-		appId:  0,
-		loaded: true,
-	}
-	appLoaderCache.Store(0, appLoader)
-
-	return getPredefinedSystemApp()
-}
-
-func getPredefinedSystemApp() *App {
-	metaConent := meta.SystemMeta
-	meragedMetaConent := MergeServiceModels(metaConent)
-	model := model.New(meragedMetaConent, 0)
-	schema := schema.New(model)
-	return &App{
-		AppId:  0,
-		Schema: schema,
-		Parser: schema.Parser(),
-		Model:  model,
 	}
 }

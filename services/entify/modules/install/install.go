@@ -18,9 +18,9 @@ import (
 )
 
 type InstallArg struct {
-	Admin    string     `json:"admin"`
-	Password string     `json:"password"`
-	WithDemo bool       `json:"withDemo"`
+	Admin    string `json:"admin"`
+	Password string `json:"password"`
+	WithDemo bool   `json:"withDemo"`
 }
 
 const INPUT = "input"
@@ -119,14 +119,10 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	if err != nil || authService == nil {
 		log.Panic(err.Error())
 	}
-	authServiceId := authMeta.(map[string]interface{})["id"].(uint64)
-	//把Service数据放入缓存
-	app.ServiceMetas.Store(authServiceId, meta.DefualtAuthServiceMeta)
-
 	nextMeta = meta.DefualtAuthServiceMeta
 	app.PublishMeta(&meta.MetaContent{}, nextMeta, 0)
 	app.LoadServiceMetas()
-	systemApp.ReLoad()
+	systemApp = app.ReloadSystemApp()
 	if input.Admin != "" {
 		instance = data.NewInstance(
 			adminInstance(input.Admin, input.Password),

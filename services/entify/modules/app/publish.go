@@ -58,7 +58,7 @@ func (a *App) Publish(ctx context.Context) {
 		log.Panic(err.Error())
 	}
 
-	a.ReLoad()
+	ReLoadApp(a.AppId)
 }
 
 func (a *App) MergeModel(content *meta.MetaContent) *meta.MetaContent {

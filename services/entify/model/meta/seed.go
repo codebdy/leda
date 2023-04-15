@@ -25,6 +25,6 @@ func init() {
 	content := ReadContentFromJson("./seeds/system-meta.json")
 	SystemMeta = &content
 
-	content = ReadContentFromJson("./seeds/auth-meta.json")
-	DefualtAuthServiceMeta = &content
+	authContent := ReadContentFromJson("./seeds/auth-meta.json")
+	DefualtAuthServiceMeta = &authContent
 }
