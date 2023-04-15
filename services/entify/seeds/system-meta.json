@@ -16,6 +16,7 @@
           "name": "name",
           "type": "String",
           "unique": true,
+          "nullable": true,
           "uuid": "META_COLUMN_NAME_UUID"
         },
         {
