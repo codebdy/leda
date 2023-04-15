@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"codebdy.com/leda/services/entify/contexts"
 	"codebdy.com/leda/services/entify/consts"
+	"codebdy.com/leda/services/entify/contexts"
 	"codebdy.com/leda/services/entify/modules/app"
 	"codebdy.com/leda/services/entify/modules/register"
 	"github.com/graphql-go/graphql"
@@ -36,25 +36,28 @@ func (m *PublishModule) QueryFields() []*graphql.Field {
 	return []*graphql.Field{}
 }
 func (m *PublishModule) MutationFields() []*graphql.Field {
-	if m.app != nil {
-		return []*graphql.Field{
-			{
-				Name: consts.PUBLISH,
-				Type: graphql.Boolean,
-				Args: graphql.FieldConfigArgument{
-					consts.APPID: &graphql.ArgumentConfig{
-						Type: &graphql.NonNull{OfType: graphql.ID},
-					},
+	return []*graphql.Field{
+		{
+			Name: consts.PUBLISH_APP_META,
+			Type: graphql.Boolean,
+			Args: graphql.FieldConfigArgument{
+				consts.APPID: &graphql.ArgumentConfig{
+					Type: &graphql.NonNull{OfType: graphql.ID},
 				},
-				Resolve: PublishMetaResolveFn(m.app),
 			},
-		}
-	} else {
-		return []*graphql.Field{}
+			Resolve: PublishMetaResolveFn(m.app),
+		},
+		{
+			Name: consts.PUBLISH_SERVICE_META,
+			Type: graphql.Boolean,
+			Args: graphql.FieldConfigArgument{
+				consts.SERVICEID: &graphql.ArgumentConfig{
+					Type: &graphql.NonNull{OfType: graphql.ID},
+				},
+			},
+			Resolve: PublishMetaResolveFn(m.app),
+		},
 	}
-}
-func (m *PublishModule) SubscriptionFields() []*graphql.Field {
-	return []*graphql.Field{}
 }
 func (m *PublishModule) Directives() []*graphql.Directive {
 	return []*graphql.Directive{}
