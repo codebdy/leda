@@ -34,6 +34,7 @@
         {
           "name": "publishedAt",
           "type": "Date",
+          "nullable": true,
           "uuid": "META_COLUMN_PUBLISHED_AT_UUID"
         },
         {
