@@ -38,20 +38,10 @@ func (m *PublishModule) QueryFields() []*graphql.Field {
 func (m *PublishModule) MutationFields() []*graphql.Field {
 	return []*graphql.Field{
 		{
-			Name: consts.PUBLISH_APP_META,
+			Name: consts.PUBLISH_META,
 			Type: graphql.Boolean,
 			Args: graphql.FieldConfigArgument{
-				consts.APPID: &graphql.ArgumentConfig{
-					Type: &graphql.NonNull{OfType: graphql.ID},
-				},
-			},
-			Resolve: PublishMetaResolveFn(m.app),
-		},
-		{
-			Name: consts.PUBLISH_SERVICE_META,
-			Type: graphql.Boolean,
-			Args: graphql.FieldConfigArgument{
-				consts.SERVICEID: &graphql.ArgumentConfig{
+				consts.METAID: &graphql.ArgumentConfig{
 					Type: &graphql.NonNull{OfType: graphql.ID},
 				},
 			},
