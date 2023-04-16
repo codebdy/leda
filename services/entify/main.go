@@ -60,6 +60,10 @@ func main() {
 	checkMetaInstall()
 	checkParams()
 
+	if app.Installed {
+		app.LoadServiceMetas()
+	}
+
 	h := handler.New(&handler.Config{
 		Pretty:         true,
 		GraphiQLConfig: &handler.GraphiQLConfig{},

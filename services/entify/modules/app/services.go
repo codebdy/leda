@@ -37,6 +37,8 @@ func LoadServiceMetas() {
 			}
 		}
 	}
+
+	ReloadSystemApp()
 }
 
 func clearServiceMetas() {

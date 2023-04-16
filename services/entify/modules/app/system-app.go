@@ -22,8 +22,9 @@ func ReloadSystemApp() *App {
 }
 
 func createPredefinedSystemApp() *App {
-	metaConent := meta.SystemMeta
-	mergedMetaConent := MergeServiceModels(metaConent)
+	//赋值一份数据合并，不要在原来的基础上修改
+	metaConent := *meta.SystemMeta
+	mergedMetaConent := MergeServiceModels(&metaConent)
 	model := model.New(mergedMetaConent, 0)
 	schema := schema.New(model)
 	return &App{
