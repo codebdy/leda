@@ -3,10 +3,12 @@ package publish
 import (
 	"log"
 	"strconv"
+	"time"
 
 	"codebdy.com/leda/services/entify/consts"
 	"codebdy.com/leda/services/entify/leda-shared/utils"
 	"codebdy.com/leda/services/entify/logs"
+	"codebdy.com/leda/services/entify/model/data"
 	"codebdy.com/leda/services/entify/model/graph"
 	"codebdy.com/leda/services/entify/model/meta"
 	"codebdy.com/leda/services/entify/modules/app"
@@ -20,6 +22,7 @@ func PublishMetaResolveFn(theApp *app.App) graphql.FieldResolveFn {
 		defer utils.PrintErrorStack()
 		strId := p.Args[consts.METAID]
 		publishMeta(strId)
+
 		logs.WriteBusinessLog(p.Context, logs.PUBLISH_META, logs.SUCCESS, "")
 		return true, nil
 	}
@@ -64,7 +67,7 @@ func publishMeta(strId interface{}) {
 	if metaMap[consts.META_PUBLISHED_CONTENT] != nil {
 		err := mapstructure.Decode(metaMap[consts.META_PUBLISHED_CONTENT], &publishedMeta)
 		if err != nil {
-			log.Println(err.Error())
+			panic(err.Error())
 		}
 	}
 	nextMeta := meta.MetaContent{}
@@ -74,12 +77,26 @@ func publishMeta(strId interface{}) {
 	}
 	app.PublishMeta(&publishedMeta, &nextMeta, appId)
 
+	metaMap[consts.META_PUBLISHED_CONTENT] = metaMap[consts.META_CONTENT]
+	metaMap[consts.META_PUBLISHEDAT] = time.Now()
+	metaMap[consts.META_CREATEDAT] = time.Now()
+	metaMap[consts.META_UPDATEDAT] = time.Now()
+	instance := data.NewInstance(
+		metaMap,
+		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
+	)
+	//插入 Meta
+	_, err = s.SaveOne(instance)
+	if err != nil {
+		panic(err.Error())
+	}
+
 	//如果是service
 	if appId == 0 {
-
+		app.LoadServiceMetas()
 	}
 	//如果是app
 	if appId != 0 {
-
+		app.ReloadApp(appId)
 	}
 }
