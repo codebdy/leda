@@ -10,7 +10,7 @@ func New(m *MetaContent, appId uint64) *Model {
 	model := Model{
 		Classes:   make([]*ClassMeta, len(m.Classes)),
 		Relations: make([]*RelationMeta, len(m.Relations)),
-		Packages:  make([]*PackageMeta, len(m.Relations)),
+		Packages:  make([]*PackageMeta, len(m.Packages)),
 	}
 
 	for i := range m.Packages {
