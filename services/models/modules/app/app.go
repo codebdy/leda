@@ -6,9 +6,9 @@ import (
 	"sync"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/model"
-	"codebdy.com/leda/services/models/model/graph"
-	"codebdy.com/leda/services/models/model/meta"
+	"codebdy.com/leda/services/models/entify/model"
+	"codebdy.com/leda/services/models/entify/model/graph"
+	"codebdy.com/leda/services/models/entify/model/meta"
 	"codebdy.com/leda/services/models/modules/app/schema"
 	"codebdy.com/leda/services/models/modules/app/schema/parser"
 	"codebdy.com/leda/services/models/service"

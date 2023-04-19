@@ -12,7 +12,6 @@ require (
 	github.com/artdarek/go-unzip v1.0.0
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/graph-gophers/dataloader v5.0.0+incompatible
-	github.com/graphql-go/graphql v0.8.1
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/spf13/viper v1.15.0
 	github.com/thinkeridea/go-extend v1.3.2
@@ -20,6 +19,7 @@ require (
 
 require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
+	github.com/graphql-go/graphql v0.8.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect

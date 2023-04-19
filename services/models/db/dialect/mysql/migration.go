@@ -6,10 +6,10 @@ import (
 	"strings"
 
 	"codebdy.com/leda/services/models/consts"
+	"codebdy.com/leda/services/models/entify/model/meta"
+	"codebdy.com/leda/services/models/entify/model/table"
 	"codebdy.com/leda/services/models/leda-shared/utils"
-	"codebdy.com/leda/services/models/model"
-	"codebdy.com/leda/services/models/model/meta"
-	"codebdy.com/leda/services/models/model/table"
+	"codebdy.com/leda/services/models/entify/model"
 )
 
 func (b *MySQLBuilder) BuildCreateTableSQL(table *table.Table) string {

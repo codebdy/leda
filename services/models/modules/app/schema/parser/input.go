@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/model/graph"
+	"codebdy.com/leda/services/models/entify/model/graph"
 	"github.com/graphql-go/graphql"
 )
 

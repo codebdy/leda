@@ -1,9 +1,9 @@
 package app
 
 import (
-	"codebdy.com/leda/services/models/model"
-	"codebdy.com/leda/services/models/model/meta"
-	"codebdy.com/leda/services/models/orm"
+	"codebdy.com/leda/services/models/entify/model"
+	"codebdy.com/leda/services/models/entify/model/meta"
+	"codebdy.com/leda/services/models/entify/orm"
 )
 
 func PublishMeta(published, next *meta.MetaContent, appId uint64) {

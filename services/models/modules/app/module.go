@@ -8,8 +8,8 @@ import (
 
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/contexts"
-	"codebdy.com/leda/services/models/model/graph"
-	"codebdy.com/leda/services/models/model/meta"
+	"codebdy.com/leda/services/models/entify/model/graph"
+	"codebdy.com/leda/services/models/entify/model/meta"
 	"codebdy.com/leda/services/models/modules/register"
 	"codebdy.com/leda/services/models/service"
 	"github.com/graphql-go/graphql"

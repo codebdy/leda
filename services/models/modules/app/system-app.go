@@ -1,8 +1,8 @@
 package app
 
 import (
-	"codebdy.com/leda/services/models/model"
-	"codebdy.com/leda/services/models/model/meta"
+	"codebdy.com/leda/services/models/entify/model"
+	"codebdy.com/leda/services/models/entify/model/meta"
 	"codebdy.com/leda/services/models/modules/app/schema"
 )
 

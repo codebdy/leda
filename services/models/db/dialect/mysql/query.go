@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/model/data"
-	"codebdy.com/leda/services/models/model/graph"
+	"codebdy.com/leda/services/models/entify/model/data"
+	"codebdy.com/leda/services/models/entify/model/graph"
 )
 
 type MySQLBuilder struct {

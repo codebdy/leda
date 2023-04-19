@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/model/data"
+	"codebdy.com/leda/services/models/entify/model/data"
 )
 
 func (b *MySQLBuilder) BuildDeleteSQL(id uint64, tableName string) string {

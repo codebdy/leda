@@ -3,8 +3,8 @@ package service
 import (
 	"log"
 
-	"codebdy.com/leda/services/models/model/data"
-	"codebdy.com/leda/services/models/orm"
+	"codebdy.com/leda/services/models/entify/model/data"
+	"codebdy.com/leda/services/models/entify/orm"
 )
 
 func (s *Service) Save(instances []*data.Instance) ([]orm.InsanceData, error) {

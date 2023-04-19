@@ -3,8 +3,8 @@ package mysql
 import (
 	"testing"
 
-	"codebdy.com/leda/services/models/model"
-	"codebdy.com/leda/services/models/model/table"
+	"codebdy.com/leda/services/models/entify/model/table"
+	"codebdy.com/leda/services/models/entify/model"
 )
 
 func TestModifyTableName(t *testing.T) {

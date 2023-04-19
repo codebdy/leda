@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"codebdy.com/leda/services/models/model/data"
-	"codebdy.com/leda/services/models/model/table"
+	"codebdy.com/leda/services/models/entify/model/data"
+	"codebdy.com/leda/services/models/entify/model/table"
 )
 
 func (b *MySQLBuilder) BuildInsertSQL(fields []*data.Field, table *table.Table) string {

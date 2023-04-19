@@ -8,13 +8,14 @@ import (
 
 	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/db"
+	"codebdy.com/leda/services/models/entify/model/meta"
+	"codebdy.com/leda/services/models/entify/orm"
 	"codebdy.com/leda/services/models/handler"
 	"codebdy.com/leda/services/models/leda-shared/errorx"
 	"codebdy.com/leda/services/models/leda-shared/middlewares"
-	"codebdy.com/leda/services/models/model/meta"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/modules/register"
-	"codebdy.com/leda/services/models/orm"
+
 	_ "github.com/go-sql-driver/mysql"
 
 	_ "codebdy.com/leda/services/models/modules/app"

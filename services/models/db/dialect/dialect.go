@@ -2,10 +2,10 @@ package dialect
 
 import (
 	"codebdy.com/leda/services/models/db/dialect/mysql"
-	"codebdy.com/leda/services/models/model"
-	"codebdy.com/leda/services/models/model/data"
-	"codebdy.com/leda/services/models/model/graph"
-	"codebdy.com/leda/services/models/model/table"
+	"codebdy.com/leda/services/models/entify/model"
+	"codebdy.com/leda/services/models/entify/model/data"
+	"codebdy.com/leda/services/models/entify/model/graph"
+	"codebdy.com/leda/services/models/entify/model/table"
 )
 
 const (

@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"codebdy.com/leda/services/models/consts"
+	"codebdy.com/leda/services/models/entify/model/data"
+	"codebdy.com/leda/services/models/entify/model/graph"
 	"codebdy.com/leda/services/models/leda-shared/utils"
-	"codebdy.com/leda/services/models/model/data"
-	"codebdy.com/leda/services/models/model/graph"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/modules/register"
 	"codebdy.com/leda/services/models/service"

@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/model/graph"
-	"codebdy.com/leda/services/models/orm"
+	"codebdy.com/leda/services/models/entify/model/graph"
+	"codebdy.com/leda/services/models/entify/orm"
 )
 
 func mergeWhereArgs(whereArgs, authArgs graph.QueryArg) graph.QueryArg {

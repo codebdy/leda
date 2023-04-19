@@ -1,7 +1,7 @@
 package app
 
 import (
-	"codebdy.com/leda/services/models/model/meta"
+	"codebdy.com/leda/services/models/entify/model/meta"
 	"github.com/mitchellh/mapstructure"
 )
 
