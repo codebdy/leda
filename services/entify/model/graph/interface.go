@@ -28,20 +28,6 @@ func (f *Interface) AllAttributes() []*Attribute {
 	return attrs
 }
 
-func (f *Interface) AllMethods() []*Method {
-	methods := []*Method{}
-	methods = append(methods, f.methods...)
-	for i := range f.Parents {
-		for j := range f.Parents[i].methods {
-			method := f.Parents[i].methods[j]
-			if findMethod(method.GetName(), methods) == nil {
-				methods = append(methods, method)
-			}
-		}
-	}
-	return methods
-}
-
 func (f *Interface) AllAssociations() []*Association {
 	associas := []*Association{}
 	associas = append(associas, f.associations...)

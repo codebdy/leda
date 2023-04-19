@@ -179,20 +179,6 @@ func (m *Model) makeInterface(intf *Interface) {
 			attr.ValueObjectType = m.GetValueObjectByUuid(attr.TypeUuid)
 		}
 	}
-	for j := range intf.methods {
-		method := intf.methods[j]
-		if method.Method.Type == meta.ENUM || method.Method.Type == meta.ENUM_ARRAY {
-			method.EumnType = m.GetEnumByUuid(method.Method.TypeUuid)
-		}
-
-		if method.Method.Type == meta.ENTITY || method.Method.Type == meta.ENTITY_ARRAY {
-			method.EnityType = m.GetEntityByUuid(method.Method.TypeUuid)
-		}
-
-		if method.Method.Type == meta.VALUE_OBJECT || method.Method.Type == meta.VALUE_OBJECT_ARRAY {
-			method.ValueObjectType = m.GetValueObjectByUuid(method.Method.TypeUuid)
-		}
-	}
 }
 
 func (m *Model) makeEntity(ent *Entity) {
@@ -208,20 +194,6 @@ func (m *Model) makeEntity(ent *Entity) {
 
 		if attr.Type == meta.VALUE_OBJECT || attr.Type == meta.VALUE_OBJECT_ARRAY {
 			attr.ValueObjectType = m.GetValueObjectByUuid(attr.TypeUuid)
-		}
-	}
-	for j := range ent.methods {
-		method := ent.methods[j]
-		if method.Method.Type == meta.ENUM || method.Method.Type == meta.ENUM_ARRAY {
-			method.EumnType = m.GetEnumByUuid(method.Method.TypeUuid)
-		}
-
-		if method.Method.Type == meta.ENTITY || method.Method.Type == meta.ENTITY_ARRAY {
-			method.EnityType = m.GetEntityByUuid(method.Method.TypeUuid)
-		}
-
-		if method.Method.Type == meta.VALUE_OBJECT || method.Method.Type == meta.VALUE_OBJECT_ARRAY {
-			method.ValueObjectType = m.GetValueObjectByUuid(method.Method.TypeUuid)
 		}
 	}
 }

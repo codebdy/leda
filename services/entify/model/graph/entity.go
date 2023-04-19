@@ -47,20 +47,6 @@ func (e *Entity) AllAttributes() []*Attribute {
 	return attrs
 }
 
-func (e *Entity) AllMethods() []*Method {
-	methods := []*Method{}
-	methods = append(methods, e.methods...)
-	for i := range e.Interfaces {
-		for j := range e.Interfaces[i].methods {
-			method := e.Interfaces[i].methods[j]
-			if findMethod(method.GetName(), methods) == nil {
-				methods = append(methods, method)
-			}
-		}
-	}
-	return methods
-}
-
 func (e *Entity) Associations() []*Association {
 	// associas := []*Association{}
 	// associas = append(associas, e.associations...)
@@ -115,15 +101,6 @@ func findAttribute(name string, attrs []*Attribute) *Attribute {
 	for i := range attrs {
 		if attrs[i].Name == name {
 			return attrs[i]
-		}
-	}
-	return nil
-}
-
-func findMethod(name string, methods []*Method) *Method {
-	for i := range methods {
-		if methods[i].GetName() == name {
-			return methods[i]
 		}
 	}
 	return nil

@@ -13,7 +13,6 @@ import (
 type Class struct {
 	attributes   []*Attribute
 	associations []*Association
-	methods      []*Method
 	Domain       *domain.Class
 }
 
@@ -21,15 +20,10 @@ func NewClass(c *domain.Class) *Class {
 	cls := Class{
 		Domain:     c,
 		attributes: make([]*Attribute, len(c.Attributes)),
-		methods:    make([]*Method, len(c.Methods)),
 	}
 
 	for i := range c.Attributes {
 		cls.attributes[i] = NewAttribute(c.Attributes[i], &cls)
-	}
-
-	for i := range c.Methods {
-		cls.methods[i] = NewMethod(c.Methods[i], &cls)
 	}
 
 	return &cls
@@ -61,26 +55,6 @@ func (c *Class) TableName() string {
 		return name
 	}
 	return fmt.Sprintf("%s%d_%s", consts.TABLE_PREFIX, c.Domain.AppId, name)
-}
-
-// func (c *Class) Attributes() []*Attribute {
-// 	return c.attributes
-// }
-
-// func (c *Class) Associations() []*Association {
-// 	return c.associations
-// }
-
-func (c *Class) MethodsByType(operateType string) []*Method {
-	methods := []*Method{}
-	for i := range c.methods {
-		method := c.methods[i]
-		if method.Method.OperateType == operateType {
-			methods = append(methods, method)
-		}
-	}
-
-	return methods
 }
 
 func (c *Class) IsSoftDelete() bool {
