@@ -4,9 +4,9 @@ import (
 	"sync"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/entify/model/graph"
-	"codebdy.com/leda/services/models/entify/model/meta"
 	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify/model/graph"
+	"github.com/codebdy/entify/model/meta"
 )
 
 var ServiceMetas sync.Map
@@ -28,7 +28,7 @@ func LoadServiceMetas() {
 				metaMap := metaData.(map[string]interface{})
 				publishedMeta := metaMap[consts.META_PUBLISHED_CONTENT]
 				if publishedMeta != nil && publishedMeta != "" {
-					var content *meta.MetaContent
+					var content *meta.UMLMeta
 					if publishedMeta != nil {
 						content = DecodeContent(publishedMeta)
 					}

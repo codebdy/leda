@@ -3,8 +3,8 @@ package service
 import (
 	"log"
 
-	"codebdy.com/leda/services/models/entify/model/data"
-	"codebdy.com/leda/services/models/entify/orm"
+	"github.com/codebdy/entify/model/data"
+	"github.com/codebdy/entify/orm"
 )
 
 func (s *Service) DeleteInstances(instances []*data.Instance) (interface{}, error) {

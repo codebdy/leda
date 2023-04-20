@@ -4,21 +4,13 @@ import (
 	"fmt"
 
 	"codebdy.com/leda/services/models/consts"
+	"github.com/codebdy/entify/db"
 )
 
 const TABLE_NAME_MAX_LENGTH = 64
 
 var fileCfg Config
 var envCfg Config
-
-type DbConfig struct {
-	Driver   string `json:"driver"`
-	User     string `json:"user"`
-	Password string `json:"password"`
-	Host     string `json:"host"`
-	Port     string `json:"port"`
-	Database string `json:"database"`
-}
 
 type Config interface {
 	getString(key string) string
@@ -50,8 +42,8 @@ func GetInt(key string) int {
 	return intValue
 }
 
-func GetDbConfig() DbConfig {
-	var cfg DbConfig
+func GetDbConfig() db.DbConfig {
+	var cfg db.DbConfig
 	cfg.Driver = GetString(consts.DB_DRIVER)
 	cfg.Database = GetString(consts.DB_DATABASE)
 	cfg.Host = GetString(consts.DB_HOST)

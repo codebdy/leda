@@ -1,7 +1,7 @@
 package app
 
 import (
-	"codebdy.com/leda/services/models/entify/model/meta"
+	"github.com/codebdy/entify/model/meta"
 	"github.com/mitchellh/mapstructure"
 )
 
@@ -11,8 +11,8 @@ func ReLoadApp(appId uint64) {
 	}
 }
 
-func DecodeContent(obj interface{}) *meta.MetaContent {
-	content := meta.MetaContent{}
+func DecodeContent(obj interface{}) *meta.UMLMeta {
+	content := meta.UMLMeta{}
 	if obj != nil {
 		err := mapstructure.Decode(obj, &content)
 		if err != nil {
@@ -23,13 +23,13 @@ func DecodeContent(obj interface{}) *meta.MetaContent {
 }
 
 //合并微服务模型
-func MergeServiceModels(content *meta.MetaContent) *meta.MetaContent {
+func MergeServiceModels(content *meta.UMLMeta) *meta.UMLMeta {
 	if content == nil {
-		content = &meta.MetaContent{}
+		content = &meta.UMLMeta{}
 	}
 	ServiceMetas.Range(func(key interface{}, value interface{}) bool {
 		if metaData, ok := ServiceMetas.Load(key); ok {
-			serviceMeta := metaData.(*meta.MetaContent)
+			serviceMeta := metaData.(*meta.UMLMeta)
 			for i := range serviceMeta.Classes {
 				content.Classes = append(content.Classes, serviceMeta.Classes[i])
 			}

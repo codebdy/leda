@@ -3,8 +3,8 @@ package logs
 import (
 	"context"
 
-	"codebdy.com/leda/services/models/entify/model/graph"
-	"codebdy.com/leda/services/models/entify/model/observer"
+	"github.com/codebdy/entify/model/graph"
+	"github.com/codebdy/entify/model/observer"
 )
 
 type ModelObserver struct {

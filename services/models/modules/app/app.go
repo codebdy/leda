@@ -6,12 +6,12 @@ import (
 	"sync"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/entify/model"
-	"codebdy.com/leda/services/models/entify/model/graph"
-	"codebdy.com/leda/services/models/entify/model/meta"
 	"codebdy.com/leda/services/models/modules/app/schema"
 	"codebdy.com/leda/services/models/modules/app/schema/parser"
 	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify/model"
+	"github.com/codebdy/entify/model/graph"
+	"github.com/codebdy/entify/model/meta"
 )
 
 //节省开支，运行时使用，初始化时请使用orm.IsEntityExists
@@ -101,7 +101,7 @@ func NewApp(appId uint64) *App {
 	}
 
 	publishedMeta := appMeta.(map[string]interface{})[consts.META_PUBLISHED_CONTENT]
-	var content *meta.MetaContent
+	var content *meta.UMLMeta
 	if publishedMeta != nil {
 		content = DecodeContent(publishedMeta)
 	}

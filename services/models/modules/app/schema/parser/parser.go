@@ -2,9 +2,9 @@ package parser
 
 import (
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/engify/model"
-	"codebdy.com/leda/services/models/entify/model/graph"
 	"codebdy.com/leda/services/models/leda-shared/utils"
+	"github.com/codebdy/entify/model"
+	"github.com/codebdy/entify/model/graph"
 	"github.com/graphql-go/graphql"
 )
 

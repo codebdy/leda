@@ -4,12 +4,12 @@ import (
 	"log"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/engify/model"
-	"codebdy.com/leda/services/models/entify/model/data"
-	"codebdy.com/leda/services/models/entify/model/graph"
-	"codebdy.com/leda/services/models/entify/model/observer"
 	"codebdy.com/leda/services/models/leda-shared/utils"
 	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify/model"
+	"github.com/codebdy/entify/model/data"
+	"github.com/codebdy/entify/model/graph"
+	"github.com/codebdy/entify/model/observer"
 	"github.com/graphql-go/graphql"
 )
 

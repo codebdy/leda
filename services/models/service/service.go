@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"codebdy.com/leda/services/models/entify/model/graph"
+	"github.com/codebdy/entify/model/graph"
 )
 
 type Service struct {

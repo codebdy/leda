@@ -4,15 +4,16 @@ import (
 	"log"
 	"time"
 
+	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/entify/model/data"
-	"codebdy.com/leda/services/models/entify/model/meta"
-	"codebdy.com/leda/services/models/entify/orm"
 	"codebdy.com/leda/services/models/leda-shared/scalars"
 	"codebdy.com/leda/services/models/leda-shared/utils"
 	"codebdy.com/leda/services/models/logs"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify"
+	"github.com/codebdy/entify/model/data"
+	"github.com/codebdy/entify/model/meta"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
 )
@@ -87,12 +88,12 @@ func installMutationFields() []*graphql.Field {
 
 func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	defer utils.PrintErrorStack()
-
+	rep := entify.New(config.GetDbConfig())
 	input := InstallArg{}
 	mapstructure.Decode(p.Args[INPUT], &input)
 
 	nextMeta := meta.SystemMeta
-	app.PublishMeta(&meta.MetaContent{}, nextMeta, 0)
+	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 
 	systemApp := app.GetSystemApp()
 
@@ -120,7 +121,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 		log.Panic(err.Error())
 	}
 	nextMeta = meta.DefualtAuthServiceMeta
-	app.PublishMeta(&meta.MetaContent{}, nextMeta, 0)
+	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 	app.LoadServiceMetas()
 	systemApp = app.ReloadSystemApp()
 	if input.Admin != "" {
@@ -145,7 +146,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 			}
 		}
 	}
-	isExist := orm.IsEntityExists(meta.META_ENTITY_NAME)
+	isExist := rep.IsEntityExists(consts.META_ENTITY_NAME)
 	logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.SUCCESS, "")
 	app.Installed = true
 	return isExist, nil

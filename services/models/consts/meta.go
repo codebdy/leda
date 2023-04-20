@@ -1,4 +1,4 @@
-package meta
+package consts
 
 const META_ENTITY_NAME = "Meta"
 const APP_ENTITY_NAME = "App"

@@ -1,9 +1,9 @@
 package app
 
 import (
-	"codebdy.com/leda/services/models/entify/model"
-	"codebdy.com/leda/services/models/entify/model/meta"
 	"codebdy.com/leda/services/models/modules/app/schema"
+	"github.com/codebdy/entify/model"
+	"github.com/codebdy/entify/model/meta"
 )
 
 var sysApp *App
