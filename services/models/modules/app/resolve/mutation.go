@@ -6,14 +6,14 @@ import (
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/leda-shared/utils"
 	"codebdy.com/leda/services/models/service"
-	"github.com/codebdy/entify/model"
+	"github.com/codebdy/entify"
 	"github.com/codebdy/entify/model/data"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/codebdy/entify/model/observer"
 	"github.com/graphql-go/graphql"
 )
 
-func PostResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolveFn {
+func PostResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
 		objects := p.Args[consts.ARG_OBJECTS].([]interface{})
@@ -24,7 +24,7 @@ func PostResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolv
 			instance := data.NewInstance(object.(map[string]interface{}), entity)
 			instances = append(instances, instance)
 		}
-		s := service.New(p.Context, model.Graph)
+		s := service.New(p.Context, r)
 		returing, err := s.Save(instances)
 
 		if err != nil {
@@ -36,11 +36,11 @@ func PostResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolv
 }
 
 //未实现
-func SetResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolveFn {
+func SetResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
 		set := p.Args[consts.ARG_SET].(map[string]interface{})
-		s := service.New(p.Context, model.Graph)
+		s := service.New(p.Context, r)
 		objs := s.QueryEntity(entity, p.Args, []string{}).Nodes
 		convertedObjs := objs
 		instances := []*data.Instance{}
@@ -72,38 +72,38 @@ func SetResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolve
 	}
 }
 
-func PostOneResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolveFn {
+func PostOneResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
 		object := p.Args[consts.ARG_OBJECT].(map[string]interface{})
 		data.ConvertObjectId(object)
 
 		instance := data.NewInstance(object, entity)
-		s := service.New(p.Context, model.Graph)
+		s := service.New(p.Context, r)
 		result, err := s.SaveOne(instance)
 		observer.EmitObjectPosted(result.(map[string]interface{}), entity, p.Context)
 		return result, err
 	}
 }
 
-func DeleteByIdResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolveFn {
+func DeleteByIdResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
 		argId := p.Args[consts.ID]
 		instance := data.NewInstance(map[string]interface{}{
 			consts.ID: data.ConvertId(argId),
 		}, entity)
-		s := service.New(p.Context, model.Graph)
+		s := service.New(p.Context, r)
 		result, err := s.DeleteInstance(instance)
 		observer.EmitObjectDeleted(result.(map[string]interface{}), entity, p.Context)
 		return result, err
 	}
 }
 
-func DeleteResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolveFn {
+func DeleteResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
-		s := service.New(p.Context, model.Graph)
+		s := service.New(p.Context, r)
 		objs := s.QueryEntity(entity, p.Args, []string{consts.ID}).Nodes
 
 		if objs == nil || len(objs) == 0 {

@@ -30,7 +30,7 @@ func (s *Service) QueryEntity(entity *graph.Entity, args graph.QueryArg, fieldNa
 	if !canRead {
 		log.Panic("No access")
 	}
-	session, err := orm.Open()
+	session, err := s.repository.OpenSession()
 	if err != nil {
 		panic(err.Error())
 	}
@@ -54,7 +54,7 @@ func (s *Service) QueryOneEntity(entity *graph.Entity, args graph.QueryArg) inte
 	if !canRead {
 		log.Panic("No access")
 	}
-	session, err := orm.Open()
+	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Panic(err.Error())
 	}
@@ -80,7 +80,7 @@ func (s *Service) BatchQueryAssociations(
 	ids []uint64,
 	args graph.QueryArg,
 ) []map[string]interface{} {
-	session, err := orm.Open()
+	session, err := s.repository.OpenSession()
 	if err != nil {
 		panic(err.Error())
 	}

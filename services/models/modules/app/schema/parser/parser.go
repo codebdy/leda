@@ -3,6 +3,7 @@ package parser
 import (
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/leda-shared/utils"
+	"github.com/codebdy/entify"
 	"github.com/codebdy/entify/model"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/graphql-go/graphql"
@@ -28,15 +29,15 @@ type ModelParser struct {
 	selectColumnsMap     map[string]*graphql.InputObject
 }
 
-func (p *ModelParser) ParseModel(model *model.Model) {
+func (p *ModelParser) ParseModel(r *entify.Repository) {
 	p.reset()
-	p.model = model
+	p.model = r.Model
 	p.makeEnums(p.model.Graph.Enums)
 	p.makeOutputInterfaces(p.model.Graph.Interfaces)
 	p.makeEntityOutputObjects(p.model.Graph.Entities)
 	p.makeThirdPartyOutputObjects(p.model.Graph.ThirdParties)
 	p.makeQueryArgs()
-	p.makeRelations(model)
+	p.makeRelations(r)
 	p.makeInputs()
 }
 

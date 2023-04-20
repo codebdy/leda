@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 
+	"github.com/codebdy/entify"
 	"github.com/codebdy/entify/model/graph"
 )
 
@@ -10,15 +11,15 @@ type Service struct {
 	isSystem bool
 	ctx      context.Context
 	roleIds  []uint64
-	model    *graph.Model
+	repository *entify.Repository
 }
 
-func New(ctx context.Context, model *graph.Model) *Service {
+func New(ctx context.Context, repository *entify.Repository) *Service {
 
 	return &Service{
 		isSystem: false,
 		ctx:      ctx,
-		model:    model,
+		repository:    repository,
 		//roleIds:  QueryRoleIds(ctx, model),
 	}
 }

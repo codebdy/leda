@@ -2,7 +2,7 @@ package schema
 
 import (
 	"codebdy.com/leda/services/models/modules/app/schema/parser"
-	"github.com/codebdy/entify/model"
+	"github.com/codebdy/entify"
 	"github.com/graphql-go/graphql"
 )
 
@@ -15,16 +15,16 @@ type AppGraphqlSchema struct {
 }
 
 type AppProcessor struct {
-	Model       *model.Model
+	Repo        *entify.Repository
 	modelParser parser.ModelParser
 }
 
-func New(model *model.Model) AppGraphqlSchema {
+func New(r *entify.Repository) AppGraphqlSchema {
 	processor := &AppProcessor{
-		Model: model,
+		Repo: r,
 	}
 
-	processor.modelParser.ParseModel(model)
+	processor.modelParser.ParseModel(r)
 	return AppGraphqlSchema{
 		QueryFields:    processor.QueryFields(),
 		MutationFields: processor.mutationFields(),

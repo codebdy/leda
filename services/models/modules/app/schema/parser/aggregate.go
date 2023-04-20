@@ -74,10 +74,8 @@ func (p *ModelParser) minFields(attrs []*graph.Attribute, methods []*domain.Meth
 func (p *ModelParser) selectFields(attrs []*graph.Attribute, methods []*domain.Method) graphql.InputObjectConfigFieldMap {
 	fields := graphql.InputObjectConfigFieldMap{}
 	for _, attr := range attrs {
-		if attr.Type != meta.FILE {
-			fields[attr.Name] = &graphql.InputObjectFieldConfig{
-				Type: p.InputPropertyType(attr),
-			}
+		fields[attr.Name] = &graphql.InputObjectFieldConfig{
+			Type: p.InputPropertyType(attr),
 		}
 	}
 	return fields

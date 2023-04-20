@@ -8,7 +8,7 @@ import (
 )
 
 func (s *Service) Save(instances []*data.Instance) ([]orm.InsanceData, error) {
-	session, err := orm.Open()
+	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Println(err.Error())
 		return nil, err
@@ -49,7 +49,7 @@ func (s *Service) Save(instances []*data.Instance) ([]orm.InsanceData, error) {
 }
 
 func (s *Service) SaveOne(instance *data.Instance) (interface{}, error) {
-	session, err := orm.Open()
+	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Println(err.Error())
 		return nil, err

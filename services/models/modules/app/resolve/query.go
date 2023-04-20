@@ -6,6 +6,7 @@ import (
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/leda-shared/utils"
 	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify"
 	"github.com/codebdy/entify/model"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/codebdy/entify/model/meta"
@@ -32,26 +33,26 @@ import (
 // 	}
 // }
 
-func QueryOneEntityResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolveFn {
+func QueryOneEntityResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
-		s := service.New(p.Context, model.Graph)
+		s := service.New(p.Context, r)
 		instance := s.QueryOneEntity(entity, p.Args)
 		return instance, nil
 	}
 }
 
-func QueryEntityResolveFn(entity *graph.Entity, model *model.Model) graphql.FieldResolveFn {
+func QueryEntityResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
-		s := service.New(p.Context, model.Graph)
+		s := service.New(p.Context, r)
 		fields := parseListFields(p.Info)
 		result := s.QueryEntity(entity, p.Args, fields)
 		return result, nil
 	}
 }
 
-func QueryAssociationFn(asso *graph.Association, model *model.Model) graphql.FieldResolveFn {
+func QueryAssociationFn(asso *graph.Association, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		var (
 			source      = p.Source.(map[string]interface{})
@@ -66,7 +67,7 @@ func QueryAssociationFn(asso *graph.Association, model *model.Model) graphql.Fie
 		if loaders == nil {
 			panic("Data loaders is nil")
 		}
-		loader := loaders.GetLoader(p, asso, p.Args, model)
+		loader := loaders.GetLoader(p, asso, p.Args, r)
 		thunk := loader.Load(p.Context, NewKey(source[consts.ID].(uint64)))
 		return func() (interface{}, error) {
 			data, err := thunk()

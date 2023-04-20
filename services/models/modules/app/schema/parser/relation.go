@@ -2,12 +2,12 @@ package parser
 
 import (
 	"codebdy.com/leda/services/models/modules/app/resolve"
-	"github.com/codebdy/entify/model"
+	"github.com/codebdy/entify"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/graphql-go/graphql"
 )
 
-func (p *ModelParser) makeRelations(model *model.Model) {
+func (p *ModelParser) makeRelations(r *entify.Repository) {
 	// for i := range p.model.Graph.Interfaces {
 	// intf := p.model.Graph.Interfaces[i]
 	// interfaceType := p.interfaceTypeMap[intf.Name()]
@@ -38,7 +38,7 @@ func (p *ModelParser) makeRelations(model *model.Model) {
 				Name:        association.Name(),
 				Type:        p.AssociationType(association),
 				Description: association.Description(),
-				Resolve:     resolve.QueryAssociationFn(association, model),
+				Resolve:     resolve.QueryAssociationFn(association, r),
 				Args:        p.QueryArgs(association.TypeEntity().Name()),
 			})
 		}

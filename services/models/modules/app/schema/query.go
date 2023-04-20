@@ -9,7 +9,7 @@ import (
 func (a *AppProcessor) QueryFields() []*graphql.Field {
 	queryFields := graphql.Fields{}
 
-	for _, entity := range a.Model.Graph.RootEnities() {
+	for _, entity := range a.Repo.Model.Graph.RootEnities() {
 		a.appendEntityToQueryFields(entity, queryFields)
 	}
 	return convertFieldsArray(queryFields)
@@ -26,12 +26,12 @@ func (a *AppProcessor) appendEntityToQueryFields(entity *graph.Entity, fields gr
 	(fields)[entity.QueryName()] = &graphql.Field{
 		Type:    a.EntityQueryResponseType(entity),
 		Args:    a.modelParser.QueryArgs(entity.Name()),
-		Resolve: resolve.QueryEntityResolveFn(entity, a.Model),
+		Resolve: resolve.QueryEntityResolveFn(entity, a.Repo),
 	}
 	(fields)[entity.QueryOneName()] = &graphql.Field{
 		Type:    a.modelParser.OutputType(entity.Name()),
 		Args:    a.modelParser.QueryArgs(entity.Name()),
-		Resolve: resolve.QueryOneEntityResolveFn(entity, a.Model),
+		Resolve: resolve.QueryOneEntityResolveFn(entity, a.Repo),
 	}
 
 }

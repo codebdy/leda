@@ -4,11 +4,10 @@ import (
 	"log"
 
 	"github.com/codebdy/entify/model/data"
-	"github.com/codebdy/entify/orm"
 )
 
 func (s *Service) DeleteInstances(instances []*data.Instance) (interface{}, error) {
-	session, err := orm.Open()
+	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Println(err.Error())
 		return nil, err
@@ -38,7 +37,7 @@ func (s *Service) DeleteInstances(instances []*data.Instance) (interface{}, erro
 }
 
 func (s *Service) DeleteInstance(instance *data.Instance) (interface{}, error) {
-	session, err := orm.Open()
+	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Println(err.Error())
 		return nil, err

@@ -8,9 +8,6 @@ import (
 )
 
 func (p *ModelParser) InputPropertyType(property graph.Propertier) graphql.Type {
-	if property.GetType() == meta.FILE {
-		return scalars.UploadType
-	}
 	return PropertyType(property.GetType())
 }
 
@@ -49,9 +46,6 @@ func PropertyType(propType string) graphql.Output {
 		// }
 		// return p.EnumType(enum.Name)
 		return graphql.String
-	case meta.FILE:
-		//return graphql.String
-		return fileOutputType
 	}
 
 	panic("No column type:" + propType)
@@ -80,8 +74,7 @@ func (p *ModelParser) AttributeExp(column *graph.Attribute) *graphql.InputObject
 		meta.DATE_ARRAY,
 		meta.ENUM_ARRAY,
 		meta.VALUE_OBJECT_ARRAY,
-		meta.ENTITY_ARRAY,
-		meta.FILE:
+		meta.ENTITY_ARRAY:
 		return nil
 	case meta.ID:
 		return &IdComparisonExp
