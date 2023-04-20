@@ -39,10 +39,10 @@ func publishMeta(strId interface{}) {
 
 	systemApp := app.GetSystemApp()
 
-	metaData := s.QueryById(systemApp.GetEntityByName(meta.META_ENTITY_NAME), metaId)
+	metaData := s.QueryById(systemApp.GetEntityByName(consts.META_ENTITY_NAME), metaId)
 
 	//获取所属APP
-	appData := s.QueryOneEntity(systemApp.GetEntityByName(meta.APP_ENTITY_NAME), graph.QueryArg{
+	appData := s.QueryOneEntity(systemApp.GetEntityByName(consts.APP_ENTITY_NAME), graph.QueryArg{
 		consts.ARG_WHERE: graph.QueryArg{
 			consts.METAID: graph.QueryArg{
 				consts.ARG_EQ: metaId,
@@ -75,7 +75,7 @@ func publishMeta(strId interface{}) {
 	if err != nil {
 		log.Println(err.Error())
 	}
-	app.PublishMeta(&publishedMeta, &nextMeta, appId)
+	systemApp.Repo.PublishMeta(&publishedMeta, &nextMeta, appId)
 
 	metaMap[consts.META_PUBLISHED_CONTENT] = metaMap[consts.META_CONTENT]
 	metaMap[consts.META_PUBLISHEDAT] = time.Now()
@@ -83,7 +83,7 @@ func publishMeta(strId interface{}) {
 	metaMap[consts.META_UPDATEDAT] = time.Now()
 	instance := data.NewInstance(
 		metaMap,
-		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
+		systemApp.GetEntityByName(consts.META_ENTITY_NAME),
 	)
 	//插入 Meta
 	_, err = s.SaveOne(instance)

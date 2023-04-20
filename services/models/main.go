@@ -7,14 +7,14 @@ import (
 	"os"
 
 	"codebdy.com/leda/services/models/config"
-	"codebdy.com/leda/services/models/db"
+	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/handler"
 	"codebdy.com/leda/services/models/leda-shared/errorx"
 	"codebdy.com/leda/services/models/leda-shared/middlewares"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/modules/register"
-	"github.com/codebdy/entify/model/meta"
-	"github.com/codebdy/entify/orm"
+	"github.com/codebdy/entify"
+	"github.com/codebdy/entify/db"
 
 	_ "github.com/go-sql-driver/mysql"
 
@@ -48,7 +48,8 @@ func checkParams() {
 }
 
 func checkMetaInstall() {
-	if !orm.IsEntityExists(meta.META_ENTITY_NAME) {
+	repo := entify.New(config.GetDbConfig())
+	if !repo.IsEntityExists(consts.META_ENTITY_NAME) {
 		app.Installed = false
 	} else {
 		app.Installed = true

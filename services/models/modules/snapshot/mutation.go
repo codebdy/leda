@@ -25,7 +25,7 @@ const (
 )
 
 func (m *SnapshotModule) MutationFields() []*graphql.Field {
-	if !app.Installed || m.app == nil || m.app.AppId == 0 {
+	if !app.Installed || m.app == nil || m.app.MetaId == 0 {
 		return []*graphql.Field{}
 	}
 	return []*graphql.Field{
@@ -127,7 +127,7 @@ func (m *SnapshotModule) makeVersion(p graphql.ResolveParams) (interface{}, erro
 			},
 			m.app.GetEntityByName("Snapshot"),
 		)
-		s := service.New(p.Context, m.app.Model.Graph)
+		s := service.New(p.Context, m.app.Repo)
 		_, err := s.SaveOne(ins)
 		if err != nil {
 			log.Panic(err.Error())

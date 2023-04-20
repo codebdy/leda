@@ -11,7 +11,6 @@ import (
 	"codebdy.com/leda/services/models/modules/register"
 	"codebdy.com/leda/services/models/service"
 	"github.com/codebdy/entify/model/graph"
-	"github.com/codebdy/entify/model/meta"
 	"github.com/graphql-go/graphql"
 )
 
@@ -39,7 +38,7 @@ func (m *AppModule) Init(ctx context.Context) {
 		} else {
 			systemApp := GetSystemApp()
 			s := service.NewSystem()
-			app := s.QueryOneEntity(systemApp.GetEntityByName(meta.APP_ENTITY_NAME), graph.QueryArg{
+			app := s.QueryOneEntity(systemApp.GetEntityByName(consts.APP_ENTITY_NAME), graph.QueryArg{
 				consts.ARG_WHERE: graph.QueryArg{
 					"name": graph.QueryArg{
 						consts.ARG_EQ: appName,

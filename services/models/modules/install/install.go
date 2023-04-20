@@ -101,7 +101,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	authMetaMp := authMetaMap()
 	instance := data.NewInstance(
 		authMetaMp,
-		systemApp.GetEntityByName(meta.META_ENTITY_NAME),
+		systemApp.GetEntityByName(consts.META_ENTITY_NAME),
 	)
 	//插入 Meta
 	authMeta, err := s.InsertOne(instance)
@@ -113,7 +113,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	authMetaId := authMeta.(map[string]interface{})["id"].(uint64)
 	instance = data.NewInstance(
 		authServiceMap(authMetaId),
-		systemApp.GetEntityByName(meta.SERVICE_ENTITY_NAME),
+		systemApp.GetEntityByName(consts.SERVICE_ENTITY_NAME),
 	)
 	// 插入 Service
 	authService, err := s.InsertOne(instance)
@@ -127,7 +127,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	if input.Admin != "" {
 		instance = data.NewInstance(
 			adminInstance(input.Admin, input.Password),
-			systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
+			systemApp.GetEntityByName(consts.USER_ENTITY_NAME),
 		)
 		_, err = s.SaveOne(instance)
 		if err != nil {
@@ -137,7 +137,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 		if input.WithDemo {
 			instance = data.NewInstance(
 				demoInstance(),
-				systemApp.GetEntityByName(meta.USER_ENTITY_NAME),
+				systemApp.GetEntityByName(consts.USER_ENTITY_NAME),
 			)
 			_, err = s.SaveOne(instance)
 			if err != nil {
