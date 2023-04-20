@@ -3,10 +3,10 @@ package service
 import (
 	"log"
 
-	"github.com/codebdy/entify/model/data"
+	"github.com/codebdy/entify/shared"
 )
 
-func (s *Service) DeleteInstances(instances []*data.Instance) (interface{}, error) {
+func (s *Service) DeleteInstances(entityName string, ids []shared.ID) (interface{}, error) {
 	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Println(err.Error())
@@ -21,10 +21,10 @@ func (s *Service) DeleteInstances(instances []*data.Instance) (interface{}, erro
 
 	deletedIds := []interface{}{}
 
-	for i := range instances {
-		instance := instances[i]
-		session.DeleteInstance(instance)
-		deletedIds = append(deletedIds, instance.Id)
+	for i := range ids {
+		id := ids[i]
+		session.DeleteInstance(entityName, id)
+		deletedIds = append(deletedIds, id)
 	}
 
 	err = session.Dbx.Commit()
@@ -36,7 +36,7 @@ func (s *Service) DeleteInstances(instances []*data.Instance) (interface{}, erro
 	return deletedIds, nil
 }
 
-func (s *Service) DeleteInstance(instance *data.Instance) (interface{}, error) {
+func (s *Service) DeleteInstance(entityName string, id shared.ID) (interface{}, error) {
 	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Println(err.Error())
@@ -48,12 +48,12 @@ func (s *Service) DeleteInstance(instance *data.Instance) (interface{}, error) {
 		return nil, err
 	}
 	defer session.ClearTx()
-	session.DeleteInstance(instance)
+	session.DeleteInstance(entityName, id)
 
 	err = session.Dbx.Commit()
 	if err != nil {
 		log.Println(err.Error())
 		return nil, err
 	}
-	return instance.ValueMap, nil
+	return map[string]interface{}{"id": id}, nil
 }

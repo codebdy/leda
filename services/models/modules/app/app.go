@@ -87,7 +87,7 @@ func NewApp(metaId shared.ID) *App {
 
 	s := service.NewSystem()
 	appData := s.QueryById(
-		systemApp.GetEntityByName(consts.APP_ENTITY_NAME),
+		consts.APP_ENTITY_NAME,
 		metaId,
 	)
 
@@ -95,7 +95,7 @@ func NewApp(metaId shared.ID) *App {
 		return nil
 	}
 	appMeta := s.QueryById(
-		systemApp.GetEntityByName(consts.META_ENTITY_NAME),
+		consts.META_ENTITY_NAME,
 		appData.(map[string]interface{})["metaId"].(uint64),
 	)
 

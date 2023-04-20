@@ -13,41 +13,21 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-// func QueryOneInterfaceResolveFn(intf *graph.Interface, model *model.Model) graphql.FieldResolveFn {
-// 	return func(p graphql.ResolveParams) (interface{}, error) {
-// 		defer utils.PrintErrorStack()
-// 		//repos := repository.New(model)
-// 		//repos.MakeInterfaceAbilityVerifier(p, intf)
-// 		instance := service.QueryOneInterface(intf, p.Args)
-// 		return instance, nil
-// 	}
-// }
-
-// func QueryInterfaceResolveFn(intf *graph.Interface, model *model.Model) graphql.FieldResolveFn {
-// 	return func(p graphql.ResolveParams) (interface{}, error) {
-// 		defer utils.PrintErrorStack()
-// 		//repos := repository.New(model)
-// 		//repos.MakeInterfaceAbilityVerifier(p, intf)
-// 		result := service.QueryInterface(intf, p.Args)
-// 		return result, nil
-// 	}
-// }
-
-func QueryOneEntityResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
+func QueryOneEntityResolveFn(entityName string, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
 		s := service.New(p.Context, r)
-		instance := s.QueryOneEntity(entity, p.Args)
+		instance := s.QueryOneEntity(entityName, p.Args)
 		return instance, nil
 	}
 }
 
-func QueryEntityResolveFn(entity *graph.Entity, r *entify.Repository) graphql.FieldResolveFn {
+func QueryEntityResolveFn(entityName string, r *entify.Repository) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		defer utils.PrintErrorStack()
 		s := service.New(p.Context, r)
 		fields := parseListFields(p.Info)
-		result := s.QueryEntity(entity, p.Args, fields)
+		result := s.QueryEntity(entityName, p.Args, fields)
 		return result, nil
 	}
 }

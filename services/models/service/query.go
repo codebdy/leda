@@ -25,8 +25,8 @@ func mergeWhereArgs(whereArgs, authArgs graph.QueryArg) graph.QueryArg {
 	}
 }
 
-func (s *Service) QueryEntity(entity *graph.Entity, args graph.QueryArg, fieldNames []string) orm.QueryResponse {
-	canRead, authArgs := s.canReadEntity(entity)
+func (s *Service) QueryEntity(entityName string, args graph.QueryArg, fieldNames []string) orm.QueryResponse {
+	canRead, authArgs := s.canReadEntity(entityName)
 	if !canRead {
 		log.Panic("No access")
 	}
@@ -35,22 +35,11 @@ func (s *Service) QueryEntity(entity *graph.Entity, args graph.QueryArg, fieldNa
 		panic(err.Error())
 	}
 
-	fields := []*graph.Attribute{}
-	allAttributes := entity.AllAttributes()
-
-	for i := range allAttributes {
-		for _, name := range fieldNames {
-			if allAttributes[i].Name == name {
-				fields = append(fields, allAttributes[i])
-			}
-		}
-	}
-
-	return session.Query(entity, mergeWhereArgs(args, authArgs), fields)
+	return session.Query(entityName, mergeWhereArgs(args, authArgs), fieldNames)
 }
 
-func (s *Service) QueryOneEntity(entity *graph.Entity, args graph.QueryArg) interface{} {
-	canRead, authArgs := s.canReadEntity(entity)
+func (s *Service) QueryOneEntity(entityName string, args graph.QueryArg) interface{} {
+	canRead, authArgs := s.canReadEntity(entityName)
 	if !canRead {
 		log.Panic("No access")
 	}
@@ -58,15 +47,15 @@ func (s *Service) QueryOneEntity(entity *graph.Entity, args graph.QueryArg) inte
 	if err != nil {
 		log.Panic(err.Error())
 	}
-	return session.QueryOne(entity, mergeWhereArgs(args, authArgs))
+	return session.QueryOne(entityName, mergeWhereArgs(args, authArgs))
 }
 
-func (s *Service) QueryById(entity *graph.Entity, id uint64) interface{} {
-	canRead, authArgs := s.canReadEntity(entity)
+func (s *Service) QueryById(entityName string, id uint64) interface{} {
+	canRead, authArgs := s.canReadEntity(entityName)
 	if !canRead {
 		log.Panic("No access")
 	}
-	return s.QueryOneEntity(entity, mergeWhereArgs(graph.QueryArg{
+	return s.QueryOneEntity(entityName, mergeWhereArgs(graph.QueryArg{
 		consts.ARG_WHERE: graph.QueryArg{
 			consts.ID: graph.QueryArg{
 				consts.ARG_EQ: id,

@@ -12,7 +12,6 @@ import (
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/service"
 	"github.com/codebdy/entify"
-	"github.com/codebdy/entify/model/data"
 	"github.com/codebdy/entify/model/meta"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
@@ -95,51 +94,35 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	nextMeta := meta.SystemMeta
 	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 
-	systemApp := app.GetSystemApp()
-
 	s := service.NewSystem()
 	authMetaMp := authMetaMap()
-	instance := data.NewInstance(
-		authMetaMp,
-		systemApp.GetEntityByName(consts.META_ENTITY_NAME),
-	)
+
 	//插入 Meta
-	authMeta, err := s.InsertOne(instance)
+	authMeta, err := s.SaveOne(consts.META_ENTITY_NAME, authMetaMp)
 
 	if err != nil || authMeta == nil {
 		log.Panic(err.Error())
 	}
 
 	authMetaId := authMeta.(map[string]interface{})["id"].(uint64)
-	instance = data.NewInstance(
-		authServiceMap(authMetaId),
-		systemApp.GetEntityByName(consts.SERVICE_ENTITY_NAME),
-	)
+
 	// 插入 Service
-	authService, err := s.InsertOne(instance)
+	authService, err := s.SaveOne(consts.SERVICE_ENTITY_NAME, authServiceMap(authMetaId))
 	if err != nil || authService == nil {
 		log.Panic(err.Error())
 	}
 	nextMeta = meta.DefualtAuthServiceMeta
 	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 	app.LoadServiceMetas()
-	systemApp = app.ReloadSystemApp()
+
 	if input.Admin != "" {
-		instance = data.NewInstance(
-			adminInstance(input.Admin, input.Password),
-			systemApp.GetEntityByName(consts.USER_ENTITY_NAME),
-		)
-		_, err = s.SaveOne(instance)
+		_, err = s.SaveOne(consts.USER_ENTITY_NAME, adminInstance(input.Admin, input.Password))
 		if err != nil {
 			logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
 			return nil, err
 		}
 		if input.WithDemo {
-			instance = data.NewInstance(
-				demoInstance(),
-				systemApp.GetEntityByName(consts.USER_ENTITY_NAME),
-			)
-			_, err = s.SaveOne(instance)
+			_, err = s.SaveOne(consts.USER_ENTITY_NAME, demoInstance())
 			if err != nil {
 				logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
 				return nil, err

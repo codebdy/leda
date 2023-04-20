@@ -107,22 +107,22 @@ func (a *AppProcessor) appendEntityMutationToFields(entity *graph.Entity, feilds
 	(feilds)[entity.DeleteName()] = &graphql.Field{
 		Type:    a.modelParser.MutationResponse(entity.Name()),
 		Args:    a.deleteArgs(entity),
-		Resolve: resolve.DeleteResolveFn(entity, a.Repo),
+		Resolve: resolve.DeleteResolveFn(entity.Name(), a.Repo),
 	}
 	(feilds)[entity.DeleteByIdName()] = &graphql.Field{
 		Type:    a.modelParser.OutputType(entity.Name()),
 		Args:    deleteByIdArgs(),
-		Resolve: resolve.DeleteByIdResolveFn(entity, a.Repo),
+		Resolve: resolve.DeleteByIdResolveFn(entity.Name(), a.Repo),
 	}
 	(feilds)[entity.UpsertName()] = &graphql.Field{
 		Type:    &graphql.List{OfType: a.modelParser.OutputType(entity.Name())},
 		Args:    a.upsertArgs(entity),
-		Resolve: resolve.PostResolveFn(entity, a.Repo),
+		Resolve: resolve.PostResolveFn(entity.Name(), a.Repo),
 	}
 	(feilds)[entity.UpsertOneName()] = &graphql.Field{
 		Type:    a.modelParser.OutputType(entity.Name()),
 		Args:    a.upsertOneArgs(entity),
-		Resolve: resolve.PostOneResolveFn(entity, a.Repo),
+		Resolve: resolve.PostOneResolveFn(entity.Name(), a.Repo),
 	}
 
 	updateInput := a.modelParser.SetInput(entity.Name())
@@ -130,7 +130,7 @@ func (a *AppProcessor) appendEntityMutationToFields(entity *graph.Entity, feilds
 		(feilds)[entity.SetName()] = &graphql.Field{
 			Type:    a.modelParser.MutationResponse(entity.Name()),
 			Args:    a.setArgs(entity),
-			Resolve: resolve.SetResolveFn(entity, a.Repo),
+			Resolve: resolve.SetResolveFn(entity.Name(), a.Repo),
 		}
 	}
 }

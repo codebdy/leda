@@ -10,7 +10,6 @@ import (
 	"codebdy.com/leda/services/models/logs"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/service"
-	"github.com/codebdy/entify/model/data"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/codebdy/entify/model/meta"
 	"github.com/graphql-go/graphql"
@@ -39,10 +38,10 @@ func publishMeta(strId interface{}) {
 
 	systemApp := app.GetSystemApp()
 
-	metaData := s.QueryById(systemApp.GetEntityByName(consts.META_ENTITY_NAME), metaId)
+	metaData := s.QueryById(consts.META_ENTITY_NAME, metaId)
 
 	//获取所属APP
-	appData := s.QueryOneEntity(systemApp.GetEntityByName(consts.APP_ENTITY_NAME), graph.QueryArg{
+	appData := s.QueryOneEntity(consts.APP_ENTITY_NAME, graph.QueryArg{
 		consts.ARG_WHERE: graph.QueryArg{
 			consts.METAID: graph.QueryArg{
 				consts.ARG_EQ: metaId,
@@ -81,12 +80,9 @@ func publishMeta(strId interface{}) {
 	metaMap[consts.META_PUBLISHEDAT] = time.Now()
 	metaMap[consts.META_CREATEDAT] = time.Now()
 	metaMap[consts.META_UPDATEDAT] = time.Now()
-	instance := data.NewInstance(
-		metaMap,
-		systemApp.GetEntityByName(consts.META_ENTITY_NAME),
-	)
+
 	//插入 Meta
-	_, err = s.SaveOne(instance)
+	_, err = s.SaveOne(consts.META_ENTITY_NAME, metaMap)
 	if err != nil {
 		panic(err.Error())
 	}

@@ -3,11 +3,10 @@ package service
 import (
 	"log"
 
-	"github.com/codebdy/entify/model/data"
 	"github.com/codebdy/entify/orm"
 )
 
-func (s *Service) Save(instances []*data.Instance) ([]orm.InsanceData, error) {
+func (s *Service) Save(entityName string, objects []map[string]interface{}) ([]orm.InsanceData, error) {
 	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Println(err.Error())
@@ -22,8 +21,8 @@ func (s *Service) Save(instances []*data.Instance) ([]orm.InsanceData, error) {
 	}
 	savedIds := []interface{}{}
 
-	for i := range instances {
-		obj, err := session.SaveOne(instances[i])
+	for i := range objects {
+		obj, err := session.SaveOne(entityName, objects[i])
 		if err != nil {
 			log.Println(err.Error())
 			session.Dbx.Rollback()
@@ -34,8 +33,8 @@ func (s *Service) Save(instances []*data.Instance) ([]orm.InsanceData, error) {
 	}
 
 	var result []orm.InsanceData
-	if len(instances) > 0 {
-		result = session.QueryByIds(instances[0].Entity, savedIds)
+	if len(objects) > 0 {
+		result = session.QueryByIds(entityName, savedIds)
 	}
 
 	err = session.Commit()
@@ -48,7 +47,8 @@ func (s *Service) Save(instances []*data.Instance) ([]orm.InsanceData, error) {
 
 }
 
-func (s *Service) SaveOne(instance *data.Instance) (interface{}, error) {
+func (s *Service) SaveOne(entityName string, object map[string]interface{}) (interface{}, error) {
+
 	session, err := s.repository.OpenSession()
 	if err != nil {
 		log.Println(err.Error())
@@ -61,23 +61,18 @@ func (s *Service) SaveOne(instance *data.Instance) (interface{}, error) {
 		return nil, err
 	}
 
-	id, err := session.SaveOne(instance)
+	id, err := session.SaveOne(entityName, object)
 	if err != nil {
 		log.Println(err.Error())
 		session.Dbx.Rollback()
 		return nil, err
 	}
 
-	result := session.QueryOneById(instance.Entity, id)
+	result := session.QueryOneById(entityName, id)
 	err = session.Commit()
 	if err != nil {
 		log.Println(err.Error())
 		return nil, err
 	}
 	return result, nil
-}
-
-func (s *Service) InsertOne(instance *data.Instance) (interface{}, error) {
-	instance.AsInsert()
-	return s.SaveOne(instance)
 }

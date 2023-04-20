@@ -12,7 +12,6 @@ import (
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/modules/register"
 	"codebdy.com/leda/services/models/service"
-	"github.com/codebdy/entify/model/data"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/graphql-go/graphql"
 )
@@ -112,23 +111,19 @@ func (m *SnapshotModule) makeVersion(p graphql.ResolveParams) (interface{}, erro
 		log.Panic(result.Errors[0])
 	}
 	if result.Data != nil {
-		ins := data.NewInstance(
-			map[string]interface{}{
-				"app": map[string]interface{}{
-					"sync": map[string]interface{}{
-						"id": appId,
-					},
-				},
-				"instanceId":        instanceId,
-				consts.META_CONTENT: result.Data.(map[string]interface{})[operateName],
-				"version":           p.Args["version"],
-				"description":       p.Args["description"],
-				"createdAt":         time.Now(),
-			},
-			m.app.GetEntityByName("Snapshot"),
-		)
 		s := service.New(p.Context, m.app.Repo)
-		_, err := s.SaveOne(ins)
+		_, err := s.SaveOne("Snapshot", map[string]interface{}{
+			"app": map[string]interface{}{
+				"sync": map[string]interface{}{
+					"id": appId,
+				},
+			},
+			"instanceId":        instanceId,
+			consts.META_CONTENT: result.Data.(map[string]interface{})[operateName],
+			"version":           p.Args["version"],
+			"description":       p.Args["description"],
+			"createdAt":         time.Now(),
+		})
 		if err != nil {
 			log.Panic(err.Error())
 		}

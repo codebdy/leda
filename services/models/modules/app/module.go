@@ -36,9 +36,9 @@ func (m *AppModule) Init(ctx context.Context) {
 		if id, ok := AppNames.Load(contextValues.AppName); ok {
 			appId = id.(uint64)
 		} else {
-			systemApp := GetSystemApp()
+
 			s := service.NewSystem()
-			app := s.QueryOneEntity(systemApp.GetEntityByName(consts.APP_ENTITY_NAME), graph.QueryArg{
+			app := s.QueryOneEntity(consts.APP_ENTITY_NAME, graph.QueryArg{
 				consts.ARG_WHERE: graph.QueryArg{
 					"name": graph.QueryArg{
 						consts.ARG_EQ: appName,

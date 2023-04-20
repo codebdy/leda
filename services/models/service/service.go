@@ -38,7 +38,7 @@ func NewSystem() *Service {
 // 	return contexts.Values(s.ctx).AppId
 // }
 
-func (s *Service) canReadEntity(entity *graph.Entity) (bool, graph.QueryArg) {
+func (s *Service) canReadEntity(entityName string) (bool, graph.QueryArg) {
 	whereArgs := map[string]interface{}{}
 	return true, whereArgs
 	// if s.isSystem || (s.me() != nil && (s.me().IsSupper || s.me().IsDemo)) {
