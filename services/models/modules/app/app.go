@@ -5,21 +5,24 @@ import (
 	"log"
 	"sync"
 
+	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/modules/app/schema"
 	"codebdy.com/leda/services/models/modules/app/schema/parser"
 	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify"
 	"github.com/codebdy/entify/model"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/codebdy/entify/model/meta"
+	"github.com/codebdy/entify/shared"
 )
 
 //节省开支，运行时使用，初始化时请使用orm.IsEntityExists
 var Installed = false
 
 type App struct {
-	AppId  uint64
-	Model  *model.Model
+	MetaId uint64
+	Repo   *entify.Repository
 	Schema schema.AppGraphqlSchema
 	Parser *parser.ModelParser
 }
@@ -62,30 +65,30 @@ func Get(appId uint64) (*App, error) {
 		appLoaderCache.Store(appId, appLoader)
 		appLoader.load(false)
 		if appId == 0 {
-			model.SystemModel = appLoader.app.Model
+			model.SystemModel = appLoader.app.Repo.Model
 		}
 		return appLoader.app, nil
 	}
 }
 
 func (a *App) GetEntityByName(name string) *graph.Entity {
-	return a.Model.Graph.GetEntityByName(name)
+	return a.Repo.Model.Graph.GetEntityByName(name)
 }
 
 func (a *App) GetEntityByInnerId(innerId uint64) *graph.Entity {
-	return a.Model.Graph.GetEntityByInnerId(innerId)
+	return a.Repo.Model.Graph.GetEntityByInnerId(innerId)
 }
 
-func NewApp(appId uint64) *App {
+func NewApp(metaId shared.ID) *App {
 	systemApp := GetSystemApp()
-	if appId == 0 {
+	if metaId == 0 {
 		return systemApp
 	}
 
 	s := service.NewSystem()
 	appData := s.QueryById(
 		systemApp.GetEntityByName(meta.APP_ENTITY_NAME),
-		appId,
+		metaId,
 	)
 
 	if appData == nil {
@@ -107,13 +110,13 @@ func NewApp(appId uint64) *App {
 	}
 
 	content = MergeServiceModels(content)
-
-	model := model.New(content, appId)
-	schema := schema.New(model)
+	repo := entify.New(config.GetDbConfig())
+	repo.Init(*content, metaId)
+	schema := schema.New(repo)
 
 	return &App{
-		AppId:  appId,
-		Model:  model,
+		MetaId: metaId,
+		Repo:   repo,
 		Schema: schema,
 		Parser: schema.Parser(),
 	}
