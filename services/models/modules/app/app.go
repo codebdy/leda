@@ -85,7 +85,7 @@ func NewApp(metaId shared.ID) *App {
 		return systemApp
 	}
 
-	s := service.NewSystem()
+	s := service.NewSystem(systemApp.Repo)
 	appData := s.QueryById(
 		consts.APP_ENTITY_NAME,
 		metaId,
@@ -109,7 +109,7 @@ func NewApp(metaId shared.ID) *App {
 		content = DecodeContent(publishedMeta)
 	}
 
-	content = MergeServiceModels(content)
+	//content = MergeServiceModels(content)
 	repo := entify.New(config.GetDbConfig())
 	repo.Init(*content, metaId)
 	schema := schema.New(repo)

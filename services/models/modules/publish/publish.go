@@ -32,11 +32,11 @@ func publishMeta(strId interface{}) {
 		panic("Not provide metaId")
 	}
 
+	systemApp := app.GetSystemApp()
+
 	intNum, _ := strconv.Atoi(strId.(string))
 	metaId := uint64(intNum)
-	s := service.NewSystem()
-
-	systemApp := app.GetSystemApp()
+	s := service.NewSystem(systemApp.Repo)
 
 	metaData := s.QueryById(consts.META_ENTITY_NAME, metaId)
 
@@ -88,9 +88,9 @@ func publishMeta(strId interface{}) {
 	}
 
 	//如果是service
-	if appId == 0 {
-		app.LoadServiceMetas()
-	}
+	// if appId == 0 {
+	// 	app.LoadServiceMetas()
+	// }
 	//如果是app
 	if appId != 0 {
 		app.ReloadApp(appId)

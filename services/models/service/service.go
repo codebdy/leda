@@ -8,23 +8,23 @@ import (
 )
 
 type Service struct {
-	isSystem bool
-	ctx      context.Context
-	roleIds  []uint64
+	isSystem   bool
+	ctx        context.Context
+	roleIds    []uint64
 	repository *entify.Repository
 }
 
 func New(ctx context.Context, repository *entify.Repository) *Service {
 
 	return &Service{
-		isSystem: false,
-		ctx:      ctx,
-		repository:    repository,
+		isSystem:   false,
+		ctx:        ctx,
+		repository: repository,
 		//roleIds:  QueryRoleIds(ctx, model),
 	}
 }
 
-func NewSystem() *Service {
+func NewSystem(repository *entify.Repository) *Service {
 	return &Service{
 		isSystem: true,
 	}

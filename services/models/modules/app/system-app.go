@@ -23,11 +23,10 @@ func ReloadSystemApp() *App {
 }
 
 func createPredefinedSystemApp() *App {
-	//赋值一份数据合并，不要在原来的基础上修改
 	metaConent := *meta.SystemMeta
-	mergedMetaConent := MergeServiceModels(&metaConent)
+	//mergedMetaConent := MergeServiceModels(&metaConent)
 	repo := entify.New(config.GetDbConfig())
-	repo.Init(*mergedMetaConent, 0)
+	repo.Init(metaConent, 0)
 	schema := schema.New(repo)
 	return &App{
 		Schema: schema,

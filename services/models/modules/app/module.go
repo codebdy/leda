@@ -26,10 +26,8 @@ func (m *AppModule) Init(ctx context.Context) {
 		return
 	}
 
-	LoadServiceMetas()
-
 	contextValues := contexts.Values(ctx)
-
+	systemApp := GetSystemApp()
 	appId := contextValues.AppId
 	appName := contextValues.AppName
 	if appId == 0 && contextValues.AppName != "" {
@@ -37,7 +35,7 @@ func (m *AppModule) Init(ctx context.Context) {
 			appId = id.(uint64)
 		} else {
 
-			s := service.NewSystem()
+			s := service.NewSystem(systemApp.Repo)
 			app := s.QueryOneEntity(consts.APP_ENTITY_NAME, graph.QueryArg{
 				consts.ARG_WHERE: graph.QueryArg{
 					"name": graph.QueryArg{

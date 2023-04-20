@@ -88,13 +88,15 @@ func installMutationFields() []*graphql.Field {
 func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	defer utils.PrintErrorStack()
 	rep := entify.New(config.GetDbConfig())
+
 	input := InstallArg{}
 	mapstructure.Decode(p.Args[INPUT], &input)
 
 	nextMeta := meta.SystemMeta
 	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 
-	s := service.NewSystem()
+	rep.Init(*meta.SystemMeta, 0)
+	s := service.NewSystem(rep)
 	authMetaMp := authMetaMap()
 
 	//插入 Meta
@@ -113,7 +115,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	}
 	nextMeta = meta.DefualtAuthServiceMeta
 	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
-	app.LoadServiceMetas()
+	//app.LoadServiceMetas()
 
 	if input.Admin != "" {
 		_, err = s.SaveOne(consts.USER_ENTITY_NAME, adminInstance(input.Admin, input.Password))
