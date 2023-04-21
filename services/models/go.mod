@@ -37,3 +37,6 @@ require (
 
 require github.com/codebdy/entify v0.0.0
 replace github.com/codebdy/entify => ../../../entify
+
+require github.com/codebdy/entify-graphql-schema v0.0.0
+replace github.com/codebdy/entify-graphql-schema => ../../../entify-graphql-schema

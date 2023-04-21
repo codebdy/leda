@@ -9,9 +9,11 @@ import (
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/contexts"
 	"codebdy.com/leda/services/models/modules/register"
-	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify-graphql-schema/service"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/graphql-go/graphql"
+
+	schemaConsts "github.com/codebdy/entify-graphql-schema/consts"
 )
 
 var AppNames sync.Map
@@ -37,9 +39,9 @@ func (m *AppModule) Init(ctx context.Context) {
 
 			s := service.NewSystem(systemApp.Repo)
 			app := s.QueryOneEntity(consts.APP_ENTITY_NAME, graph.QueryArg{
-				consts.ARG_WHERE: graph.QueryArg{
+				schemaConsts.ARG_WHERE: graph.QueryArg{
 					"name": graph.QueryArg{
-						consts.ARG_EQ: appName,
+						schemaConsts.ARG_EQ: appName,
 					},
 				},
 			})

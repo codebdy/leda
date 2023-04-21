@@ -6,13 +6,13 @@ import (
 
 	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/leda-shared/scalars"
-	"codebdy.com/leda/services/models/leda-shared/utils"
 	"codebdy.com/leda/services/models/logs"
 	"codebdy.com/leda/services/models/modules/app"
-	"codebdy.com/leda/services/models/service"
 	"github.com/codebdy/entify"
+	"github.com/codebdy/entify-graphql-schema/scalars"
+	"github.com/codebdy/entify-graphql-schema/service"
 	"github.com/codebdy/entify/model/meta"
+	"github.com/codebdy/entify/shared"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
 )
@@ -61,7 +61,7 @@ func installQueryFields() []*graphql.Field {
 			Name: consts.INSTALLED,
 			Type: graphql.Boolean,
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				defer utils.PrintErrorStack()
+				defer shared.PrintErrorStack()
 				return app.Installed, nil
 			},
 		},
@@ -86,7 +86,7 @@ func installMutationFields() []*graphql.Field {
 }
 
 func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
-	defer utils.PrintErrorStack()
+	defer shared.PrintErrorStack()
 	rep := entify.New(config.GetDbConfig())
 
 	input := InstallArg{}

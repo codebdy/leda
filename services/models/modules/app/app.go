@@ -7,10 +7,11 @@ import (
 
 	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/modules/app/schema"
-	"codebdy.com/leda/services/models/modules/app/schema/parser"
-	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify-graphql-schema/service"
+
 	"github.com/codebdy/entify"
+	"github.com/codebdy/entify-graphql-schema/schema"
+	"github.com/codebdy/entify-graphql-schema/schema/parser"
 	"github.com/codebdy/entify/model"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/codebdy/entify/model/meta"
@@ -23,7 +24,7 @@ var Installed = false
 type App struct {
 	MetaId uint64
 	Repo   *entify.Repository
-	Schema schema.AppGraphqlSchema
+	Schema schema.MetaGraphqlSchema
 	Parser *parser.ModelParser
 }
 

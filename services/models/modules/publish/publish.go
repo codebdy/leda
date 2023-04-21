@@ -6,19 +6,20 @@ import (
 	"time"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/leda-shared/utils"
 	"codebdy.com/leda/services/models/logs"
 	"codebdy.com/leda/services/models/modules/app"
-	"codebdy.com/leda/services/models/service"
+	schemaConsts "github.com/codebdy/entify-graphql-schema/consts"
+	"github.com/codebdy/entify-graphql-schema/service"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/codebdy/entify/model/meta"
+	"github.com/codebdy/entify/shared"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
 )
 
 func PublishMetaResolveFn(theApp *app.App) graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
-		defer utils.PrintErrorStack()
+		defer shared.PrintErrorStack()
 		strId := p.Args[consts.METAID]
 		publishMeta(strId)
 
@@ -42,9 +43,9 @@ func publishMeta(strId interface{}) {
 
 	//获取所属APP
 	appData := s.QueryOneEntity(consts.APP_ENTITY_NAME, graph.QueryArg{
-		consts.ARG_WHERE: graph.QueryArg{
+		schemaConsts.ARG_WHERE: graph.QueryArg{
 			consts.METAID: graph.QueryArg{
-				consts.ARG_EQ: metaId,
+				schemaConsts.ARG_EQ: metaId,
 			},
 		},
 	})

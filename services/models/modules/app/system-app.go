@@ -2,7 +2,7 @@ package app
 
 import (
 	"codebdy.com/leda/services/models/config"
-	"codebdy.com/leda/services/models/modules/app/schema"
+	"github.com/codebdy/entify-graphql-schema/schema"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify/model/meta"
 )

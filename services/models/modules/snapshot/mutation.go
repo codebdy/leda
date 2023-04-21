@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/leda-shared/utils"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/modules/register"
-	"codebdy.com/leda/services/models/service"
+	"github.com/codebdy/entify-graphql-schema/service"
 	"github.com/codebdy/entify/model/graph"
+	"github.com/codebdy/entify/shared"
 	"github.com/graphql-go/graphql"
 )
 
@@ -52,7 +52,7 @@ func (m *SnapshotModule) MutationFields() []*graphql.Field {
 				},
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				defer utils.PrintErrorStack()
+				defer shared.PrintErrorStack()
 				return m.makeVersion(p)
 			},
 		},
@@ -60,17 +60,17 @@ func (m *SnapshotModule) MutationFields() []*graphql.Field {
 }
 
 func (m *SnapshotModule) makeVersion(p graphql.ResolveParams) (interface{}, error) {
-	appId := utils.Uint64Value(p.Args[APP_ID])
+	appId := shared.Uint64Value(p.Args[APP_ID])
 	if appId == 0 {
 		log.Panic("App id is nil")
 	}
-	instanceId := utils.Uint64Value(p.Args[INSTANCE_ID])
+	instanceId := shared.Uint64Value(p.Args[INSTANCE_ID])
 
 	if instanceId == 0 {
 		log.Panic("Instance id is nil")
 	}
 
-	entityInnerId := utils.DecodeEntityInnerId(instanceId)
+	entityInnerId := shared.DecodeEntityInnerId(instanceId)
 
 	entity := m.app.GetEntityByInnerId(entityInnerId)
 

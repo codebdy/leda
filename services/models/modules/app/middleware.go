@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"codebdy.com/leda/services/models/consts"
-	"codebdy.com/leda/services/models/modules/app/resolve"
+	"github.com/codebdy/entify-graphql-schema/resolve"
 )
 
 func LoadersMiddleware(next http.Handler) http.Handler {

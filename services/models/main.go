@@ -8,9 +8,9 @@ import (
 
 	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/consts"
+	"codebdy.com/leda/services/models/errorx"
 	"codebdy.com/leda/services/models/handler"
-	"codebdy.com/leda/services/models/leda-shared/errorx"
-	"codebdy.com/leda/services/models/leda-shared/middlewares"
+	"codebdy.com/leda/services/models/middlewares"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/modules/register"
 	"github.com/codebdy/entify"
