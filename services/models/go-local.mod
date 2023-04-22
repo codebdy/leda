@@ -18,7 +18,6 @@ require (
 )
 
 require (
-	github.com/codebdy/entify v0.0.0-20230422015803-ea27a158ebe8 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/graphql-go/graphql v0.8.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
@@ -35,3 +34,9 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+require github.com/codebdy/entify v0.0.0
+replace github.com/codebdy/entify => ../../../entify
+
+require github.com/codebdy/entify-graphql-schema v0.0.0
+replace github.com/codebdy/entify-graphql-schema => ../../../entify-graphql-schema
