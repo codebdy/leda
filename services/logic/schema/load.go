@@ -1,22 +1,48 @@
 package schema
 
 import (
-	"codebdy.com/leda/services/logic/consts"
+	"log"
+
+	"codebdy.com/leda/services/logic/global"
 	"github.com/codebdy/entify"
+	"github.com/codebdy/entify-graphql-schema/schema"
 	ledasdk "github.com/codebdy/leda-service-sdk"
 	"github.com/codebdy/leda-service-sdk/config"
+	"github.com/graphql-go/graphql"
 )
 
 func Load() {
 	config := config.GetDbConfig()
 
-	umlMeta, err := ledasdk.GetMata(consts.SERVICE_NAME, config)
+	metaObj, err := ledasdk.GetServiceMata(global.SERVICE_NAME, config)
 
-	repo := entify.New(config)
-	repo.Init(*umlMeta, metaId)
-	schema := schema.New(repo)
 	if err != nil {
 		panic(err.Error())
 	}
+	repo := entify.New(config)
+	repo.Init(metaObj.PublishedContent, metaObj.Id)
+	metaSchema := schema.New(repo)
+	rootQuery := graphql.NewObject(graphql.ObjectConfig{
+		Name:   "query",
+		Fields: metaSchema.QueryFields,
+	})
 
+	rootMutation := graphql.NewObject(graphql.ObjectConfig{
+		Name:   "mutation",
+		Fields: metaSchema.MutationFields,
+	})
+	schemaConfig := graphql.SchemaConfig{
+		Query:      rootQuery,
+		Mutation:   rootMutation,
+		Directives: metaSchema.Directives,
+		Types:      metaSchema.Types,
+	}
+
+	schema, err := graphql.NewSchema(schemaConfig)
+
+	if err != nil {
+		log.Panic(err.Error())
+	}
+
+	global.ServiceSchema = &schema
 }
