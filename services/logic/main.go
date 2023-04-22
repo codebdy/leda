@@ -10,6 +10,7 @@ import (
 func main() {
 
 	//加载ServiceSchema
+	schema.Init()
 
 	h := handler.New(&handler.Config{
 		Schema:   schema.ServiceSchema,
