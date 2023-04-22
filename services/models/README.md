@@ -6,4 +6,4 @@ docker内连宿主机mysql host.docker.internal
 docker build --pull --rm -f "Dockerfile" -t models:lastest "."
 
 创建容器
-docker create -p 4000:4000  --name entify  models:lastest
+docker create -p 4000:4000  --name models  models:lastest
