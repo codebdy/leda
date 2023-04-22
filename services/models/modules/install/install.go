@@ -1,6 +1,8 @@
 package install
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"time"
 
@@ -13,6 +15,7 @@ import (
 	"github.com/codebdy/entify-graphql-schema/service"
 	"github.com/codebdy/entify/model/meta"
 	"github.com/codebdy/entify/shared"
+	"github.com/codebdy/leda-service-sdk/system"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
 )
@@ -85,6 +88,24 @@ func installMutationFields() []*graphql.Field {
 	}
 }
 
+func ReadContentFromJson(fileName string) meta.UMLMeta {
+	data, err := ioutil.ReadFile(fileName)
+	content := meta.UMLMeta{}
+	if nil != err {
+		log.Panic(err.Error())
+	} else {
+		err = json.Unmarshal(data, &content)
+	}
+
+	return content
+}
+
+func loadAuthMeta() *meta.UMLMeta {
+
+	authContent := ReadContentFromJson("./seeds/auth-meta.json")
+	return &authContent
+}
+
 func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	defer shared.PrintErrorStack()
 	rep := entify.New(config.GetDbConfig())
@@ -92,12 +113,13 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	input := InstallArg{}
 	mapstructure.Decode(p.Args[INPUT], &input)
 
-	nextMeta := meta.SystemMeta
+	nextMeta := system.SystemMeta
 	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 
-	rep.Init(*meta.SystemMeta, 0)
+	rep.Init(*system.SystemMeta, 0)
 	s := service.NewSystem(rep)
-	authMetaMp := authMetaMap()
+	authUmlMeta := loadAuthMeta()
+	authMetaMp := authMetaMap(authUmlMeta)
 
 	//插入 Meta
 	authMeta, err := s.SaveOne(consts.META_ENTITY_NAME, authMetaMp)
@@ -113,7 +135,7 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	if err != nil || authService == nil {
 		log.Panic(err.Error())
 	}
-	nextMeta = meta.DefualtAuthServiceMeta
+	nextMeta = authUmlMeta
 	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 	//app.LoadServiceMetas()
 
@@ -137,12 +159,12 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	return isExist, nil
 }
 
-func authMetaMap() map[string]interface{} {
+func authMetaMap(authMeta *meta.UMLMeta) map[string]interface{} {
 
 	return map[string]interface{}{
 		consts.NAME:                   "authMeta",
-		consts.META_CONTENT:           meta.DefualtAuthServiceMeta,
-		consts.META_PUBLISHED_CONTENT: meta.DefualtAuthServiceMeta,
+		consts.META_CONTENT:           authMeta,
+		consts.META_PUBLISHED_CONTENT: authMeta,
 		consts.META_PUBLISHEDAT:       time.Now(),
 		consts.META_CREATEDAT:         time.Now(),
 		consts.META_UPDATEDAT:         time.Now(),

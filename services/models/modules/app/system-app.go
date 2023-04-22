@@ -4,7 +4,7 @@ import (
 	"codebdy.com/leda/services/models/config"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/schema"
-	"github.com/codebdy/entify/model/meta"
+	"github.com/codebdy/leda-service-sdk/system"
 )
 
 var sysApp *App
@@ -23,7 +23,7 @@ func ReloadSystemApp() *App {
 }
 
 func createPredefinedSystemApp() *App {
-	metaConent := *meta.SystemMeta
+	metaConent := *system.SystemMeta
 	//mergedMetaConent := MergeServiceModels(&metaConent)
 	repo := entify.New(config.GetDbConfig())
 	repo.Init(metaConent, 0)
