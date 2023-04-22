@@ -27,7 +27,6 @@ func newFileConfig() *FileConfig {
 		panic("Env not set and can not find config file")
 	}
 
-	f.v.SetDefault(consts.SERVICE_ID, 1)
 	f.v.SetDefault(consts.DB_DRIVER, "mysql")
 	return &f
 }

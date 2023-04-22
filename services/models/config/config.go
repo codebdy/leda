@@ -1,8 +1,6 @@
 package config
 
 import (
-	"fmt"
-
 	"codebdy.com/leda/services/models/consts"
 	"github.com/codebdy/entify/db"
 )
@@ -54,19 +52,6 @@ func GetDbConfig() db.DbConfig {
 		cfg.Driver = "mysql"
 	}
 	return cfg
-}
-
-func ServiceId() int {
-	serviceId := GetInt(consts.SERVICE_ID)
-	if serviceId == 0 {
-		fmt.Println("Not set service id, use 1 as service id")
-		return 1
-	}
-	return serviceId
-}
-
-func AuthUrl() string {
-	return GetString(consts.AUTH_URL)
 }
 
 func init() {

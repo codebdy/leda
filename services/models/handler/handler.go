@@ -12,10 +12,8 @@ import (
 
 	"codebdy.com/leda/services/models/contexts"
 	"codebdy.com/leda/services/models/modules/register"
-	"codebdy.com/leda/services/models/storage"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/graphql/gqlerrors"
-	"github.com/mitchellh/mapstructure"
 )
 
 func set(v interface{}, m interface{}, path string) error {
@@ -142,52 +140,6 @@ func NewRequestOptions(appId uint64, r *http.Request) *RequestOptions {
 		}
 
 		return &RequestOptions{}
-	case ContentTypeMultipartFormData:
-		var operations interface{}
-		// Parse multipart form
-		if err := r.ParseMultipartForm(1024); err != nil {
-			panic(err)
-		}
-
-		// Unmarshal uploads
-		var uploads = map[storage.File][]string{}
-		var uploadsMap = map[string][]string{}
-		if err := json.Unmarshal([]byte(r.Form.Get("map")), &uploadsMap); err != nil {
-			panic(err)
-		} else {
-			for key, path := range uploadsMap {
-				if file, header, err := r.FormFile(key); err != nil {
-					panic(err)
-					//w.WriteHeader(http.StatusInternalServerError)
-					//return
-				} else {
-					uploads[storage.File{
-						File:     file,
-						Size:     header.Size,
-						Filename: header.Filename,
-						AppId:    appId,
-					}] = path
-				}
-			}
-		}
-
-		// Unmarshal operations
-		if err := json.Unmarshal([]byte(r.Form.Get("operations")), &operations); err != nil {
-			panic(err)
-		}
-
-		// set uploads to operations
-		for file, paths := range uploads {
-			for _, path := range paths {
-				if err := set(file, operations, path); err != nil {
-					panic(err)
-				}
-			}
-		}
-
-		var opts RequestOptions
-		mapstructure.Decode(operations, &opts)
-		return &opts
 	case ContentTypeJSON:
 		fallthrough
 	default:
