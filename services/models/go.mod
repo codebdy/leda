@@ -18,7 +18,8 @@ require (
 )
 
 require (
-	github.com/codebdy/entify v0.0.0-20230422015803-ea27a158ebe8 // indirect
+	github.com/codebdy/entify v0.0.1 // indirect
+	github.com/codebdy/entify-graphql-schema v0.0.2 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/graphql-go/graphql v0.8.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
