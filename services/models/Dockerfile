@@ -12,7 +12,7 @@ RUN go mod download
 RUN go mod verify
 RUN go get ./...
 RUN go mod vendor
-RUN go build -o entify
+RUN go build -o models
 
 EXPOSE 4000
 CMD ["./models"]
