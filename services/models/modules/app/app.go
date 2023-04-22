@@ -11,7 +11,6 @@ import (
 
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/schema"
-	"github.com/codebdy/entify-graphql-schema/schema/parser"
 	"github.com/codebdy/entify/model"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/codebdy/entify/model/meta"
@@ -25,7 +24,7 @@ type App struct {
 	MetaId uint64
 	Repo   *entify.Repository
 	Schema schema.MetaGraphqlSchema
-	Parser *parser.ModelParser
+	//Parser *parser.ModelParser
 }
 
 type AppLoader struct {
@@ -119,6 +118,6 @@ func NewApp(metaId shared.ID) *App {
 		MetaId: metaId,
 		Repo:   repo,
 		Schema: schema,
-		Parser: schema.Parser(),
+		//Parser: schema.Parser(),
 	}
 }

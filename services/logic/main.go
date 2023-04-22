@@ -4,16 +4,17 @@ import (
 	"net/http"
 
 	"codebdy.com/leda/services/logic/schema"
+	"codebdy.com/leda/services/logic/global"
 	"github.com/graphql-go/handler"
 )
 
 func main() {
 
 	//加载ServiceSchema
-	schema.Init()
+	schema.Load()
 
 	h := handler.New(&handler.Config{
-		Schema:   schema.ServiceSchema,
+		Schema:   global.ServiceSchema,
 		Pretty:   true,
 		GraphiQL: true,
 	})

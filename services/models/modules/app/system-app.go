@@ -2,8 +2,8 @@ package app
 
 import (
 	"codebdy.com/leda/services/models/config"
-	"github.com/codebdy/entify-graphql-schema/schema"
 	"github.com/codebdy/entify"
+	"github.com/codebdy/entify-graphql-schema/schema"
 	"github.com/codebdy/entify/model/meta"
 )
 
@@ -30,7 +30,7 @@ func createPredefinedSystemApp() *App {
 	schema := schema.New(repo)
 	return &App{
 		Schema: schema,
-		Parser: schema.Parser(),
-		Repo:   repo,
+		//Parser: schema.Parser(),
+		Repo: repo,
 	}
 }
