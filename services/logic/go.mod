@@ -9,7 +9,7 @@ require (
 
 require (
 	github.com/codebdy/entify v0.0.3
-	github.com/codebdy/entify-graphql-schema v0.0.2
+	github.com/codebdy/entify-graphql-schema v0.0.3
 	github.com/codebdy/leda-service-sdk v0.0.0
 )
 

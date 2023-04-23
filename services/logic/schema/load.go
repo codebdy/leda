@@ -11,16 +11,6 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func convertArrayFields(fields []*graphql.Field) graphql.Fields {
-	graphqlFields := graphql.Fields{}
-	for i := range fields {
-		field := fields[i]
-		graphqlFields[field.Name] = field
-	}
-
-	return graphqlFields
-}
-
 func Load() {
 	config := config.GetDbConfig()
 
@@ -34,12 +24,12 @@ func Load() {
 	metaSchema := schema.New(repo)
 	rootQuery := graphql.NewObject(graphql.ObjectConfig{
 		Name:   "query",
-		Fields: convertArrayFields(metaSchema.QueryFields),
+		Fields: schema.ConvertArrayFields(metaSchema.QueryFields),
 	})
 
 	rootMutation := graphql.NewObject(graphql.ObjectConfig{
 		Name:   "mutation",
-		Fields: convertArrayFields(metaSchema.MutationFields),
+		Fields: schema.ConvertArrayFields(metaSchema.MutationFields),
 	})
 	schemaConfig := graphql.SchemaConfig{
 		Query:      rootQuery,
