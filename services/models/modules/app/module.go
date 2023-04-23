@@ -9,7 +9,6 @@ import (
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/contexts"
 	"codebdy.com/leda/services/models/modules/register"
-	"github.com/codebdy/entify-graphql-schema/service"
 	"github.com/codebdy/entify/model/graph"
 	"github.com/graphql-go/graphql"
 
@@ -37,8 +36,11 @@ func (m *AppModule) Init(ctx context.Context) {
 			appId = id.(uint64)
 		} else {
 
-			s := service.NewSystem(systemApp.Repo)
-			app := s.QueryOneEntity(consts.APP_ENTITY_NAME, graph.QueryArg{
+			s, err := systemApp.Repo.OpenSession()
+			if err != nil {
+				panic(err.Error())
+			}
+			app := s.QueryOne(consts.APP_ENTITY_NAME, graph.QueryArg{
 				schemaConsts.ARG_WHERE: graph.QueryArg{
 					"name": graph.QueryArg{
 						schemaConsts.ARG_EQ: appName,

@@ -7,7 +7,6 @@ import (
 
 	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/consts"
-	"github.com/codebdy/entify-graphql-schema/service"
 
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/schema"
@@ -85,8 +84,11 @@ func NewApp(metaId shared.ID) *App {
 		return systemApp
 	}
 
-	s := service.NewSystem(systemApp.Repo)
-	appData := s.QueryById(
+	s, err := systemApp.Repo.OpenSession()
+	if err != nil {
+		panic(err.Error())
+	}
+	appData := s.QueryOneById(
 		consts.APP_ENTITY_NAME,
 		metaId,
 	)
@@ -94,7 +96,7 @@ func NewApp(metaId shared.ID) *App {
 	if appData == nil {
 		return nil
 	}
-	appMeta := s.QueryById(
+	appMeta := s.QueryOneById(
 		consts.META_ENTITY_NAME,
 		appData.(map[string]interface{})["metaId"].(uint64),
 	)

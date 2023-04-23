@@ -8,9 +8,6 @@ import (
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/logs"
 	"codebdy.com/leda/services/models/modules/app"
-	schemaConsts "github.com/codebdy/entify-graphql-schema/consts"
-	"github.com/codebdy/entify-graphql-schema/service"
-	"github.com/codebdy/entify/model/graph"
 	"github.com/codebdy/entify/model/meta"
 	"github.com/codebdy/entify/shared"
 	"github.com/graphql-go/graphql"
@@ -37,18 +34,15 @@ func publishMeta(strId interface{}) {
 
 	intNum, _ := strconv.Atoi(strId.(string))
 	metaId := uint64(intNum)
-	s := service.NewSystem(systemApp.Repo)
+	s, err := systemApp.Repo.OpenSession()
 
-	metaData := s.QueryById(consts.META_ENTITY_NAME, metaId)
+	if err != nil {
+		panic(err.Error())
+	}
+	metaData := s.QueryOneById(consts.META_ENTITY_NAME, metaId)
 
 	//获取所属APP
-	appData := s.QueryOneEntity(consts.APP_ENTITY_NAME, graph.QueryArg{
-		schemaConsts.ARG_WHERE: graph.QueryArg{
-			consts.METAID: graph.QueryArg{
-				schemaConsts.ARG_EQ: metaId,
-			},
-		},
-	})
+	appData := s.QueryOneById(consts.APP_ENTITY_NAME, metaId)
 
 	var appId uint64
 
@@ -71,7 +65,7 @@ func publishMeta(strId interface{}) {
 		}
 	}
 	nextMeta := meta.UMLMeta{}
-	err := mapstructure.Decode(metaMap[consts.META_CONTENT], &nextMeta)
+	err = mapstructure.Decode(metaMap[consts.META_CONTENT], &nextMeta)
 	if err != nil {
 		log.Println(err.Error())
 	}

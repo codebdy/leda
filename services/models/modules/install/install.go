@@ -12,7 +12,6 @@ import (
 	"codebdy.com/leda/services/models/modules/app"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/scalars"
-	"github.com/codebdy/entify-graphql-schema/service"
 	"github.com/codebdy/entify/model/meta"
 	"github.com/codebdy/entify/shared"
 	"github.com/codebdy/leda-service-sdk/system"
@@ -117,22 +116,23 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 
 	rep.Init(*system.SystemMeta, 0)
-	s := service.NewSystem(rep)
+	s, err := rep.OpenSession()
+	if err != nil {
+		panic(err.Error())
+	}
 	authUmlMeta := loadAuthMeta()
 	authMetaMp := authMetaMap(authUmlMeta)
 
 	//插入 Meta
-	authMeta, err := s.SaveOne(consts.META_ENTITY_NAME, authMetaMp)
+	authMetaId, err := s.SaveOne(consts.META_ENTITY_NAME, authMetaMp)
 
-	if err != nil || authMeta == nil {
+	if err != nil || authMetaId == 0 {
 		log.Panic(err.Error())
 	}
 
-	authMetaId := authMeta.(map[string]interface{})["id"].(uint64)
-
 	// 插入 Service
-	authService, err := s.SaveOne(consts.SERVICE_ENTITY_NAME, authServiceMap(authMetaId))
-	if err != nil || authService == nil {
+	authServiceId, err := s.SaveOne(consts.SERVICE_ENTITY_NAME, authServiceMap(authMetaId))
+	if err != nil || authServiceId == 0 {
 		log.Panic(err.Error())
 	}
 	nextMeta = authUmlMeta
