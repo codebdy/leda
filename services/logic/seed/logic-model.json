@@ -84,6 +84,12 @@
           "typeLabel": "Date",
           "updateDate": true,
           "uuid": "17d2f6a1-af0e-493b-8249-a6fa410b9905"
+        },
+        {
+          "name": "appId",
+          "type": "ID",
+          "typeLabel": "ID",
+          "uuid": "d63b8498-4f66-4a58-a05b-fa068c5ab2c4"
         }
       ],
       "innerId": 1003,
@@ -142,11 +148,11 @@
     },
     {
       "diagramUuid": "63df4cd9-de49-4066-8334-9250b8c9ba14",
-      "height": 120,
+      "height": 190,
       "id": "9dab4a83-31b5-4dde-b807-d60c05d48dc1",
       "width": 180,
       "x": 310,
-      "y": -90
+      "y": -160
     }
   ],
   "x6Edges": [
