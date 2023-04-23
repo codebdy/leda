@@ -1,12 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
-	"codebdy.com/leda/services/logic/schema"
 	"codebdy.com/leda/services/logic/global"
+	"codebdy.com/leda/services/logic/schema"
 	"github.com/graphql-go/handler"
 )
+
+const port = ":4002"
 
 func main() {
 
@@ -20,5 +23,6 @@ func main() {
 	})
 
 	http.Handle("/graphql", h)
-	http.ListenAndServe(":4002", nil)
+	fmt.Println(fmt.Sprintf("🚀 Graphql server ready at http://localhost%s/graphql", port))
+	http.ListenAndServe(port, nil)
 }
