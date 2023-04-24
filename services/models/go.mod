@@ -9,8 +9,8 @@ require (
 )
 
 require (
-	github.com/codebdy/entify v0.0.2
-	github.com/codebdy/entify-graphql-schema v0.0.2
+	github.com/codebdy/entify v0.0.5
+	github.com/codebdy/entify-graphql-schema v0.0.4
 	github.com/codebdy/leda-service-sdk v0.0.1
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/graphql-go/graphql v0.8.1
@@ -20,7 +20,11 @@ require (
 )
 
 require (
+	github.com/dlclark/regexp2 v1.7.0 // indirect
+	github.com/dop251/goja v0.0.0-20230402114112-623f9dda9079 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
+	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
+	github.com/google/pprof v0.0.0-20230207041349-798e818bf904 // indirect
 	github.com/graph-gophers/dataloader v5.0.0+incompatible // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
