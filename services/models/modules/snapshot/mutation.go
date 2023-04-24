@@ -24,7 +24,7 @@ const (
 )
 
 func (m *SnapshotModule) MutationFields() []*graphql.Field {
-	if !app.Installed || m.app == nil || m.app.MetaId == 0 {
+	if !app.Installed || m.app == nil || m.app.AppId == 0 {
 		return []*graphql.Field{}
 	}
 	return []*graphql.Field{

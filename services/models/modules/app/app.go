@@ -20,7 +20,7 @@ import (
 var Installed = false
 
 type App struct {
-	MetaId uint64
+	AppId  uint64
 	Repo   *entify.Repository
 	Schema schema.MetaGraphqlSchema
 	//Parser *parser.ModelParser
@@ -78,9 +78,9 @@ func (a *App) GetEntityByInnerId(innerId uint64) *graph.Entity {
 	return a.Repo.Model.Graph.GetEntityByInnerId(innerId)
 }
 
-func NewApp(metaId shared.ID) *App {
+func NewApp(appId shared.ID) *App {
 	systemApp := GetSystemApp()
-	if metaId == 0 {
+	if appId == 0 {
 		return systemApp
 	}
 
@@ -90,15 +90,16 @@ func NewApp(metaId shared.ID) *App {
 	}
 	appData := s.QueryOneById(
 		consts.APP_ENTITY_NAME,
-		metaId,
+		appId,
 	)
 
 	if appData == nil {
 		return nil
 	}
+	metaId := appData.(map[string]interface{})["metaId"].(uint64)
 	appMeta := s.QueryOneById(
 		consts.META_ENTITY_NAME,
-		appData.(map[string]interface{})["metaId"].(uint64),
+		metaId,
 	)
 
 	if appMeta == nil {
@@ -117,7 +118,7 @@ func NewApp(metaId shared.ID) *App {
 	schema := schema.New(repo)
 
 	return &App{
-		MetaId: metaId,
+		AppId:  appId,
 		Repo:   repo,
 		Schema: schema,
 		//Parser: schema.Parser(),
