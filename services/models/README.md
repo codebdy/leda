@@ -12,4 +12,4 @@ docker create -p 4000:4000  --name models  idlewater2/models:v0.0.1
 docker tag $mageId idlewater2/models
 
 推送镜像
-docker push idlewater2/models
+docker push idlewater2/models:v0.0.1
