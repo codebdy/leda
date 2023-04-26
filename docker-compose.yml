@@ -1,1 +1,6 @@
-version 0.0.1
+version: "0.0.1"
+services:
+  nginx:
+    image: bitnami/nginx:latest
+  models:
+    image: idlewater2/models:v0.0.1
