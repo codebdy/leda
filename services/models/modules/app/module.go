@@ -66,14 +66,14 @@ func (m *AppModule) Init(ctx context.Context) {
 func (m *AppModule) QueryFields() []*graphql.Field {
 
 	if m.app != nil {
-		return m.app.Schema.QueryFields
+		return convertFieldsArray(m.app.Schema.QueryFields)
 	} else {
 		return []*graphql.Field{}
 	}
 }
 func (m *AppModule) MutationFields() []*graphql.Field {
 	if m.app != nil {
-		return m.app.Schema.MutationFields
+		return convertFieldsArray(m.app.Schema.MutationFields)
 	} else {
 		return []*graphql.Field{}
 	}
