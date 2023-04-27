@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"codebdy.com/leda/services/schedule/global"
+	"codebdy.com/leda/services/schedule/resolver"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/schema"
 	ledasdk "github.com/codebdy/leda-service-sdk"
@@ -22,6 +23,8 @@ func Load() {
 	repo := entify.New(config)
 	repo.Init(metaObj.PublishedContent, metaObj.Id)
 	metaSchema := schema.New(repo)
+	//加载自定义API
+	metaSchema.ParseApi(&resolver.Resolver{})
 	rootQuery := graphql.NewObject(graphql.ObjectConfig{
 		Name:   "query",
 		Fields: metaSchema.QueryFields,

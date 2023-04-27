@@ -7,6 +7,13 @@ import (
 	"codebdy.com/leda/services/schedule/runner"
 )
 
+func (*Resolver) CreateTask(ctx context.Context, args struct {
+	ID string
+}) string {
+	//runner.TaskRunner.StartTask()
+	return "CreateTask !"
+}
+
 func (*Resolver) StartTask(ctx context.Context, args struct {
 	ID string
 }) string {
