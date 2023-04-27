@@ -24,12 +24,12 @@ func Load() {
 	metaSchema := schema.New(repo)
 	rootQuery := graphql.NewObject(graphql.ObjectConfig{
 		Name:   "query",
-		Fields: schema.ConvertArrayFields(metaSchema.QueryFields),
+		Fields: metaSchema.QueryFields,
 	})
 
 	rootMutation := graphql.NewObject(graphql.ObjectConfig{
 		Name:   "mutation",
-		Fields: schema.ConvertArrayFields(metaSchema.MutationFields),
+		Fields: metaSchema.MutationFields,
 	})
 	schemaConfig := graphql.SchemaConfig{
 		Query:      rootQuery,
