@@ -3,7 +3,7 @@ const { ApolloGateway, IntrospectAndCompose } = require("@apollo/gateway");
 const { readFileSync } = require("fs");
 import { GraphQLClient } from "graphql-request";
 
-var services
+var services;
 const port = 8081;
 const gqlstr = `
   query{
@@ -15,28 +15,28 @@ const gqlstr = `
   }
 `;
 
-const graphQLClient = new GraphQLClient(
-  "http://models:4000/graphql",
-  {
-    mode: "cors",
-  }
-);
+const graphQLClient = new GraphQLClient("http://models:4000/graphql", {
+  mode: "cors",
+});
 graphQLClient
   .request(gqlstr)
   .then((data) => {
     if (data) {
-      services = data["services"]
+      services = [...data["services"], { name: "models", port: "4000" }];
       const gateway = new ApolloGateway({
         supergraphSdl: new IntrospectAndCompose({
-          subgraphs:services,
+          subgraphs: services?.map((service) => ({
+            ...service,
+            url: `${service.name}:${service.port}/graphql`,
+          })),
         }),
       });
-    
+
       // Pass the ApolloGateway to the ApolloServer constructor
       const server = new ApolloServer({
         gateway,
       });
-    
+
       server.listen({ port }).then(({ url }) => {
         console.log(`🚀 Server ready at ${url}`);
       });
@@ -44,6 +44,5 @@ graphQLClient
   })
   .catch((err) => {
     console.error(err);
-    return
+    return;
   });
-
