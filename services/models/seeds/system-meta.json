@@ -120,6 +120,12 @@
           "uuid": "SERVICE_COLUMN_NAME_UUID"
         },
         {
+          "name": "port",
+          "type": "String",
+          "unique": true,
+          "uuid": "SERVICE_COLUMN_PORT_UUID"
+        },
+        {
           "name": "title",
           "nullable": true,
           "type": "String",

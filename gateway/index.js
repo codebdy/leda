@@ -10,13 +10,13 @@ const gqlstr = `
     services{
       id
       name
-      url
+      port
     }
   }
 `;
 
 const graphQLClient = new GraphQLClient(
-  "http://localhost:8080/graphql",
+  "http://models:4000/graphql",
   {
     mode: "cors",
   }
