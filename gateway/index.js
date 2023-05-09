@@ -1,7 +1,5 @@
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer } = require("apollo-server");
 const { ApolloGateway, IntrospectAndCompose } = require("@apollo/gateway");
-const { readFileSync } = require("fs");
-import { GraphQLClient } from "graphql-request";
 
 var services;
 const port = 8081;
