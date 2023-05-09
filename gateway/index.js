@@ -6,7 +6,10 @@ import { GraphQLClient } from "graphql-request";
 var services;
 const port = 8081;
 
-services = [{ name: "models", url: "http://models:4000/graphql" }];
+services = [
+  { name: "models", url: "http://models:4000/graphql" },
+  { name: "schedule", url: "http://schedule:4002/graphql" },
+];
 const gateway = new ApolloGateway({
   supergraphSdl: new IntrospectAndCompose({
     subgraphs: services,
