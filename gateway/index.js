@@ -1,10 +1,9 @@
 const { ApolloServer } = require("apollo-server");
 const { ApolloGateway, IntrospectAndCompose } = require("@apollo/gateway");
 
-var services;
 const port = 8081;
 
-services = [
+const services = [
   { name: "models", url: "http://models:4000/graphql" },
   { name: "schedule", url: "http://schedule:4002/graphql" },
 ];
