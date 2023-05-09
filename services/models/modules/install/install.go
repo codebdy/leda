@@ -1,8 +1,6 @@
 package install
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"log"
 	"time"
 
@@ -12,6 +10,7 @@ import (
 	"codebdy.com/leda/services/models/modules/app"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/scalars"
+	"github.com/codebdy/entify/model"
 	"github.com/codebdy/entify/model/meta"
 	"github.com/codebdy/entify/shared"
 	"github.com/codebdy/leda-service-sdk/system"
@@ -87,21 +86,9 @@ func installMutationFields() []*graphql.Field {
 	}
 }
 
-func ReadContentFromJson(fileName string) meta.UMLMeta {
-	data, err := ioutil.ReadFile(fileName)
-	content := meta.UMLMeta{}
-	if nil != err {
-		log.Panic(err.Error())
-	} else {
-		err = json.Unmarshal(data, &content)
-	}
-
-	return content
-}
-
 func loadAuthMeta() *meta.UMLMeta {
 
-	authContent := ReadContentFromJson("./seeds/auth-meta.json")
+	authContent := model.ReadContentFromJson("./seeds/auth-meta.json")
 	return &authContent
 }
 

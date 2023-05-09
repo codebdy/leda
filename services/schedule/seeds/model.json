@@ -174,6 +174,40 @@
   ],
   "graphLogics": [],
   "scriptLogics": [],
+  "apis": [
+    {
+      "args": [
+        {
+          "name": "id",
+          "type": "ID",
+          "typeLabel": "ID",
+          "uuid": "987e6553-6841-4689-8800-f245e22d7792"
+        }
+      ],
+      "logicScript": "",
+      "name": "startTask",
+      "operateType": "mutation",
+      "type": "String",
+      "typeLabel": "String",
+      "uuid": "de951cfa-68c5-44d7-8ebf-aae6d144325a"
+    },
+    {
+      "args": [
+        {
+          "name": "id",
+          "type": "ID",
+          "typeLabel": "ID",
+          "uuid": "f2df9561-1506-43e6-a4fe-892c9c17380b"
+        }
+      ],
+      "logicScript": "",
+      "name": "stopTask",
+      "operateType": "mutation",
+      "type": "String",
+      "typeLabel": "String",
+      "uuid": "045eff2f-d9bd-4cfe-a591-da1c01438e2f"
+    }
+  ],
   "x6Nodes": [
     {
       "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
