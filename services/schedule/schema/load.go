@@ -15,13 +15,10 @@ import (
 func Load() {
 	config := config.GetDbConfig()
 
-	metaObj, err := ledasdk.GetServiceMata(global.SERVICE_NAME, config)
+	umlMeta := ledasdk.ReadContentFromJson("./seeds/model.json")
 
-	if err != nil {
-		panic(err.Error())
-	}
 	repo := entify.New(config)
-	repo.Init(metaObj.PublishedContent, metaObj.Id)
+	repo.Init(umlMeta, umlMeta.Id)
 	metaSchema := schema.New(repo)
 	//加载自定义API
 	metaSchema.ParseApi(&resolver.Resolver{})

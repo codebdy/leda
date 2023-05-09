@@ -3,9 +3,9 @@ module codebdy.com/leda/services/schedule
 go 1.18
 
 require (
-	github.com/codebdy/entify v0.0.6
+	github.com/codebdy/entify v0.0.9
 	github.com/codebdy/entify-graphql-schema v0.0.9
-	github.com/codebdy/leda-service-sdk v0.0.2
+	github.com/codebdy/leda-service-sdk v0.0.3
 	github.com/graphql-go/graphql v0.8.1
 	github.com/graphql-go/handler v0.2.3
 	github.com/machinebox/graphql v0.2.2
@@ -41,5 +41,9 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+//replace github.com/codebdy/leda-service-sdk v0.0.3 => ../../../leda-service-sdk
+
+//replace github.com/codebdy/entify v0.0.7 => ../../../entify
 
 //replace github.com/codebdy/entify-graphql-schema v0.0.5 => ../../../entify-graphql-schema

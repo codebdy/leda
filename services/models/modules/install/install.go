@@ -10,9 +10,9 @@ import (
 	"codebdy.com/leda/services/models/modules/app"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/scalars"
-	"github.com/codebdy/entify/model"
 	"github.com/codebdy/entify/model/meta"
 	"github.com/codebdy/entify/shared"
+	ledasdk "github.com/codebdy/leda-service-sdk"
 	"github.com/codebdy/leda-service-sdk/system"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
@@ -88,7 +88,7 @@ func installMutationFields() []*graphql.Field {
 
 func loadAuthMeta() *meta.UMLMeta {
 
-	authContent := model.ReadContentFromJson("./seeds/auth-meta.json")
+	authContent := ledasdk.ReadContentFromJson("./seeds/auth-meta.json")
 	return &authContent
 }
 
