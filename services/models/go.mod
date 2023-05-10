@@ -44,4 +44,4 @@ require (
 //replace github.com/codebdy/leda-service-sdk v0.0.3 => ../../../leda-service-sdk
 
 //replace github.com/codebdy/entify v0.0.6 => ../../../entify
-//replace github.com/codebdy/entify-graphql-schema v0.0.7 => ../../../entify-graphql-schema
+replace github.com/codebdy/entify-graphql-schema v0.0.9 => ../../../entify-graphql-schema
