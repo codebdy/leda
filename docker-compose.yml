@@ -21,4 +21,8 @@ services:
     depends_on:
       - models
       - schedule
- 
+  simuserver:
+    hostname: "simuserver"
+    ports:
+      - "8080:8080"
+    image: idlewater2/simuserver:latest
