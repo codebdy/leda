@@ -8,4 +8,17 @@ services:
     ports:
       - "4000:4000"
     image: idlewater2/models:v0.0.1
+  schedule:
+    hostname: "schedule"
+    ports:
+      - "4002:4002"
+    image: idlewater2/schedule:v0.0.1
+  gateway:
+    hostname: "gateway"
+    ports:
+      - "8081:8081"
+    image: idlewater2/leda_gateway:latest
+    depends_on:
+      - models
+      - schedule
  
