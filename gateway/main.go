@@ -1,116 +1,19 @@
 package main
 
 import (
-	"context"
-	"fmt"
-	"net/http"
-	"strings"
-	"time"
-
-	"github.com/codbdy/leda/gateway/gateway"
-	"github.com/codbdy/leda/gateway/middlewares"
-	"github.com/gobwas/ws"
-	log "github.com/jensneuse/abstractlogger"
-	"go.uber.org/zap"
-
-	"github.com/wundergraph/graphql-go-tools/pkg/graphql"
-	"github.com/wundergraph/graphql-go-tools/pkg/playground"
-
-	http2 "github.com/codbdy/leda/gateway/http"
+	"github.com/nautilus/gateway/cmd/gateway/server"
+	"github.com/spf13/cobra"
 )
 
-// It's just a simple example of graphql federation gateway server, it's NOT a production ready code.
-//
-func logger() log.Logger {
-	logger, err := zap.NewDevelopmentConfig().Build()
-	if err != nil {
-		panic(err)
-	}
-
-	return log.NewZapLogger(logger, log.DebugLevel)
+var rootCmd = &cobra.Command{
+	Use:   "graphql-gateway",
+	Short: "GraphQL Gateway is a standalone service to consolidate your GraphQL APIs.",
 }
 
-// func fallback(sc *gateway.ServiceConfig) (string, error) {
-// 	dat, err := os.ReadFile(sc.Name + "/graph/schema.graphqls")
-// 	if err != nil {
-// 		return "", err
-// 	}
-
-// 	return string(dat), nil
-// }
-
-func startServer() {
-	logger := logger()
-	logger.Info("logger initialized")
-
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
-	upgrader := &ws.DefaultHTTPUpgrader
-	upgrader.Header = http.Header{}
-	upgrader.Header.Add("Sec-Websocket-Protocol", "graphql-ws")
-
-	graphqlEndpoint := "/graphql"
-	playgroundURLPrefix := "/playground"
-	playgroundURL := ""
-
-	httpClient := http.DefaultClient
-
-	mux := http.NewServeMux()
-
-	datasourceWatcher := gateway.NewDatasourcePoller(httpClient, gateway.DatasourcePollerConfig{
-		Services: []gateway.ServiceConfig{
-			{Name: "models", URL: "http://localhost:4000/graphql"},
-			// {Name: "products", URL: "http://localhost:4002/query", WS: "ws://localhost:4002/query"},
-			{Name: "schedule", URL: "http://localhost:4002/graphql"},
-		},
-		PollingInterval: 30 * time.Second,
-	})
-
-	p := playground.New(playground.Config{
-		PathPrefix:                      "",
-		PlaygroundPath:                  playgroundURLPrefix,
-		GraphqlEndpointPath:             graphqlEndpoint,
-		GraphQLSubscriptionEndpointPath: graphqlEndpoint,
-	})
-
-	handlers, err := p.Handlers()
-	if err != nil {
-		logger.Fatal("configure handlers", log.Error(err))
-		return
-	}
-
-	for i := range handlers {
-		mux.Handle(handlers[i].Path, middlewares.CorsMiddleware(handlers[i].Handler))
-	}
-
-	var gqlHandlerFactory gateway.HandlerFactoryFn = func(schema *graphql.Schema, engine *graphql.ExecutionEngineV2) http.Handler {
-		return middlewares.CorsMiddleware(http2.NewGraphqlHTTPHandler(schema, engine, upgrader, logger))
-	}
-
-	gateway := gateway.NewGateway(gqlHandlerFactory, httpClient, logger)
-
-	datasourceWatcher.Register(gateway)
-	go datasourceWatcher.Run(ctx)
-
-	gateway.Ready()
-
-	mux.Handle("/graphql", middlewares.CorsMiddleware(gateway))
-
-	addr := "0.0.0.0:8081"
-	logger.Info("Listening",
-		log.String("add", addr),
-	)
-	fmt.Printf("Access Playground on: http://%s%s%s\n", prettyAddr(addr), playgroundURLPrefix, playgroundURL)
-	logger.Fatal("failed listening",
-		log.Error(http.ListenAndServe(addr, middlewares.CorsMiddleware(mux))),
-	)
-}
-
-func prettyAddr(addr string) string {
-	return strings.Replace(addr, "0.0.0.0", "localhost", -1)
-}
-
+// start the gateway executable
 func main() {
-	startServer()
+	server.StartServer([]string{
+		"http://localhost:4000/graphql",
+		"http://localhost:4002/graphql",
+	})
 }
