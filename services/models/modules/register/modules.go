@@ -5,13 +5,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/codebdy/entify-graphql-schema/consts"
 	"github.com/graphql-go/graphql"
-)
-
-const (
-	ROOT_QUERY_NAME        = "Query"
-	ROOT_MUTATION_NAME     = "Mutation"
-	ROOT_SUBSCRIPTION_NAME = "Subscription"
 )
 
 var modules []Moduler = []Moduler{}
@@ -52,12 +47,12 @@ func GetSchema(ctx context.Context) graphql.Schema {
 	}
 
 	rootQuery := graphql.NewObject(graphql.ObjectConfig{
-		Name:   ROOT_QUERY_NAME,
+		Name:   consts.ROOT_QUERY_NAME,
 		Fields: rootQueryFields,
 	})
 
 	rootMutation := graphql.NewObject(graphql.ObjectConfig{
-		Name:   ROOT_MUTATION_NAME,
+		Name:   consts.ROOT_MUTATION_NAME,
 		Fields: rootMutationFields,
 	})
 

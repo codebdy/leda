@@ -29,6 +29,9 @@ func ListenAndServe(services []string) {
 
 	// add the graphql endpoints to the router
 	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, leda-appid, leda-appname")
 		if r.Method == http.MethodGet && strings.Contains(r.Header.Get("Accept"), "text/html") { // rudimentary check to see if this is accessed from a browser UI
 			// if calling from a UI, redirect to the UI handler
 			http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
@@ -52,7 +55,6 @@ func ListenAndServe(services []string) {
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT")
 		w.Header().Set("Access-Control-Allow-Headers", "*")
-
 		// if we are handling a pre-flight request
 		if r.Method == http.MethodOptions {
 			return

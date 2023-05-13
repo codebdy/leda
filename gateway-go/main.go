@@ -13,6 +13,7 @@ var rootCmd = &cobra.Command{
 // start the gateway executable
 func main() {
 	server.StartServer([]string{
+		"http://localhost:4000/graphql",
 		"http://localhost:4002/graphql",
 	})
 }
