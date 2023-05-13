@@ -31,10 +31,13 @@ func ListenAndServe(services []string) {
 	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, leda-appid, leda-appname")
+		w.Header().Set("Access-Control-Allow-Headers", "*")
 		if r.Method == http.MethodGet && strings.Contains(r.Header.Get("Accept"), "text/html") { // rudimentary check to see if this is accessed from a browser UI
 			// if calling from a UI, redirect to the UI handler
 			http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+			return
+		}
+		if r.Method == http.MethodOptions {
 			return
 		}
 		gw.GraphQLHandler(w, r)
