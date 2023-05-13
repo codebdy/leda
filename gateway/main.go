@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"os"
 	"strings"
 	"time"
 
 	"github.com/codbdy/leda/gateway/gateway"
+	"github.com/codbdy/leda/gateway/middlewares"
 	"github.com/gobwas/ws"
 	log "github.com/jensneuse/abstractlogger"
 	"go.uber.org/zap"
@@ -16,7 +16,7 @@ import (
 	"github.com/wundergraph/graphql-go-tools/pkg/graphql"
 	"github.com/wundergraph/graphql-go-tools/pkg/playground"
 
-	http2 "github.com/wundergraph/graphql-go-tools/examples/federation/gateway/http"
+	http2 "github.com/codbdy/leda/gateway/http"
 )
 
 // It's just a simple example of graphql federation gateway server, it's NOT a production ready code.
@@ -30,14 +30,14 @@ func logger() log.Logger {
 	return log.NewZapLogger(logger, log.DebugLevel)
 }
 
-func fallback(sc *gateway.ServiceConfig) (string, error) {
-	dat, err := os.ReadFile(sc.Name + "/graph/schema.graphqls")
-	if err != nil {
-		return "", err
-	}
+// func fallback(sc *gateway.ServiceConfig) (string, error) {
+// 	dat, err := os.ReadFile(sc.Name + "/graph/schema.graphqls")
+// 	if err != nil {
+// 		return "", err
+// 	}
 
-	return string(dat), nil
-}
+// 	return string(dat), nil
+// }
 
 func startServer() {
 	logger := logger()
@@ -50,7 +50,7 @@ func startServer() {
 	upgrader.Header = http.Header{}
 	upgrader.Header.Add("Sec-Websocket-Protocol", "graphql-ws")
 
-	graphqlEndpoint := "/query"
+	graphqlEndpoint := "/graphql"
 	playgroundURLPrefix := "/playground"
 	playgroundURL := ""
 
@@ -81,11 +81,11 @@ func startServer() {
 	}
 
 	for i := range handlers {
-		mux.Handle(handlers[i].Path, handlers[i].Handler)
+		mux.Handle(handlers[i].Path, middlewares.CorsMiddleware(handlers[i].Handler))
 	}
 
 	var gqlHandlerFactory gateway.HandlerFactoryFn = func(schema *graphql.Schema, engine *graphql.ExecutionEngineV2) http.Handler {
-		return http2.NewGraphqlHTTPHandler(schema, engine, upgrader, logger)
+		return middlewares.CorsMiddleware(http2.NewGraphqlHTTPHandler(schema, engine, upgrader, logger))
 	}
 
 	gateway := gateway.NewGateway(gqlHandlerFactory, httpClient, logger)
@@ -95,7 +95,7 @@ func startServer() {
 
 	gateway.Ready()
 
-	mux.Handle("/query", gateway)
+	mux.Handle("/graphql", middlewares.CorsMiddleware(gateway))
 
 	addr := "0.0.0.0:8081"
 	logger.Info("Listening",
@@ -103,7 +103,7 @@ func startServer() {
 	)
 	fmt.Printf("Access Playground on: http://%s%s%s\n", prettyAddr(addr), playgroundURLPrefix, playgroundURL)
 	logger.Fatal("failed listening",
-		log.Error(http.ListenAndServe(addr, mux)),
+		log.Error(http.ListenAndServe(addr, middlewares.CorsMiddleware(mux))),
 	)
 }
 

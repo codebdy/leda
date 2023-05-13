@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/codbdy/leda/gateway/middlewares"
 	log "github.com/jensneuse/abstractlogger"
 
 	graphqlDataSource "github.com/wundergraph/graphql-go-tools/pkg/engine/datasource/graphql_datasource"
@@ -59,7 +60,7 @@ type Gateway struct {
 
 func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	g.mu.Lock()
-	handler := g.gqlHandler
+	handler := middlewares.CorsMiddleware(g.gqlHandler)
 	g.mu.Unlock()
 
 	handler.ServeHTTP(w, r)
@@ -94,7 +95,7 @@ func (g *Gateway) UpdateDataSources(newDataSourcesConfig []graphqlDataSource.Con
 	}
 
 	g.mu.Lock()
-	g.gqlHandler = g.gqlHandlerFactory.Make(schema, engine)
+	g.gqlHandler = middlewares.CorsMiddleware(g.gqlHandlerFactory.Make(schema, engine))
 	g.mu.Unlock()
 
 	g.readyOnce.Do(func() { close(g.readyCh) })

@@ -6,7 +6,6 @@ require (
 	github.com/gobwas/ws v1.2.0
 	github.com/jensneuse/abstractlogger v0.0.4
 	github.com/wundergraph/graphql-go-tools v1.63.0
-	github.com/wundergraph/graphql-go-tools/examples/federation v0.0.0-20230509140106-12e258d9d2f7
 	go.uber.org/zap v1.24.0
 )
 
