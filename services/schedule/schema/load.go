@@ -3,7 +3,6 @@ package schema
 import (
 	"log"
 
-	"codebdy.com/leda/services/schedule/global"
 	"codebdy.com/leda/services/schedule/resolver"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/schema"
@@ -12,7 +11,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func Load() {
+func Load() *graphql.Schema {
 	config := config.GetDbConfig()
 
 	umlMeta := ledasdk.ReadContentFromJson("./seeds/model.json")
@@ -44,5 +43,5 @@ func Load() {
 		log.Panic(err.Error())
 	}
 
-	global.ServiceSchema = &schema
+	return &schema
 }

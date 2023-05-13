@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"codebdy.com/leda/services/schedule/global"
 	_ "codebdy.com/leda/services/schedule/runner"
 	"codebdy.com/leda/services/schedule/schema"
 	"github.com/graphql-go/handler"
@@ -13,11 +12,11 @@ import (
 const port = ":4002"
 
 func main() {
-  schema.Load()
+	schema := schema.Load()
 	h := handler.New(&handler.Config{
-		Schema:   global.ServiceSchema,
-		Pretty:   true,
-		GraphiQL: true,
+		Schema:     schema,
+		Pretty:     true,
+		Playground: true,
 	})
 
 	http.Handle("/graphql", h)
