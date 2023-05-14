@@ -10,9 +10,7 @@ import (
 	"github.com/nautilus/graphql"
 )
 
-const Port = "8081"
-
-func ListenAndServe(services []string) {
+func ListenAndServe(services []string, port string) {
 	// introspect the schemas
 	schemas, err := graphql.IntrospectRemoteSchemas(services...)
 	if err != nil {
@@ -67,8 +65,8 @@ func ListenAndServe(services []string) {
 	})
 
 	// start the server
-	fmt.Printf("🚀 Gateway is ready at http://localhost:%s/graphql\n", Port)
-	err = http.ListenAndServe(fmt.Sprintf(":%s", Port), nil)
+	fmt.Printf("🚀 Gateway is ready at http://localhost:%s/graphql\n", port)
+	err = http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
