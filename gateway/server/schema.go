@@ -51,9 +51,21 @@ func (gl *GatewayLoader) UpdateSchemas() {
 		fmt.Println("Encountered error introspecting schemas:", err.Error())
 		os.Exit(1)
 	}
+	forwardHeaderMiddleware := gateway.RequestMiddleware(func(r *http.Request) error {
+		//从context拿出所有header
+		h := r.Context().Value(ALL_HEADERS).(http.Header)
+		// Loop over header names
+		for name, values := range h {
+			// Loop over all values for the name.
+			for _, value := range values {
+				r.Header.Set(name, value)
+			}
+		}
+		return nil
+	})
 
 	// create the gateway instance
-	gw, err := gateway.New(schemas)
+	gw, err := gateway.New(schemas, gateway.WithMiddlewares(forwardHeaderMiddleware))
 	if err != nil {
 		fmt.Println("Encountered error starting gateway:", err.Error())
 		os.Exit(1)

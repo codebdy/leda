@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"os"
@@ -8,6 +9,8 @@ import (
 
 	"github.com/nautilus/gateway"
 )
+
+const ALL_HEADERS = "ALL_HEADERS"
 
 func ListenAndServe(port string) {
 
@@ -22,6 +25,8 @@ func ListenAndServe(port string) {
 		if r.Method == http.MethodOptions {
 			return
 		}
+		//把所有header 放入context 转发到请求
+		r = r.WithContext(context.WithValue(r.Context(), ALL_HEADERS, r.Header))
 		gw := GetGateway(w, r)
 		gw.GraphQLHandler(w, r)
 	})
