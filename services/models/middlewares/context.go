@@ -9,6 +9,7 @@ import (
 
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/contexts"
+	ledaconsts "github.com/codebdy/leda-service-sdk/consts"
 	"github.com/thinkeridea/go-extend/exnet"
 )
 
@@ -24,8 +25,8 @@ func ContextMiddleware(next http.Handler) http.Handler {
 }
 
 func TransContext(w http.ResponseWriter, r *http.Request) context.Context {
-	reqToken := r.Header.Get(consts.AUTHORIZATION)
-	splitToken := strings.Split(reqToken, consts.BEARER)
+	reqToken := r.Header.Get(ledaconsts.AUTHORIZATION)
+	splitToken := strings.Split(reqToken, ledaconsts.BEARER)
 	v := contexts.ContextValues{}
 	if len(splitToken) == 2 {
 		reqToken = splitToken[1]
@@ -39,13 +40,13 @@ func TransContext(w http.ResponseWriter, r *http.Request) context.Context {
 			// v.Me = me
 		}
 	}
-	appId := r.Header.Get(consts.HEADER_LEDA_APPID)
+	appId := r.Header.Get(ledaconsts.HEADER_LEDA_APPID)
 	if appId != "" {
 		intAppId, _ := strconv.ParseUint(appId, 10, 64)
 		v.AppId = intAppId
 	}
 
-	appName := r.Header.Get(consts.HEADER_LEDA_APPNAME)
+	appName := r.Header.Get(ledaconsts.HEADER_LEDA_APPNAME)
 	v.AppName = appName
 
 	v.Host = r.Host

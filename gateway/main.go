@@ -16,10 +16,5 @@ func main() {
 		"http://localhost:4000/graphql",
 		"http://localhost:4002/graphql",
 	}
-	server.ListenAndServe([]string{
-		"http://localhost:4000/graphql",
-		"http://localhost:4002/graphql",
-	},
-		"8081",
-	)
+	server.ListenAndServe("8081")
 }

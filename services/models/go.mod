@@ -11,7 +11,7 @@ require (
 require (
 	github.com/codebdy/entify v0.0.10
 	github.com/codebdy/entify-graphql-schema v0.0.13
-	github.com/codebdy/leda-service-sdk v0.0.3
+	github.com/codebdy/leda-service-sdk v0.0.4
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/graphql-go/graphql v0.8.1
 	github.com/mitchellh/mapstructure v1.5.0

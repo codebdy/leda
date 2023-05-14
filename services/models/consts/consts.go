@@ -1,8 +1,6 @@
 package consts
 
 const LOADERS = "loaders"
-const HEADER_LEDA_APPID = "leda-appid"
-const HEADER_LEDA_APPNAME = "leda-appname"
 const APPID = "appId"
 const TABLE_PREFIX = "a"
 const SERVICEID = "serviceId"
@@ -110,9 +108,6 @@ const CREATEDATE = "createDate"
 const UPDATEDATE = "updateDate"
 
 const (
-	TOKEN          = "token"
-	AUTHORIZATION  = "Authorization"
-	BEARER         = "Bearer "
 	CONTEXT_VALUES = "values"
 	ME             = "me"
 	//HOST           = "host"
