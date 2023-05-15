@@ -17,7 +17,7 @@ services:
     hostname: "gateway"
     ports:
       - "8081:8081"
-    image: idlewater2/leda_gateway:latest
+    image: idlewater2/gateway:v0.0.1
     depends_on:
       - models
       - schedule

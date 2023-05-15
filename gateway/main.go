@@ -13,8 +13,8 @@ var rootCmd = &cobra.Command{
 // start the gateway executable
 func main() {
 	server.Services = []string{
-		"http://localhost:4000/graphql",
-		"http://localhost:4002/graphql",
+		"http://models:4000/graphql",
+		"http://schedule:4002/graphql",
 	}
 	server.ListenAndServe("8081")
 }

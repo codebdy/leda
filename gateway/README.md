@@ -1,0 +1,1 @@
+docker build --pull --rm -f "Dockerfile" -t idlewater2/gateway:v0.0.1 "."
