@@ -126,20 +126,21 @@ func InstallResolve(p graphql.ResolveParams) (interface{}, error) {
 	rep.PublishMeta(&meta.UMLMeta{}, nextMeta, 0)
 	//app.LoadServiceMetas()
 
-	if input.Admin != "" {
-		_, err = s.SaveOne(consts.USER_ENTITY_NAME, adminInstance(input.Admin, input.Password))
-		if err != nil {
-			logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
-			return nil, err
-		}
-		if input.WithDemo {
-			_, err = s.SaveOne(consts.USER_ENTITY_NAME, demoInstance())
-			if err != nil {
-				logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
-				return nil, err
-			}
-		}
-	}
+	//@@ 这个安装移动到权限认证模块
+	// if input.Admin != "" {
+	// 	_, err = s.SaveOne(consts.USER_ENTITY_NAME, adminInstance(input.Admin, input.Password))
+	// 	if err != nil {
+	// 		logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
+	// 		return nil, err
+	// 	}
+	// 	if input.WithDemo {
+	// 		_, err = s.SaveOne(consts.USER_ENTITY_NAME, demoInstance())
+	// 		if err != nil {
+	// 			logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.FAILURE, err.Error())
+	// 			return nil, err
+	// 		}
+	// 	}
+	// }
 	isExist := rep.IsEntityExists(consts.META_ENTITY_NAME)
 	logs.WriteBusinessLog(p.Context, logs.INSTALL, logs.SUCCESS, "")
 	app.Installed = true
