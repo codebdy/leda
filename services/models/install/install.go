@@ -45,6 +45,7 @@ func syncDefaultApp() {
 		return
 	}
 	rep := entify.New(config.GetDbConfig())
+	rep.Init(*system.SystemMeta, 0)
 	appJson := ledasdk.ReadAppFromJson(DEAULT_APP_SEED)
 
 	//查询已有app
