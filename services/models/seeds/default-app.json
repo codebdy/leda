@@ -1,0 +1,208 @@
+{
+  "app": {
+    "id": "2",
+    "metaId": "9",
+    "name": "caa",
+    "title": "燃气仿真"
+  },
+  "meta": {
+    "content": {
+      "id": 9,
+      "packages": [
+        {
+          "name": "燃气仿真",
+          "uuid": "b2f861a1-65bf-4f46-bd90-cdebd43664d4"
+        }
+      ],
+      "classes": [
+        {
+          "attributes": [
+            {
+              "name": "id",
+              "primary": true,
+              "type": "ID",
+              "typeLabel": "ID",
+              "uuid": "5932f1f6-0f8a-4f86-a23c-812d6811556c"
+            },
+            {
+              "name": "contents",
+              "nullable": true,
+              "type": "JSON",
+              "typeLabel": "JSON",
+              "uuid": "101b1f43-986d-407b-852c-df746a496748"
+            },
+            {
+              "createDate": true,
+              "name": "createdAt",
+              "type": "Date",
+              "typeLabel": "Date",
+              "uuid": "97701a2e-682e-4887-b85d-3b981e2e97f5"
+            },
+            {
+              "name": "updatedAt",
+              "type": "Date",
+              "typeLabel": "Date",
+              "updateDate": true,
+              "uuid": "62040947-7750-4f06-b627-ff3db68243db"
+            },
+            {
+              "name": "name",
+              "nullable": true,
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "a156fc42-2b38-4d4f-9a6f-d20517287212"
+            }
+          ],
+          "innerId": 1001,
+          "name": "PipeNetwork",
+          "packageUuid": "b2f861a1-65bf-4f46-bd90-cdebd43664d4",
+          "root": true,
+          "stereoType": "Entity",
+          "uuid": "21831f33-081a-4db1-a703-950ff89a150e"
+        },
+        {
+          "attributes": [
+            {
+              "name": "id",
+              "primary": true,
+              "type": "ID",
+              "typeLabel": "ID",
+              "uuid": "b7a5488b-a37e-4575-917d-658474662190"
+            },
+            {
+              "name": "result",
+              "nullable": true,
+              "type": "JSON",
+              "typeLabel": "JSON",
+              "uuid": "45e17455-37ab-44ed-974f-53404cb7c7fc"
+            },
+            {
+              "name": "calculatedAt",
+              "nullable": true,
+              "type": "Date",
+              "typeLabel": "Date",
+              "uuid": "b38a7d38-2c16-43d9-876d-921fadb089db"
+            }
+          ],
+          "innerId": 1002,
+          "name": "CalculateRecord",
+          "packageUuid": "b2f861a1-65bf-4f46-bd90-cdebd43664d4",
+          "root": true,
+          "stereoType": "Entity",
+          "uuid": "e34d96f2-e53d-48ab-8731-4a4ef860c369"
+        }
+      ],
+      "relations": [
+        {
+          "innerId": 1001,
+          "relationType": "twoWayAssociation",
+          "roleOfSource": "pipeNetwork",
+          "roleOfTarget": "results",
+          "sourceId": "21831f33-081a-4db1-a703-950ff89a150e",
+          "sourceMutiplicity": "0..1",
+          "targetId": "e34d96f2-e53d-48ab-8731-4a4ef860c369",
+          "targetMultiplicity": "0..*",
+          "uuid": "e0ebb8ec-b887-4b8f-9b40-f89efa4ece7e"
+        }
+      ],
+      "diagrams": [
+        {
+          "edges": [],
+          "name": "类图",
+          "nodes": [],
+          "packageUuid": "b2f861a1-65bf-4f46-bd90-cdebd43664d4",
+          "uuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9"
+        }
+      ],
+      "graphLogics": [],
+      "scriptLogics": [
+        {
+          "args": [
+            {
+              "name": "id",
+              "type": "ID",
+              "typeLabel": "ID",
+              "uuid": "a7a00ecd-3595-43ee-ae9f-4432e6d4ff11"
+            }
+          ],
+          "logicScript": "//读取管网数据\r\nconst pipeNetWork = $entify.queryOne(\"PipeNetwork\",id);\r\n\r\n//转换数据\r\nconst params = convert(pipeNetWork.contents);\r\n//调用计算接口\r\nconst result = iFetch(\"http://localhost:8080/caa\",{\r\n    method:\"POST\",\r\n    body:params,\r\n    headers:{}\r\n});\r\n\r\n//保存计算结果\r\n$entify.post(\"CalculateRecord\", {pipeNetWork:{id:id}, contents:result});\r\n\r\n//返回结果\r\nreturn result;",
+          "name": "calculateOne",
+          "operateType": "mutation",
+          "type": "JSON",
+          "typeLabel": "JSON",
+          "uuid": "ba127f73-e186-4975-98ba-1a16b89fdae0"
+        },
+        {
+          "args": [
+            {
+              "name": "params",
+              "type": "JSON",
+              "typeLabel": "JSON",
+              "uuid": "ad2524fc-4101-4cf4-af11-98b310d6d7b4"
+            }
+          ],
+          "logicScript": "//调用计算接口\r\nconst result = iFetch(\"http://simuserver:8080/ts/caa\",{\r\n    method:\"POST\",\r\n    body:convert(params),\r\n    headers:{\r\n        \"Content-Type\":\"application/json\"\r\n    }\r\n});\r\n\r\n//返回结果\r\nreturn result;",
+          "name": "calculate",
+          "operateType": "mutation",
+          "type": "JSON",
+          "typeLabel": "JSON",
+          "uuid": "e5f553c6-8415-45ba-a281-ea480553a30f"
+        }
+      ],
+      "codes": [
+        {
+          "name": "数据转换",
+          "scriptText": "function convert(data){\r\n    return data\r\n}",
+          "uuid": "9786328c-2743-467d-bbca-c763c1516fc9"
+        }
+      ],
+      "apis": [],
+      "x6Nodes": [
+        {
+          "diagramUuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9",
+          "height": 170,
+          "id": "21831f33-081a-4db1-a703-950ff89a150e",
+          "width": 180,
+          "x": 130.00000000000003,
+          "y": 80.00000000000003
+        },
+        {
+          "diagramUuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9",
+          "height": 120,
+          "id": "e34d96f2-e53d-48ab-8731-4a4ef860c369",
+          "width": 210,
+          "x": 510,
+          "y": 100
+        }
+      ],
+      "x6Edges": [
+        {
+          "diagramUuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9",
+          "id": "e0ebb8ec-b887-4b8f-9b40-f89efa4ece7e",
+          "roleOnSourcePosition": {
+            "distance": 40,
+            "offset": 20
+          },
+          "roleOnTargetPosition": {
+            "distance": -40,
+            "offset": 20
+          },
+          "sourceMultiplicityPosition": {
+            "distance": 40,
+            "offset": -20
+          },
+          "targetMultiplicityPosition": {
+            "distance": -40,
+            "offset": -20
+          },
+          "vertices": []
+        }
+      ]
+    },
+    "createdAt": "2023-05-17T00:49:29Z",
+    "id": "9",
+    "name": null,
+    "publishedAt": "2023-05-17T00:49:29Z",
+    "updatedAt": "2023-05-17T00:49:29Z"
+  }
+}

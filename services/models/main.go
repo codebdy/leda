@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/errorx"
 	"codebdy.com/leda/services/models/handler"
@@ -15,13 +14,13 @@ import (
 	"codebdy.com/leda/services/models/modules/register"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify/db"
+	"github.com/codebdy/leda-service-sdk/config"
 
-	_ "github.com/go-sql-driver/mysql"
-
+	_ "codebdy.com/leda/services/models/install"
 	_ "codebdy.com/leda/services/models/modules/app"
-	_ "codebdy.com/leda/services/models/modules/install"
 	_ "codebdy.com/leda/services/models/modules/publish"
 	_ "codebdy.com/leda/services/models/modules/snapshot"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const PORT = 4000

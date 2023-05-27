@@ -5,8 +5,8 @@ import (
 	"log"
 	"sync"
 
-	"codebdy.com/leda/services/models/config"
 	"codebdy.com/leda/services/models/consts"
+	"github.com/codebdy/leda-service-sdk/config"
 
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/schema"

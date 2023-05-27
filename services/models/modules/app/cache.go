@@ -18,3 +18,10 @@ func ReloadAllApps() {
 		return true
 	})
 }
+
+func ClearAppCache() {
+	appLoaderCache.Range(func(key interface{}, value interface{}) bool {
+		appLoaderCache.Delete(key)
+		return true
+	})
+}
