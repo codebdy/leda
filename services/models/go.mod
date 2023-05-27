@@ -11,7 +11,7 @@ require (
 require (
 	github.com/codebdy/entify v0.0.10
 	github.com/codebdy/entify-graphql-schema v0.0.13
-	github.com/codebdy/leda-service-sdk v0.0.4
+	github.com/codebdy/leda-service-sdk v0.0.6
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/graphql-go/graphql v0.8.1
 	github.com/mitchellh/mapstructure v1.5.0
@@ -41,7 +41,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/codebdy/leda-service-sdk v0.0.4 => ../../../leda-service-sdk
+//replace github.com/codebdy/leda-service-sdk v0.0.4 => ../../../leda-service-sdk
 
 //replace github.com/codebdy/entify v0.0.6 => ../../../entify
 //replace github.com/codebdy/entify-graphql-schema v0.0.12 => ../../../entify-graphql-schema
