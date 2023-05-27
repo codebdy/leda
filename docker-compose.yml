@@ -20,7 +20,7 @@ services:
     hostname: "schedule"
     ports:
       - "4002:4002"
-    image: idlewater2/schedule:v0.0.1
+    image: idlewater2/schedule:v0.0.2
     environment:
       DATABASE: caa
       DRIVER: mysql
@@ -28,6 +28,7 @@ services:
       PASSWORD: RxDragDb
       PORT: "3306"
       USER: root
+      MIGRATION: install
   gateway:
     hostname: "gateway"
     ports:

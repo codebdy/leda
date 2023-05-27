@@ -1,6 +1,7 @@
-database: leda
+database: caa
 driver: mysql
 host: host.docker.internal
 password: RxDragDb
 port: "3306"
 user: root
+migration: install

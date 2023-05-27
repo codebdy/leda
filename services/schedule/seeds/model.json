@@ -1,247 +1,263 @@
 {
-  "id": 8,
-  "packages": [
-    {
-      "name": "计划任务",
-      "uuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3"
-    }
-  ],
-  "classes": [
-    {
-      "attributes": [
+  "service": {
+    "id": "3",
+    "imageUrl": "",
+    "metaId": "8",
+    "name": "schedule",
+    "title": "计划任务"
+  },
+  "meta": {
+    "content": {
+      "packages": [
         {
-          "name": "id",
-          "primary": true,
-          "type": "ID",
-          "typeLabel": "ID",
-          "uuid": "dd5399ba-84f4-43d9-bd4e-d5c62e394ca8"
-        },
-        {
-          "name": "name",
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "45470c1c-d2df-41ce-984f-4d4d4dd629ab"
-        },
-        {
-          "name": "cronExpression",
-          "nullable": true,
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "4221391b-2e70-4418-8799-ae37e9855ae2"
-        },
-        {
-          "name": "status",
-          "nullable": true,
-          "type": "Enum",
-          "typeLabel": "TaskStatus",
-          "typeUuid": "3339a0f4-56d5-4161-bff9-77b4ea2de6d5",
-          "uuid": "21dffe7b-6930-4cb9-b35f-904fb0ced6e0"
-        },
-        {
-          "name": "config",
-          "nullable": true,
-          "type": "ValueObject",
-          "typeLabel": "TaskConfig",
-          "typeUuid": "65b01505-3fb0-4c80-b28b-788b2b535647",
-          "uuid": "6a36700f-625e-42d0-ada6-acbda9643c40"
-        },
-        {
-          "createDate": true,
-          "name": "createdAt",
-          "type": "Date",
-          "typeLabel": "Date",
-          "uuid": "b9007af2-486e-4b72-b65b-3cbf6a6f3396"
-        },
-        {
-          "name": "updatedAt",
-          "nullable": false,
-          "type": "Date",
-          "typeLabel": "Date",
-          "updateDate": true,
-          "uuid": "5fadb20e-169a-4c45-9cb3-a1f7d40eb108"
+          "name": "计划任务",
+          "uuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3"
         }
       ],
-      "innerId": 1001,
-      "name": "Task",
-      "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
-      "root": true,
-      "stereoType": "Entity",
-      "uuid": "5b11412a-03a9-43fd-988d-cee4d135dd77"
-    },
-    {
-      "attributes": [
+      "classes": [
         {
-          "name": "requestType",
-          "type": "Enum",
-          "typeLabel": "RequestType",
-          "typeUuid": "91aa4c1f-0b9f-499f-a2e2-960155b80577",
-          "uuid": "6f5f2b05-f668-4db0-904e-1461d20711fd"
+          "attributes": [
+            {
+              "name": "id",
+              "primary": true,
+              "type": "ID",
+              "typeLabel": "ID",
+              "uuid": "dd5399ba-84f4-43d9-bd4e-d5c62e394ca8"
+            },
+            {
+              "name": "name",
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "45470c1c-d2df-41ce-984f-4d4d4dd629ab"
+            },
+            {
+              "name": "cronExpression",
+              "nullable": true,
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "4221391b-2e70-4418-8799-ae37e9855ae2"
+            },
+            {
+              "name": "status",
+              "nullable": true,
+              "type": "Enum",
+              "typeLabel": "TaskStatus",
+              "typeUuid": "3339a0f4-56d5-4161-bff9-77b4ea2de6d5",
+              "uuid": "21dffe7b-6930-4cb9-b35f-904fb0ced6e0"
+            },
+            {
+              "name": "config",
+              "nullable": true,
+              "type": "ValueObject",
+              "typeLabel": "TaskConfig",
+              "typeUuid": "65b01505-3fb0-4c80-b28b-788b2b535647",
+              "uuid": "6a36700f-625e-42d0-ada6-acbda9643c40"
+            },
+            {
+              "createDate": true,
+              "name": "createdAt",
+              "type": "Date",
+              "typeLabel": "Date",
+              "uuid": "b9007af2-486e-4b72-b65b-3cbf6a6f3396"
+            },
+            {
+              "name": "updatedAt",
+              "nullable": false,
+              "type": "Date",
+              "typeLabel": "Date",
+              "updateDate": true,
+              "uuid": "5fadb20e-169a-4c45-9cb3-a1f7d40eb108"
+            }
+          ],
+          "innerId": 1001,
+          "name": "Task",
+          "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
+          "root": true,
+          "stereoType": "Entity",
+          "uuid": "5b11412a-03a9-43fd-988d-cee4d135dd77"
         },
         {
-          "name": "url",
-          "nullable": true,
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "6616a7d0-c37b-48c9-8484-b4259ae4591b"
+          "attributes": [
+            {
+              "name": "requestType",
+              "type": "Enum",
+              "typeLabel": "RequestType",
+              "typeUuid": "91aa4c1f-0b9f-499f-a2e2-960155b80577",
+              "uuid": "6f5f2b05-f668-4db0-904e-1461d20711fd"
+            },
+            {
+              "name": "url",
+              "nullable": true,
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "6616a7d0-c37b-48c9-8484-b4259ae4591b"
+            },
+            {
+              "name": "gql",
+              "nullable": true,
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "00f3f85e-be06-4772-bd26-6afd228b4d42"
+            },
+            {
+              "name": "params",
+              "nullable": true,
+              "type": "JSON",
+              "typeLabel": "JSON",
+              "uuid": "0b1d7e7a-4c4f-4375-a1ca-4ac0f6c00cfe"
+            }
+          ],
+          "innerId": 1002,
+          "name": "TaskConfig",
+          "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
+          "root": false,
+          "stereoType": "ValueObject",
+          "uuid": "65b01505-3fb0-4c80-b28b-788b2b535647"
         },
         {
-          "name": "gql",
-          "nullable": true,
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "00f3f85e-be06-4772-bd26-6afd228b4d42"
+          "attributes": [
+            {
+              "name": "HttpGet",
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "3d30ef48-394d-4c2b-97d9-1d11f79eb3f5"
+            },
+            {
+              "name": "HttpPost",
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "93c71685-4132-4eb0-93ef-c0f5a235a2f2"
+            },
+            {
+              "name": "Graphql",
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "a04dc51a-b3dd-4e7f-b87e-d95d5e8e201e"
+            }
+          ],
+          "innerId": 1003,
+          "name": "RequestType",
+          "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
+          "root": false,
+          "stereoType": "Enum",
+          "uuid": "91aa4c1f-0b9f-499f-a2e2-960155b80577"
         },
         {
-          "name": "params",
-          "nullable": true,
-          "type": "JSON",
-          "typeLabel": "JSON",
-          "uuid": "0b1d7e7a-4c4f-4375-a1ca-4ac0f6c00cfe"
+          "attributes": [
+            {
+              "name": "Error",
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "cf214463-d955-416e-b984-d2282845a173"
+            },
+            {
+              "name": "Stoped",
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "77f6c873-fa2f-4451-b519-c2fb1ed2cb80"
+            },
+            {
+              "name": "Running",
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "c3b4246c-4c46-4f97-8fff-6112c14769a6"
+            }
+          ],
+          "innerId": 1004,
+          "name": "TaskStatus",
+          "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
+          "root": false,
+          "stereoType": "Enum",
+          "uuid": "3339a0f4-56d5-4161-bff9-77b4ea2de6d5"
         }
       ],
-      "innerId": 1002,
-      "name": "TaskConfig",
-      "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
-      "root": false,
-      "stereoType": "ValueObject",
-      "uuid": "65b01505-3fb0-4c80-b28b-788b2b535647"
-    },
-    {
-      "attributes": [
+      "relations": [],
+      "diagrams": [
         {
-          "name": "HttpGet",
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "3d30ef48-394d-4c2b-97d9-1d11f79eb3f5"
-        },
-        {
-          "name": "HttpPost",
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "93c71685-4132-4eb0-93ef-c0f5a235a2f2"
-        },
-        {
-          "name": "Graphql",
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "a04dc51a-b3dd-4e7f-b87e-d95d5e8e201e"
+          "edges": [],
+          "name": "类图",
+          "nodes": [],
+          "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
+          "uuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e"
         }
       ],
-      "innerId": 1003,
-      "name": "RequestType",
-      "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
-      "root": false,
-      "stereoType": "Enum",
-      "uuid": "91aa4c1f-0b9f-499f-a2e2-960155b80577"
-    },
-    {
-      "attributes": [
+      "graphLogics": [],
+      "scriptLogics": [],
+      "codes": [],
+      "apis": [
         {
-          "name": "Error",
+          "args": [
+            {
+              "name": "id",
+              "type": "ID",
+              "typeLabel": "ID",
+              "uuid": "987e6553-6841-4689-8800-f245e22d7792"
+            }
+          ],
+          "logicScript": "",
+          "name": "startTask",
+          "operateType": "mutation",
           "type": "String",
           "typeLabel": "String",
-          "uuid": "cf214463-d955-416e-b984-d2282845a173"
+          "uuid": "de951cfa-68c5-44d7-8ebf-aae6d144325a"
         },
         {
-          "name": "Stoped",
+          "args": [
+            {
+              "name": "id",
+              "type": "ID",
+              "typeLabel": "ID",
+              "uuid": "f2df9561-1506-43e6-a4fe-892c9c17380b"
+            }
+          ],
+          "logicScript": "",
+          "name": "stopTask",
+          "operateType": "mutation",
           "type": "String",
           "typeLabel": "String",
-          "uuid": "77f6c873-fa2f-4451-b519-c2fb1ed2cb80"
+          "uuid": "045eff2f-d9bd-4cfe-a591-da1c01438e2f"
+        }
+      ],
+      "x6Nodes": [
+        {
+          "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
+          "height": 210,
+          "id": "5b11412a-03a9-43fd-988d-cee4d135dd77",
+          "width": 180,
+          "x": 280,
+          "y": 60.00000000000003
         },
         {
-          "name": "Running",
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "c3b4246c-4c46-4f97-8fff-6112c14769a6"
-        }
-      ],
-      "innerId": 1004,
-      "name": "TaskStatus",
-      "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
-      "root": false,
-      "stereoType": "Enum",
-      "uuid": "3339a0f4-56d5-4161-bff9-77b4ea2de6d5"
-    }
-  ],
-  "relations": [],
-  "diagrams": [
-    {
-      "edges": [],
-      "name": "类图",
-      "nodes": [],
-      "packageUuid": "210c87fc-3de2-41fc-944d-a9a3e1a54ac3",
-      "uuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e"
-    }
-  ],
-  "graphLogics": [],
-  "scriptLogics": [],
-  "apis": [
-    {
-      "args": [
+          "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
+          "height": 160,
+          "id": "65b01505-3fb0-4c80-b28b-788b2b535647",
+          "width": 180,
+          "x": 590,
+          "y": -109.99999999999994
+        },
         {
-          "name": "id",
-          "type": "ID",
-          "typeLabel": "ID",
-          "uuid": "987e6553-6841-4689-8800-f245e22d7792"
-        }
-      ],
-      "logicScript": "",
-      "name": "startTask",
-      "operateType": "mutation",
-      "type": "String",
-      "typeLabel": "String",
-      "uuid": "de951cfa-68c5-44d7-8ebf-aae6d144325a"
-    },
-    {
-      "args": [
+          "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
+          "height": 120,
+          "id": "91aa4c1f-0b9f-499f-a2e2-960155b80577",
+          "width": 180,
+          "x": 280,
+          "y": -110
+        },
         {
-          "name": "id",
-          "type": "ID",
-          "typeLabel": "ID",
-          "uuid": "f2df9561-1506-43e6-a4fe-892c9c17380b"
+          "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
+          "height": 120,
+          "id": "3339a0f4-56d5-4161-bff9-77b4ea2de6d5",
+          "width": 180,
+          "x": 600,
+          "y": 110
         }
       ],
-      "logicScript": "",
-      "name": "stopTask",
-      "operateType": "mutation",
-      "type": "String",
-      "typeLabel": "String",
-      "uuid": "045eff2f-d9bd-4cfe-a591-da1c01438e2f"
-    }
-  ],
-  "x6Nodes": [
-    {
-      "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
-      "height": 210,
-      "id": "5b11412a-03a9-43fd-988d-cee4d135dd77",
-      "width": 180,
-      "x": 280,
-      "y": 60.00000000000003
+      "x6Edges": []
     },
-    {
-      "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
-      "height": 160,
-      "id": "65b01505-3fb0-4c80-b28b-788b2b535647",
-      "width": 180,
-      "x": 590,
-      "y": -109.99999999999994
-    },
-    {
-      "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
-      "height": 120,
-      "id": "91aa4c1f-0b9f-499f-a2e2-960155b80577",
-      "width": 180,
-      "x": 280,
-      "y": -110
-    },
-    {
-      "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
-      "height": 120,
-      "id": "3339a0f4-56d5-4161-bff9-77b4ea2de6d5",
-      "width": 180,
-      "x": 600,
-      "y": 110
-    }
-  ],
-  "x6Edges": []
+    "createdAt": "2023-04-27T09:16:26Z",
+    "id": "8",
+    "name": null,
+    "publishedAt": "2023-04-27T09:16:26Z",
+    "updatedAt": "2023-04-27T09:16:26Z"
+  }
 }

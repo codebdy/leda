@@ -3,6 +3,7 @@ package schema
 import (
 	"log"
 
+	"codebdy.com/leda/services/schedule/install"
 	"codebdy.com/leda/services/schedule/resolver"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/consts"
@@ -15,7 +16,8 @@ import (
 func Load() *graphql.Schema {
 	config := config.GetDbConfig()
 
-	umlMeta := ledasdk.ReadContentFromJson("./seeds/model.json")
+	serviceJson := ledasdk.ReadAppFromJson(install.MODEL_SEED)
+	umlMeta := serviceJson.Meta.Content
 
 	repo := entify.New(config)
 	repo.Init(umlMeta, umlMeta.Id)

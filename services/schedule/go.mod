@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/codebdy/entify v0.0.10
 	github.com/codebdy/entify-graphql-schema v0.0.13
-	github.com/codebdy/leda-service-sdk v0.0.3
+	github.com/codebdy/leda-service-sdk v0.0.6
 	github.com/graphql-go/graphql v0.8.1
 	github.com/graphql-go/handler v0.2.3
 	github.com/machinebox/graphql v0.2.2
