@@ -16,8 +16,8 @@ import (
 func Load() *graphql.Schema {
 	config := config.GetDbConfig()
 
-	serviceJson := ledasdk.ReadAppFromJson(install.MODEL_SEED)
-	umlMeta := serviceJson.Meta.Content
+	serviceStruct, _ := ledasdk.ReadAppFromJson(install.MODEL_SEED)
+	umlMeta := serviceStruct.Meta.Content
 
 	repo := entify.New(config)
 	repo.Init(umlMeta, umlMeta.Id)

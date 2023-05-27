@@ -48,7 +48,7 @@ func syncDefaultApp() {
 	}
 	rep := entify.New(config.GetDbConfig())
 	rep.Init(*system.SystemMeta, 0)
-	appJson := ledasdk.ReadAppFromJson(DEAULT_APP_SEED)
+	appStruct, appJson := ledasdk.ReadAppFromJson(DEAULT_APP_SEED)
 
 	//查询已有app
 	s, err := rep.OpenSession()
@@ -59,7 +59,7 @@ func syncDefaultApp() {
 		graph.QueryArg{
 			shared.ARG_WHERE: graph.QueryArg{
 				"name": graph.QueryArg{
-					shared.ARG_EQ: appJson.App.Name,
+					shared.ARG_EQ: appStruct.App.Name,
 				},
 			},
 		},
@@ -76,8 +76,8 @@ func syncDefaultApp() {
 		}
 	}
 
-	metaMap["content"] = appJson.Meta.Content
-	metaMap["publishedContent"] = appJson.Meta.Content
+	metaMap["content"] = appJson["meta"].(map[string]interface{})["content"]
+	metaMap["publishedContent"] = appJson["meta"].(map[string]interface{})["content"]
 	metaMap["publishedAt"] = time.Now()
 	appMetaId, err := s.SaveOne(consts.META_ENTITY_NAME, metaMap)
 
@@ -91,13 +91,13 @@ func syncDefaultApp() {
 		appMap = app.(map[string]interface{})
 	}
 
-	appMap["name"] = appJson.App.Name
-	appMap["title"] = appJson.App.Title
+	appMap["name"] = appStruct.App.Name
+	appMap["title"] = appStruct.App.Title
 	appMap["metaId"] = appMetaId
 	s.SaveOne(consts.APP_ENTITY_NAME, appMap)
 
 	//发布AppMeta
-	rep.PublishMeta(&oldContent, &appJson.Meta.Content, appMetaId)
+	rep.PublishMeta(&oldContent, &appStruct.Meta.Content, appMetaId)
 }
 
 func isDefaultAppSeedExist() bool {

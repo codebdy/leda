@@ -31,7 +31,7 @@ func updateServiceModel(isSync bool) {
 	}
 	rep := entify.New(config.GetDbConfig())
 	rep.Init(*system.SystemMeta, 0)
-	serviceJson := ledasdk.ReadServiceFromJson(MODEL_SEED)
+	serviceStruct, serviceJson := ledasdk.ReadServiceFromJson(MODEL_SEED)
 
 	//查询已有Service
 	s, err := rep.OpenSession()
@@ -42,7 +42,7 @@ func updateServiceModel(isSync bool) {
 		graph.QueryArg{
 			shared.ARG_WHERE: graph.QueryArg{
 				"name": graph.QueryArg{
-					shared.ARG_EQ: serviceJson.Service.Name,
+					shared.ARG_EQ: serviceStruct.Service.Name,
 				},
 			},
 		},
@@ -64,8 +64,8 @@ func updateServiceModel(isSync bool) {
 		}
 	}
 
-	metaMap["content"] = serviceJson.Meta.Content
-	metaMap["publishedContent"] = serviceJson.Meta.Content
+	metaMap["content"] = serviceJson["meta"].(map[string]interface{})["content"]
+	metaMap["publishedContent"] = serviceJson["meta"].(map[string]interface{})["content"]
 	metaMap["publishedAt"] = time.Now()
 	serviceMetaId, err := s.SaveOne(consts.META_ENTITY_NAME, metaMap)
 
@@ -79,12 +79,12 @@ func updateServiceModel(isSync bool) {
 		serviceMap = serviceObj.(map[string]interface{})
 	}
 
-	serviceMap["name"] = serviceJson.Service.Name
-	serviceMap["title"] = serviceJson.Service.Title
+	serviceMap["name"] = serviceStruct.Service.Name
+	serviceMap["title"] = serviceStruct.Service.Title
 	serviceMap["metaId"] = serviceMetaId
 	s.SaveOne(consts.SERVICE_ENTITY_NAME, serviceMap)
 
-	rep.PublishMeta(&oldContent, &serviceJson.Meta.Content, serviceMetaId)
+	rep.PublishMeta(&oldContent, &serviceStruct.Meta.Content, serviceMetaId)
 }
 
 func isServiceModelSeedExist() bool {
