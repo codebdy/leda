@@ -29,6 +29,8 @@ services:
       PORT: "3306"
       USER: root
       MIGRATION: install
+    depends_on:
+      - models
   gateway:
     hostname: "gateway"
     ports:

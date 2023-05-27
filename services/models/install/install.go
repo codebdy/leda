@@ -2,6 +2,7 @@ package install
 
 import (
 	"os"
+	"time"
 
 	"codebdy.com/leda/services/models/consts"
 	"github.com/codebdy/entify"
@@ -10,6 +11,7 @@ import (
 	"github.com/codebdy/entify/shared"
 	"github.com/codebdy/leda-service-sdk/config"
 	"github.com/codebdy/leda-service-sdk/system"
+	"github.com/mitchellh/mapstructure"
 
 	ledasdk "github.com/codebdy/leda-service-sdk"
 )
@@ -62,17 +64,22 @@ func syncDefaultApp() {
 			},
 		},
 	)
-	//更新metaObj
-	metaObj := map[string]interface{}{}
+	oldContent := meta.UMLMeta{}
+	//更新metaMap
+	metaMap := map[string]interface{}{}
 	if app != nil && app.(map[string]interface{})["metaId"] != 0 {
 		metaId := app.(map[string]interface{})["metaId"].(uint64)
 		if metaId != 0 {
-			metaObj = s.QueryOneById(consts.META_ENTITY_NAME, metaId).(map[string]interface{})
+			metaMap = s.QueryOneById(consts.META_ENTITY_NAME, metaId).(map[string]interface{})
+			oldJson := metaMap["publishedContent"].(shared.JSON)
+			mapstructure.Decode(oldJson, &oldContent)
 		}
 	}
 
-	metaObj["content"] = appJson.Meta.Content
-	appMetaId, err := s.SaveOne(consts.META_ENTITY_NAME, metaObj)
+	metaMap["content"] = appJson.Meta.Content
+	metaMap["publishedContent"] = appJson.Meta.Content
+	metaMap["publishedAt"] = time.Now()
+	appMetaId, err := s.SaveOne(consts.META_ENTITY_NAME, metaMap)
 
 	if err != nil {
 		panic(err.Error())
@@ -90,11 +97,6 @@ func syncDefaultApp() {
 	s.SaveOne(consts.APP_ENTITY_NAME, appMap)
 
 	//发布AppMeta
-	oldContent := meta.UMLMeta{}
-	if metaObj["nextContent"] != nil {
-		oldContent = metaObj["nextContent"].(meta.UMLMeta)
-	}
-
 	rep.PublishMeta(&oldContent, &appJson.Meta.Content, appMetaId)
 }
 

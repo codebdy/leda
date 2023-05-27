@@ -53,8 +53,8 @@ github.com/codebdy/entify v0.0.10 h1:8II1a6rVL+J+Y/INwVI1LJ0FHOiOM9ObjCji5qE9IjI
 github.com/codebdy/entify v0.0.10/go.mod h1:YaiTlrOyFbuEiMKu7fH/lMh0l+zM6cVb6rUDmbZwNek=
 github.com/codebdy/entify-graphql-schema v0.0.13 h1:6fCl9/qmVjOK+QuoZoHt+TLgf5QlijHsnHmKnnrOh/Y=
 github.com/codebdy/entify-graphql-schema v0.0.13/go.mod h1:lb9hNPsyNL6y7e4tiB0bMB1F47STY051UwauXEahzAs=
-github.com/codebdy/leda-service-sdk v0.0.6 h1:yzqolPlH0Ssig94mcq5jWG9uX4YMJMtgx4ltXdEaqYo=
-github.com/codebdy/leda-service-sdk v0.0.6/go.mod h1:739N8ypAquawWqvS0GVDzvQds/YUYd1CXYa+DEOk7fY=
+github.com/codebdy/leda-service-sdk v0.0.8 h1:lO8c84IZiidTNjOBuNit1Sgvps7EdscaEi5epn3bpno=
+github.com/codebdy/leda-service-sdk v0.0.8/go.mod h1:739N8ypAquawWqvS0GVDzvQds/YUYd1CXYa+DEOk7fY=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -85,6 +85,8 @@ github.com/go-sourcemap/sourcemap v2.1.3+incompatible h1:W1iEw64niKVGogNgBN3ePyL
 github.com/go-sourcemap/sourcemap v2.1.3+incompatible/go.mod h1:F8jJfvm2KbVjc5NqelyYJmf/v5J0dwNLS2mL4sNA1Jg=
 github.com/go-sql-driver/mysql v1.7.0 h1:ueSltNNllEqE3qcWBTD0iQd3IpL/6U+mJxLkazJ7YPc=
 github.com/go-sql-driver/mysql v1.7.0/go.mod h1:OXbVy3sEdcQ2Doequ6Z5BW6fXNQTmx+9S1MCJN5yJMI=
+github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9 h1:wqckanyE9qc/XnvnybC6SHOb8Nyd62QXAZOzA8twFig=
+github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9/go.mod h1:64ikIrMv84B+raz7akXOqbF7cK3/OQQ/6cClY10oy7A=
 github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod h1:SBH7ygxi8pfUlaOkMMuAQtPIUF8ecWP5IEl/CR7VP2Q=
 github.com/golang/groupcache v0.0.0-20190702054246-869f871628b6/go.mod h1:cIg4eruTrX1D+g88fzRXU5OdNfaM+9IcxsU14FzY7Hc=
 github.com/golang/groupcache v0.0.0-20191227052852-215e87163ea7/go.mod h1:cIg4eruTrX1D+g88fzRXU5OdNfaM+9IcxsU14FzY7Hc=

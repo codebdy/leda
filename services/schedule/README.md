@@ -21,4 +21,4 @@ start(taskId: string)
 end(taskId: string)
 
 创建镜像：
-docker build --pull --rm -f "Dockerfile" -t idlewater2/schedule:v0.0.1 "."
+docker build --pull --rm -f "Dockerfile" -t idlewater2/schedule:v0.0.2 "."
