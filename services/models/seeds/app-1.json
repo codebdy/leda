@@ -24,15 +24,16 @@
               "uuid": "5932f1f6-0f8a-4f86-a23c-812d6811556c"
             },
             {
-              "name": "versionName",
+              "name": "version",
               "type": "String",
               "typeLabel": "String",
               "uuid": "e02b3d83-0ffa-400f-b18c-edba6f816975"
             },
             {
               "name": "publishedAt",
-              "type": "String",
-              "typeLabel": "String",
+              "nullable": true,
+              "type": "Date",
+              "typeLabel": "Date",
               "uuid": "8a780935-d963-4c48-9cf6-0eebd28c768d"
             }
           ],
@@ -311,10 +312,10 @@
         }
       ]
     },
-    "createdAt": "2023-06-13T23:40:46Z",
+    "createdAt": "2023-06-14T02:18:22Z",
     "id": "1",
     "name": null,
-    "publishedAt": "2023-06-13T23:40:46Z",
-    "updatedAt": "2023-06-13T23:40:46Z"
+    "publishedAt": "2023-06-14T02:18:22Z",
+    "updatedAt": "2023-06-14T02:18:22Z"
   }
 }
