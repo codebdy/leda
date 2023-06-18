@@ -51,8 +51,8 @@ github.com/cncf/udpa/go v0.0.0-20200629203442-efcf912fb354/go.mod h1:WmhPx2Nbnht
 github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
 github.com/codebdy/entify v0.0.14 h1:JZ2r4VJWUJgEJvzQPCtFvijmTyso8rq5iGn23yJ4wTo=
 github.com/codebdy/entify v0.0.14/go.mod h1:YaiTlrOyFbuEiMKu7fH/lMh0l+zM6cVb6rUDmbZwNek=
-github.com/codebdy/entify-graphql-schema v0.0.15 h1:LCVAlkDzQCRAFJ3eOB4PMRoC+4SHJAWncbvvfoY9gB8=
-github.com/codebdy/entify-graphql-schema v0.0.15/go.mod h1:nAdUiDN8DVNzhiZJHxX2+I98LbgafZaULTnkGoAYRsA=
+github.com/codebdy/entify-graphql-schema v0.0.16 h1:BTQ6s55a43nn+S/v1HivaFvNpIBLrbnfYZMf3/cjwoA=
+github.com/codebdy/entify-graphql-schema v0.0.16/go.mod h1:nAdUiDN8DVNzhiZJHxX2+I98LbgafZaULTnkGoAYRsA=
 github.com/codebdy/leda-service-sdk v0.0.9 h1:9MNSH3oQzElyuOqYkG2N4UEAylIf9fTdJo944K+kPeU=
 github.com/codebdy/leda-service-sdk v0.0.9/go.mod h1:739N8ypAquawWqvS0GVDzvQds/YUYd1CXYa+DEOk7fY=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=

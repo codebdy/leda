@@ -10,7 +10,7 @@ require (
 
 require (
 	github.com/codebdy/entify v0.0.14
-	github.com/codebdy/entify-graphql-schema v0.0.15
+	github.com/codebdy/entify-graphql-schema v0.0.16
 	github.com/codebdy/leda-service-sdk v0.0.9
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/graphql-go/graphql v0.8.1
@@ -45,4 +45,4 @@ require (
 
 //replace github.com/codebdy/entify v0.0.13 => ../../../entify
 
-replace github.com/codebdy/entify-graphql-schema v0.0.14 => ../../../entify-graphql-schema
+//replace github.com/codebdy/entify-graphql-schema v0.0.15 => ../../../entify-graphql-schema
