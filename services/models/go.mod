@@ -45,4 +45,4 @@ require (
 
 //replace github.com/codebdy/entify v0.0.13 => ../../../entify
 
-//replace github.com/codebdy/entify-graphql-schema v0.0.15 => ../../../entify-graphql-schema
+//replace github.com/codebdy/entify-graphql-schema v0.0.16 => ../../../entify-graphql-schema

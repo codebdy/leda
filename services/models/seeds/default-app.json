@@ -1,7 +1,7 @@
 {
   "app": {
-    "id": "2",
-    "metaId": "9",
+    "id": "1",
+    "metaId": "1",
     "name": "caa",
     "title": "燃气仿真"
   },
@@ -24,36 +24,21 @@
               "uuid": "5932f1f6-0f8a-4f86-a23c-812d6811556c"
             },
             {
-              "name": "contents",
-              "nullable": true,
-              "type": "JSON",
-              "typeLabel": "JSON",
-              "uuid": "101b1f43-986d-407b-852c-df746a496748"
-            },
-            {
-              "createDate": true,
-              "name": "createdAt",
-              "type": "Date",
-              "typeLabel": "Date",
-              "uuid": "97701a2e-682e-4887-b85d-3b981e2e97f5"
-            },
-            {
-              "name": "updatedAt",
-              "type": "Date",
-              "typeLabel": "Date",
-              "updateDate": true,
-              "uuid": "62040947-7750-4f06-b627-ff3db68243db"
-            },
-            {
-              "name": "name",
-              "nullable": true,
+              "name": "version",
               "type": "String",
               "typeLabel": "String",
-              "uuid": "a156fc42-2b38-4d4f-9a6f-d20517287212"
+              "uuid": "e02b3d83-0ffa-400f-b18c-edba6f816975"
+            },
+            {
+              "name": "publishedAt",
+              "nullable": true,
+              "type": "Date",
+              "typeLabel": "Date",
+              "uuid": "8a780935-d963-4c48-9cf6-0eebd28c768d"
             }
           ],
           "innerId": 1001,
-          "name": "PipeNetwork",
+          "name": "MainNetwork",
           "packageUuid": "b2f861a1-65bf-4f46-bd90-cdebd43664d4",
           "root": true,
           "stereoType": "Entity",
@@ -89,6 +74,67 @@
           "root": true,
           "stereoType": "Entity",
           "uuid": "e34d96f2-e53d-48ab-8731-4a4ef860c369"
+        },
+        {
+          "attributes": [
+            {
+              "name": "id",
+              "primary": true,
+              "type": "ID",
+              "typeLabel": "ID",
+              "uuid": "56434864-591a-4524-83e8-763eee4dd784"
+            },
+            {
+              "name": "name",
+              "type": "String",
+              "typeLabel": "String",
+              "uuid": "41e4bc00-7d93-47dc-8aa6-281d1058da15"
+            }
+          ],
+          "innerId": 1003,
+          "name": "DraftNetwork",
+          "packageUuid": "b2f861a1-65bf-4f46-bd90-cdebd43664d4",
+          "root": true,
+          "stereoType": "Entity",
+          "uuid": "873f1cf5-7da8-4171-9b7f-8acad2f6d904"
+        },
+        {
+          "attributes": [
+            {
+              "name": "id",
+              "primary": true,
+              "type": "ID",
+              "typeLabel": "ID",
+              "uuid": "fe1b53ca-8f7e-4112-8afe-5124a7f78b51"
+            },
+            {
+              "name": "contents",
+              "nullable": true,
+              "type": "JSON",
+              "typeLabel": "JSON",
+              "uuid": "2a09ad50-b56f-4b93-b23a-71de4ab595b1"
+            },
+            {
+              "createDate": true,
+              "name": "createdAt",
+              "type": "Date",
+              "typeLabel": "Date",
+              "uuid": "80216949-c77e-4a92-988d-ce4d5b67fb1a"
+            },
+            {
+              "name": "updatedAt",
+              "type": "Date",
+              "typeLabel": "Date",
+              "updateDate": true,
+              "uuid": "501672d4-18cd-4cb3-9f03-4acf1ed3d067"
+            }
+          ],
+          "innerId": 1004,
+          "name": "PipeNetwork",
+          "packageUuid": "b2f861a1-65bf-4f46-bd90-cdebd43664d4",
+          "root": false,
+          "stereoType": "Abstract",
+          "uuid": "af9a4297-2638-49f6-a82c-5cef94123b63"
         }
       ],
       "relations": [
@@ -102,6 +148,24 @@
           "targetId": "e34d96f2-e53d-48ab-8731-4a4ef860c369",
           "targetMultiplicity": "0..*",
           "uuid": "e0ebb8ec-b887-4b8f-9b40-f89efa4ece7e"
+        },
+        {
+          "innerId": 0,
+          "relationType": "inherit",
+          "sourceId": "873f1cf5-7da8-4171-9b7f-8acad2f6d904",
+          "sourceMutiplicity": "0..1",
+          "targetId": "af9a4297-2638-49f6-a82c-5cef94123b63",
+          "targetMultiplicity": "0..1",
+          "uuid": "b1935f72-fc3e-45c0-936f-25892c0fdfa9"
+        },
+        {
+          "innerId": 0,
+          "relationType": "inherit",
+          "sourceId": "21831f33-081a-4db1-a703-950ff89a150e",
+          "sourceMutiplicity": "0..1",
+          "targetId": "af9a4297-2638-49f6-a82c-5cef94123b63",
+          "targetMultiplicity": "0..1",
+          "uuid": "d277b4db-7f77-4bbd-93a2-625427606727"
         }
       ],
       "diagrams": [
@@ -116,19 +180,12 @@
       "graphLogics": [],
       "scriptLogics": [
         {
-          "args": [
-            {
-              "name": "id",
-              "type": "ID",
-              "typeLabel": "ID",
-              "uuid": "a7a00ecd-3595-43ee-ae9f-4432e6d4ff11"
-            }
-          ],
-          "logicScript": "//读取管网数据\r\nconst pipeNetWork = $entify.queryOne(\"PipeNetwork\",id);\r\n\r\n//转换数据\r\nconst params = convert(pipeNetWork.contents);\r\n//调用计算接口\r\nconst result = iFetch(\"http://localhost:8080/caa\",{\r\n    method:\"POST\",\r\n    body:params,\r\n    headers:{}\r\n});\r\n\r\n//保存计算结果\r\n$entify.post(\"CalculateRecord\", {pipeNetWork:{id:id}, contents:result});\r\n\r\n//返回结果\r\nreturn result;",
-          "name": "calculateOne",
+          "args": [],
+          "logicScript": "//读取最新管网数据\r\nconst pipeNetWork = $entify.queryOne(\"MainNetwork\", {\r\n    where: {\r\n        publishedAt: {\r\n            _isNotNull: true,\r\n        }\r\n    },\r\n    orderBy: [\r\n        {\r\n            publishedAt: \"desc\"\r\n        }\r\n    ]\r\n});\r\n\r\nif (pipeNetWork?.contents) {\r\n    //转换数据\r\n    const params = convert(pipeNetWork.contents);\r\n    //调用计算接口\r\n    const result = iFetch(\"http://simuserver:8080/ts/caa\", {\r\n        method: \"POST\",\r\n        body: convert(params),\r\n        headers: {\r\n            \"Content-Type\": \"application/json\"\r\n        }\r\n    });\r\n\r\n    //保存计算结果\r\n    $entify.saveOne(\"CalculateRecord\", { pipeNetWork: { id: pipeNetWork.id }, result: result, calculatedAt:new Date() });\r\n}\r\n\r\n\r\n//返回结果\r\nreturn true;",
+          "name": "calculateLastest",
           "operateType": "mutation",
-          "type": "JSON",
-          "typeLabel": "JSON",
+          "type": "Boolean",
+          "typeLabel": "Boolean",
           "uuid": "ba127f73-e186-4975-98ba-1a16b89fdae0"
         },
         {
@@ -162,8 +219,8 @@
           "height": 170,
           "id": "21831f33-081a-4db1-a703-950ff89a150e",
           "width": 180,
-          "x": 130.00000000000003,
-          "y": 80.00000000000003
+          "x": 140,
+          "y": 130
         },
         {
           "diagramUuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9",
@@ -171,7 +228,23 @@
           "id": "e34d96f2-e53d-48ab-8731-4a4ef860c369",
           "width": 210,
           "x": 510,
-          "y": 100
+          "y": 150
+        },
+        {
+          "diagramUuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9",
+          "height": 120,
+          "id": "873f1cf5-7da8-4171-9b7f-8acad2f6d904",
+          "width": 180,
+          "x": -160,
+          "y": 110
+        },
+        {
+          "diagramUuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9",
+          "height": 150,
+          "id": "af9a4297-2638-49f6-a82c-5cef94123b63",
+          "width": 180,
+          "x": -29.999999999999957,
+          "y": -150
         }
       ],
       "x6Edges": [
@@ -195,13 +268,41 @@
             "offset": -20
           },
           "vertices": []
+        },
+        {
+          "diagramUuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9",
+          "id": "b1935f72-fc3e-45c0-936f-25892c0fdfa9",
+          "vertices": [
+            {
+              "x": -70,
+              "y": 60
+            },
+            {
+              "x": 60,
+              "y": 60
+            }
+          ]
+        },
+        {
+          "diagramUuid": "63a7fb57-fa3e-4dbd-814b-3523293178b9",
+          "id": "d277b4db-7f77-4bbd-93a2-625427606727",
+          "vertices": [
+            {
+              "x": 230,
+              "y": 60
+            },
+            {
+              "x": 60,
+              "y": 60
+            }
+          ]
         }
       ]
     },
-    "createdAt": "2023-05-17T00:49:29Z",
-    "id": "9",
+    "createdAt": "2023-06-18T11:03:57Z",
+    "id": "1",
     "name": null,
-    "publishedAt": "2023-05-17T00:49:29Z",
-    "updatedAt": "2023-05-17T00:49:29Z"
+    "publishedAt": "2023-06-18T11:03:57Z",
+    "updatedAt": "2023-06-18T11:03:57Z"
   }
 }
