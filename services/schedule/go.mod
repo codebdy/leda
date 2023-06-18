@@ -3,8 +3,8 @@ module codebdy.com/leda/services/schedule
 go 1.18
 
 require (
-	github.com/codebdy/entify v0.0.13
-	github.com/codebdy/entify-graphql-schema v0.0.13
+	github.com/codebdy/entify v0.0.14
+	github.com/codebdy/entify-graphql-schema v0.0.15
 	github.com/codebdy/leda-service-sdk v0.0.11
 	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
 	github.com/graphql-go/graphql v0.8.1
