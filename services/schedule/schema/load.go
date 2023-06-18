@@ -3,7 +3,7 @@ package schema
 import (
 	"log"
 
-	"codebdy.com/leda/services/schedule/install"
+	"codebdy.com/leda/services/schedule/global"
 	"codebdy.com/leda/services/schedule/resolver"
 	"github.com/codebdy/entify"
 	"github.com/codebdy/entify-graphql-schema/consts"
@@ -15,12 +15,17 @@ import (
 
 func Load() *graphql.Schema {
 	config := config.GetDbConfig()
+	//metaId已变，从数据库取，不要从文件取。安装时从文件写入数据库，id可能会变化
+	//global.serviceMeta, _ = ledasdk.ReadServiceFromJson(install.MODEL_SEED)
+	serviceMeta, err := ledasdk.GetServiceMata(global.SERVICE_NAME, config)
+	if err != nil {
+		panic(err.Error())
+	}
 
-	serviceStruct, _ := ledasdk.ReadAppFromJson(install.MODEL_SEED)
-	umlMeta := serviceStruct.Meta.Content
+	global.ServiceMeta = serviceMeta
 
 	repo := entify.New(config)
-	repo.Init(umlMeta, umlMeta.Id)
+	repo.Init(serviceMeta.Content, serviceMeta.Id)
 	metaSchema := schema.New(repo)
 	//加载自定义API
 	metaSchema.ParseApi(&resolver.Resolver{})

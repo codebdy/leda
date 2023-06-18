@@ -3,13 +3,14 @@ module codebdy.com/leda/services/schedule
 go 1.18
 
 require (
-	github.com/codebdy/entify v0.0.10
+	github.com/codebdy/entify v0.0.13
 	github.com/codebdy/entify-graphql-schema v0.0.13
-	github.com/codebdy/leda-service-sdk v0.0.9
+	github.com/codebdy/leda-service-sdk v0.0.11
 	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
 	github.com/graphql-go/graphql v0.8.1
 	github.com/graphql-go/handler v0.2.3
 	github.com/machinebox/graphql v0.2.2
+	github.com/mitchellh/mapstructure v1.5.0
 	github.com/robfig/cron v1.2.0
 )
 
@@ -26,7 +27,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/matryer/is v1.4.1 // indirect
-	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect

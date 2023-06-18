@@ -1,8 +1,8 @@
 {
   "service": {
-    "id": "3",
-    "imageUrl": "",
-    "metaId": "8",
+    "id": "1",
+    "imageUrl": null,
+    "metaId": "2",
     "name": "schedule",
     "title": "计划任务"
   },
@@ -67,6 +67,20 @@
               "typeLabel": "Date",
               "updateDate": true,
               "uuid": "5fadb20e-169a-4c45-9cb3-a1f7d40eb108"
+            },
+            {
+              "name": "stopedAt",
+              "nullable": true,
+              "type": "Date",
+              "typeLabel": "Date",
+              "uuid": "ea57f87a-87aa-4db3-b2ee-c5db8f76e001"
+            },
+            {
+              "name": "runAt",
+              "nullable": true,
+              "type": "Date",
+              "typeLabel": "Date",
+              "uuid": "fc095433-e19e-401d-b883-2a72086aca71"
             }
           ],
           "innerId": 1001,
@@ -221,11 +235,11 @@
       "x6Nodes": [
         {
           "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
-          "height": 210,
+          "height": 250,
           "id": "5b11412a-03a9-43fd-988d-cee4d135dd77",
           "width": 180,
-          "x": 280,
-          "y": 60.00000000000003
+          "x": 279.9999999999997,
+          "y": 60.00000000000014
         },
         {
           "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
@@ -254,10 +268,10 @@
       ],
       "x6Edges": []
     },
-    "createdAt": "2023-04-27T09:16:26Z",
-    "id": "8",
+    "createdAt": "2023-06-18T07:11:29Z",
+    "id": "2",
     "name": null,
-    "publishedAt": "2023-04-27T09:16:26Z",
-    "updatedAt": "2023-04-27T09:16:26Z"
+    "publishedAt": "2023-06-18T07:11:29Z",
+    "updatedAt": "2023-06-18T07:11:29Z"
   }
 }
