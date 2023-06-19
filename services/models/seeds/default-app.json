@@ -181,7 +181,7 @@
       "scriptLogics": [
         {
           "args": [],
-          "logicScript": "//读取最新管网数据\r\nconst pipeNetWork = $entify.queryOne(\"MainNetwork\", {\r\n    where: {\r\n        publishedAt: {\r\n            _isNotNull: true,\r\n        }\r\n    },\r\n    orderBy: [\r\n        {\r\n            publishedAt: \"desc\"\r\n        }\r\n    ]\r\n});\r\n\r\nif (pipeNetWork?.contents) {\r\n    //转换数据\r\n    const params = convert(pipeNetWork.contents);\r\n    //调用计算接口\r\n    const result = iFetch(\"http://simuserver:8080/ts/caa\", {\r\n        method: \"POST\",\r\n        body: convert(params),\r\n        headers: {\r\n            \"Content-Type\": \"application/json\"\r\n        }\r\n    });\r\n\r\n    //保存计算结果\r\n    $entify.saveOne(\"CalculateRecord\", { pipeNetWork: { id: pipeNetWork.id }, result: result, calculatedAt:new Date() });\r\n}\r\n\r\n\r\n//返回结果\r\nreturn true;",
+          "logicScript": "//读取最新管网数据\r\nconst pipeNetWork = $entify.queryOne(\"MainNetwork\", {\r\n    where: {\r\n        publishedAt: {\r\n            _isNotNull: true,\r\n        }\r\n    },\r\n    orderBy: [\r\n        {\r\n            publishedAt: \"desc\"\r\n        }\r\n    ]\r\n});\r\n\r\nif (pipeNetWork?.contents) {\r\n    //转换数据\r\n    const params = convert(pipeNetWork.contents);\r\n    //调用计算接口\r\n    const result = iFetch(\"http://simuserver:8080/ts/caa\", {\r\n        method: \"POST\",\r\n        body: convert(params),\r\n        headers: {\r\n            \"Content-Type\": \"application/json\"\r\n        }\r\n    });\r\n\r\n    //保存计算结果\r\n    $entify.saveOne(\"CalculateRecord\", { pipeNetwork: {sync:{ id: pipeNetWork.id?.toString() }}, result: result, calculatedAt:new Date() });\r\n}\r\n\r\n\r\n//返回结果\r\nreturn true;",
           "name": "calculateLastest",
           "operateType": "mutation",
           "type": "Boolean",
@@ -299,10 +299,10 @@
         }
       ]
     },
-    "createdAt": "2023-06-18T11:03:57Z",
+    "createdAt": "2023-06-18T12:26:23Z",
     "id": "1",
     "name": null,
-    "publishedAt": "2023-06-18T11:03:57Z",
-    "updatedAt": "2023-06-18T11:03:57Z"
+    "publishedAt": "2023-06-18T12:26:23Z",
+    "updatedAt": "2023-06-18T12:26:23Z"
   }
 }
