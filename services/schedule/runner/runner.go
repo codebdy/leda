@@ -33,7 +33,7 @@ func Start() {
 		[]string{"id", "name", "cronExpression", "config", "status"},
 	)
 
-	for node := range data.Nodes {
+	for _, node := range data.Nodes {
 		task := entities.Task{}
 		mapstructure.Decode(node, &task)
 		TaskRunner.StartTask(&task)
