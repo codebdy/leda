@@ -11,7 +11,7 @@ require (
 	github.com/graphql-go/handler v0.2.3
 	github.com/machinebox/graphql v0.2.2
 	github.com/mitchellh/mapstructure v1.5.0
-	github.com/robfig/cron v1.2.0
+	github.com/robfig/cron/v3 v3.0.0
 )
 
 require (

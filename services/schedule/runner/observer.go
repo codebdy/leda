@@ -30,7 +30,11 @@ func (o *ModelObserver) ObjectPosted(object map[string]interface{}, entityName s
 	if entityName == entities.TASK_NAME {
 		var task entities.Task
 		mapstructure.Decode(object, &task)
-		TaskRunner.StartTask(&task)
+		if task.Status == entities.TASK_STATUS_RUNNING {
+			TaskRunner.StartTask(&task)
+		} else if task.Status == entities.TASK_STATUS_STOPED {
+			TaskRunner.StopTask(task.Id)
+		}
 	}
 }
 func (o *ModelObserver) ObjectMultiPosted(objects []map[string]interface{}, entityName string, ctx context.Context) {

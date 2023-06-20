@@ -5,18 +5,9 @@ import (
 
 	"codebdy.com/leda/services/schedule/entities"
 	"github.com/codebdy/entify/shared"
-	"github.com/robfig/cron"
+	"github.com/robfig/cron/v3"
 )
 
-// func init() {
-// 	c := cron.New()
-// 	c.AddFunc("*/5 * * * * *", func() {
-// 		fmt.Println("只执行一次")
-// 		fmt.Printf("2 c.Entries(): %v\n", c.Entries())
-// 	})
-// 	fmt.Printf("1 c.Entries(): %v\n", c.Entries())
-// 	c.Start()
-// }
 var TaskRunner *TaskManager = &TaskManager{}
 
 type TaskManager struct {
@@ -25,7 +16,8 @@ type TaskManager struct {
 
 func (t *TaskManager) StartTask(task *entities.Task) {
 	defer shared.PrintErrorStack()
-	c := cron.New()
+	t.StopTask(task.Id)
+	c := cron.New(cron.WithSeconds())
 	c.AddJob(task.CronExpression, Job{task: task})
 	t.crons.Store(task.Id, c)
 	c.Start()
