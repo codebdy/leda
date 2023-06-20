@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 
 	_ "codebdy.com/leda/services/schedule/install"
 	"codebdy.com/leda/services/schedule/runner"
@@ -12,6 +14,15 @@ import (
 )
 
 const port = ":4002"
+
+func init() {
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+	logFile, err := os.OpenFile("./debug.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	if err != nil {
+		log.Panic("打开日志文件异常")
+	}
+	log.SetOutput(logFile)
+}
 
 func main() {
 	schema := schema.Load()

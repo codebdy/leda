@@ -10,7 +10,7 @@ type Job struct {
 
 func (j Job) Run() {
 	if j.task.Config.RequestType == entities.REQUEST_TYPE_GRAPHQL {
-		excuteGraphqlTask(j.task.Config)
+		excuteGraphqlTask(*j.task)
 	} else if j.task.Config.RequestType == entities.REQUEST_TYPE_HTTP_GET {
 		panic("Not implement")
 	} else if j.task.Config.RequestType == entities.REQUEST_TYPE_HTTP_POST {

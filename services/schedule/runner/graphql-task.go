@@ -9,8 +9,9 @@ import (
 	"github.com/machinebox/graphql"
 )
 
-func excuteGraphqlTask(taskConfig entities.TaskConfig) {
+func excuteGraphqlTask(task entities.Task) {
 	defer shared.PrintErrorStack()
+	taskConfig := task.Config
 	// create a client (safe to share across requests)
 	client := graphql.NewClient(taskConfig.Url)
 
@@ -41,6 +42,8 @@ func excuteGraphqlTask(taskConfig entities.TaskConfig) {
 	// run it and capture the response
 	var graphqlResponse interface{}
 	if err := client.Run(ctx, req, &graphqlResponse); err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		task.Status = entities.TASK_STATUS_ERROR
+		entities.PostTask(task)
 	}
 }
