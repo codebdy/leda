@@ -119,6 +119,13 @@
               "type": "JSON",
               "typeLabel": "JSON",
               "uuid": "0b1d7e7a-4c4f-4375-a1ca-4ac0f6c00cfe"
+            },
+            {
+              "name": "headers",
+              "nullable": true,
+              "type": "JSON",
+              "typeLabel": "JSON",
+              "uuid": "07698206-f8f0-45e8-89d1-55ab2de7b302"
             }
           ],
           "innerId": 1002,
@@ -227,11 +234,11 @@
         },
         {
           "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
-          "height": 160,
+          "height": 220,
           "id": "65b01505-3fb0-4c80-b28b-788b2b535647",
           "width": 180,
-          "x": 590,
-          "y": -109.99999999999994
+          "x": 580,
+          "y": -140
         },
         {
           "diagramUuid": "518bac7f-1d7c-4c24-9f60-f00489951e5e",
@@ -252,10 +259,10 @@
       ],
       "x6Edges": []
     },
-    "createdAt": "2023-06-20T03:48:01Z",
+    "createdAt": "2023-06-20T05:42:06Z",
     "id": "2",
     "name": null,
-    "publishedAt": "2023-06-20T03:48:01Z",
-    "updatedAt": "2023-06-20T03:48:01Z"
+    "publishedAt": "2023-06-20T05:42:06Z",
+    "updatedAt": "2023-06-20T05:42:06Z"
   }
 }

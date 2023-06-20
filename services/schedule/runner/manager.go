@@ -4,6 +4,7 @@ import (
 	"sync"
 
 	"codebdy.com/leda/services/schedule/entities"
+	"github.com/codebdy/entify/shared"
 	"github.com/robfig/cron"
 )
 
@@ -23,6 +24,7 @@ type TaskManager struct {
 }
 
 func (t *TaskManager) StartTask(task *entities.Task) {
+	defer shared.PrintErrorStack()
 	c := cron.New()
 	c.AddJob(task.CronExpression, Job{task: task})
 	t.crons.Store(task.Id, c)
@@ -30,6 +32,7 @@ func (t *TaskManager) StartTask(task *entities.Task) {
 }
 
 func (t *TaskManager) StopTask(taskId int64) {
+	defer shared.PrintErrorStack()
 	c, ok := t.crons.Load(taskId)
 	if ok {
 		(c.(*cron.Cron)).Stop()
@@ -38,6 +41,7 @@ func (t *TaskManager) StopTask(taskId int64) {
 }
 
 func (t *TaskManager) Destory() {
+	defer shared.PrintErrorStack()
 	t.crons.Range(func(key interface{}, value interface{}) bool {
 		c, ok := t.crons.LoadAndDelete(key)
 		if ok {

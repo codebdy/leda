@@ -5,4 +5,5 @@ type TaskConfig struct {
 	Url         string      `json:"url"`
 	Gql         string      `json:"gql"`
 	Params      interface{} `json:"params"`
+	Headers     interface{} `json:"headers"`
 }

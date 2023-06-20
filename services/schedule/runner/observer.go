@@ -5,6 +5,7 @@ import (
 
 	"codebdy.com/leda/services/schedule/entities"
 	"github.com/codebdy/entify/model/observer"
+	"github.com/codebdy/entify/shared"
 	"github.com/mitchellh/mapstructure"
 )
 
@@ -25,6 +26,7 @@ func (o *ModelObserver) Key() string {
 }
 
 func (o *ModelObserver) ObjectPosted(object map[string]interface{}, entityName string, ctx context.Context) {
+	defer shared.PrintErrorStack()
 	if entityName == entities.TASK_NAME {
 		var task entities.Task
 		mapstructure.Decode(object, &task)
@@ -35,6 +37,7 @@ func (o *ModelObserver) ObjectMultiPosted(objects []map[string]interface{}, enti
 
 }
 func (o *ModelObserver) ObjectDeleted(object map[string]interface{}, entityName string, ctx context.Context) {
+	defer shared.PrintErrorStack()
 	if entityName == entities.TASK_NAME {
 		var task entities.Task
 		mapstructure.Decode(object, &task)
