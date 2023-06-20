@@ -12,4 +12,6 @@ type Task struct {
 	CreatedAt      time.Time  `json:"createdAt"`
 	UpdatedAt      time.Time  `json:"updatedAt"`
 	Config         TaskConfig `json:"config"`
+	RunAt          time.Time  `json:"runAt"`
+	StopedAt       time.Time  `json:"stopedAt"`
 }

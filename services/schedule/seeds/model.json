@@ -209,27 +209,11 @@
             }
           ],
           "logicScript": "",
-          "name": "startTask",
+          "name": "helloMutation",
           "operateType": "mutation",
           "type": "String",
           "typeLabel": "String",
           "uuid": "de951cfa-68c5-44d7-8ebf-aae6d144325a"
-        },
-        {
-          "args": [
-            {
-              "name": "id",
-              "type": "ID",
-              "typeLabel": "ID",
-              "uuid": "f2df9561-1506-43e6-a4fe-892c9c17380b"
-            }
-          ],
-          "logicScript": "",
-          "name": "stopTask",
-          "operateType": "mutation",
-          "type": "String",
-          "typeLabel": "String",
-          "uuid": "045eff2f-d9bd-4cfe-a591-da1c01438e2f"
         }
       ],
       "x6Nodes": [
@@ -268,10 +252,10 @@
       ],
       "x6Edges": []
     },
-    "createdAt": "2023-06-18T07:11:29Z",
+    "createdAt": "2023-06-20T03:48:01Z",
     "id": "2",
     "name": null,
-    "publishedAt": "2023-06-18T07:11:29Z",
-    "updatedAt": "2023-06-18T07:11:29Z"
+    "publishedAt": "2023-06-20T03:48:01Z",
+    "updatedAt": "2023-06-20T03:48:01Z"
   }
 }
