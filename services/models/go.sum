@@ -49,8 +49,14 @@ github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDk
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/cncf/udpa/go v0.0.0-20200629203442-efcf912fb354/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
 github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
+github.com/codebdy/entify v0.0.16 h1:9O5cyNAwwNiv6VpIibjF1iyA0QADn790mPZmQTX02kw=
+github.com/codebdy/entify v0.0.16/go.mod h1:OMsyP83d8v9ExF2LFm9bjE11LwQEx9PyekOmp+0cBkw=
+github.com/codebdy/entify-graphql-schema v0.0.18 h1:vIo9jdZvU15lAvKsTjuDERFg5f5zNz0EvVA+dqm1SCQ=
+github.com/codebdy/entify-graphql-schema v0.0.18/go.mod h1:nmworCfhsOcy8u9AoiVr8JEGasNTI4ORos/ZBiv2ttI=
 github.com/codebdy/leda-service-sdk v0.0.9 h1:9MNSH3oQzElyuOqYkG2N4UEAylIf9fTdJo944K+kPeU=
 github.com/codebdy/leda-service-sdk v0.0.9/go.mod h1:739N8ypAquawWqvS0GVDzvQds/YUYd1CXYa+DEOk7fY=
+github.com/codebdy/minions-go v0.1.0 h1:J9oLOXHX1tflRwyhn6ETwQ1G+6wyTVeeyEyzOTVpffI=
+github.com/codebdy/minions-go v0.1.0/go.mod h1:CNQC+yeSfMbdgkY0N1T2ML5Ezv0CK+57Gd2/d67Vrx4=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

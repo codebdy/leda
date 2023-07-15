@@ -9,8 +9,8 @@ require (
 )
 
 require (
-	github.com/codebdy/entify v0.0.14
-	github.com/codebdy/entify-graphql-schema v0.0.16
+	github.com/codebdy/entify v0.0.16
+	github.com/codebdy/entify-graphql-schema v0.0.18
 	github.com/codebdy/leda-service-sdk v0.0.9
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/graphql-go/graphql v0.8.1
@@ -19,7 +19,7 @@ require (
 )
 
 require (
-	github.com/codebdy/minions-go v0.0.2 // indirect
+	github.com/codebdy/minions-go v0.1.0 // indirect
 	github.com/dlclark/regexp2 v1.7.0 // indirect
 	github.com/dop251/goja v0.0.0-20230707174833-636fdf960de1 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
@@ -44,8 +44,8 @@ require (
 
 //replace github.com/codebdy/leda-service-sdk v0.0.9 => ../../../leda-service-sdk
 
-replace github.com/codebdy/entify v0.0.14 => ../../../entify
+//replace github.com/codebdy/entify v0.0.14 => ../../../entify
 
-replace github.com/codebdy/minions-go v0.0.2 => ../../../minions-go
+//replace github.com/codebdy/minions-go v0.0.2 => ../../../minions-go
 
-replace github.com/codebdy/entify-graphql-schema v0.0.16 => ../../../entify-graphql-schema
+//replace github.com/codebdy/entify-graphql-schema v0.0.16 => ../../../entify-graphql-schema
