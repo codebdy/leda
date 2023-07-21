@@ -1,6 +1,0 @@
-database: your database
-driver: mysql
-host: localhost
-password: your password
-port: "3306"
-user: root

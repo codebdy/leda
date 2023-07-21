@@ -55,8 +55,6 @@ github.com/codebdy/entify-graphql-schema v0.0.18 h1:vIo9jdZvU15lAvKsTjuDERFg5f5z
 github.com/codebdy/entify-graphql-schema v0.0.18/go.mod h1:nmworCfhsOcy8u9AoiVr8JEGasNTI4ORos/ZBiv2ttI=
 github.com/codebdy/leda-service-sdk v0.0.9 h1:9MNSH3oQzElyuOqYkG2N4UEAylIf9fTdJo944K+kPeU=
 github.com/codebdy/leda-service-sdk v0.0.9/go.mod h1:739N8ypAquawWqvS0GVDzvQds/YUYd1CXYa+DEOk7fY=
-github.com/codebdy/minions-go v0.1.0 h1:J9oLOXHX1tflRwyhn6ETwQ1G+6wyTVeeyEyzOTVpffI=
-github.com/codebdy/minions-go v0.1.0/go.mod h1:CNQC+yeSfMbdgkY0N1T2ML5Ezv0CK+57Gd2/d67Vrx4=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
