@@ -11,8 +11,8 @@ import (
 	"codebdy.com/leda/services/models/middlewares"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/modules/register"
-	"github.com/codebdy/entify"
-	"github.com/codebdy/entify/db"
+	"github.com/codebdy/entify-core"
+	"github.com/codebdy/entify-core/db"
 	"github.com/codebdy/leda-service-sdk/config"
 
 	_ "codebdy.com/leda/services/models/install"

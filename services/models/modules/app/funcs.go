@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/codebdy/entify/model/meta"
+	"github.com/codebdy/entify-core/model/meta"
 	"github.com/mitchellh/mapstructure"
 )
 

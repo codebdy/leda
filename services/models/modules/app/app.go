@@ -8,15 +8,15 @@ import (
 	"codebdy.com/leda/services/models/consts"
 	"github.com/codebdy/leda-service-sdk/config"
 
-	"github.com/codebdy/entify"
+	"github.com/codebdy/entify-core"
+	"github.com/codebdy/entify-core/model"
+	"github.com/codebdy/entify-core/model/graph"
+	"github.com/codebdy/entify-core/model/meta"
+	"github.com/codebdy/entify-core/shared"
 	"github.com/codebdy/entify-graphql-schema/schema"
-	"github.com/codebdy/entify/model"
-	"github.com/codebdy/entify/model/graph"
-	"github.com/codebdy/entify/model/meta"
-	"github.com/codebdy/entify/shared"
 )
 
-//节省开支，运行时使用，初始化时请使用orm.IsEntityExists
+// 节省开支，运行时使用，初始化时请使用orm.IsEntityExists
 var Installed = false
 
 type App struct {

@@ -9,9 +9,9 @@ require (
 )
 
 require (
-	github.com/codebdy/entify v0.0.16
-	github.com/codebdy/entify-graphql-schema v0.0.18
-	github.com/codebdy/leda-service-sdk v0.0.9
+	github.com/codebdy/entify-core v0.1.0
+	github.com/codebdy/entify-graphql-schema v0.1.0
+	github.com/codebdy/leda-service-sdk v0.1.0
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/graphql-go/graphql v0.8.1
 	github.com/mitchellh/mapstructure v1.5.0
@@ -46,6 +46,6 @@ require (
 
 //replace github.com/codebdy/entify v0.0.14 => ../../../entify
 
-replace github.com/codebdy/minions-go v0.1.1 => ../../../minions-go
+//replace github.com/codebdy/minions-go v0.1.1 => ../../../minions-go
 
 //replace github.com/codebdy/entify-graphql-schema v0.0.16 => ../../../entify-graphql-schema

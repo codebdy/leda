@@ -3,7 +3,7 @@ package logs
 import (
 	"context"
 
-	"github.com/codebdy/entify/model/graph"
+	"github.com/codebdy/entify-core/model/graph"
 )
 
 func WriteModelLog(

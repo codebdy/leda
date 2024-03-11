@@ -3,7 +3,7 @@ package logs
 import (
 	"context"
 
-	"github.com/codebdy/entify/model/observer"
+	"github.com/codebdy/entify-core/model/observer"
 )
 
 type ModelObserver struct {

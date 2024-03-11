@@ -10,9 +10,9 @@ import (
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/modules/app"
 	"codebdy.com/leda/services/models/modules/register"
+	"github.com/codebdy/entify-core/model/graph"
+	"github.com/codebdy/entify-core/shared"
 	"github.com/codebdy/entify-graphql-schema/service"
-	"github.com/codebdy/entify/model/graph"
-	"github.com/codebdy/entify/shared"
 	"github.com/graphql-go/graphql"
 )
 

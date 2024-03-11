@@ -8,9 +8,9 @@ import (
 	"codebdy.com/leda/services/models/consts"
 	"codebdy.com/leda/services/models/logs"
 	"codebdy.com/leda/services/models/modules/app"
-	"github.com/codebdy/entify/model/graph"
-	"github.com/codebdy/entify/model/meta"
-	"github.com/codebdy/entify/shared"
+	"github.com/codebdy/entify-core/model/graph"
+	"github.com/codebdy/entify-core/model/meta"
+	"github.com/codebdy/entify-core/shared"
 	"github.com/graphql-go/graphql"
 	"github.com/mitchellh/mapstructure"
 )
